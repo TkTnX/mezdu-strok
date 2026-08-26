@@ -24,6 +24,8 @@
 	--color-secondary: var(--color-secondary);
 	--color-border: var(--color-border);
 	--color-success: var(--color-success);
+
+	--breakpoint-vsm: 475px 
 }
 
 body {
@@ -37,4 +39,8 @@ body {
 
 input {
 	@apply outline-none;
+}
+
+button {
+	cursor: pointer;
 }

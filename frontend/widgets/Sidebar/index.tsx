@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 export const Sidebar = () => {
 	const pathname = usePathname()
 	return (
-		<div className='border-border flex h-[100vh-60px] max-w-62.5 flex-1 flex-col gap-4 border-r p-4'>
+		<div className='border-border hidden vsm:flex h-[100vh-60px] max-w-50 flex-col gap-4 border-r p-4 sm:flex-1 lg:max-w-62.5'>
 			{NAV_ITEMS.map(item => (
 				<Link
 					className={cn(
@@ -19,7 +19,7 @@ export const Sidebar = () => {
 					key={item.href}
 				>
 					{item.icon}
-					{item.label}
+					<span className='hidden sm:inline'>{item.label}</span>
 				</Link>
 			))}
 		</div>
