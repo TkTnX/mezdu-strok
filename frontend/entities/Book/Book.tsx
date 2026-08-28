@@ -1,9 +1,10 @@
 import { BookAudioIcon } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export const Book = () => {
 	return (
-		<div className='flex w-full flex-col items-center text-center lg:block lg:text-left'>
+		<Link href={'/library/1'} className='flex w-full flex-col items-center text-center lg:block lg:text-left '>
 			<div className='vsm:h-70 relative h-55 w-full max-w-55 sm:h-80'>
 				<Image
 					fill
@@ -20,6 +21,6 @@ export const Book = () => {
 				<BookAudioIcon />
 				<p className='font-bold'>78</p>
 			</div>
-		</div>
+		</Link>
 	)
 }
