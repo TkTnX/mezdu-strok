@@ -18,9 +18,9 @@ const LibraryPage = () => {
 				</Button>
 			</div>
 			<Filters />
-			<div className='text-secondary mt-5 flex-wrap gap-2 flex items-center justify-between gap-1 md:gap-3'>
+			<div className='text-secondary mt-5 flex flex-wrap items-center justify-between gap-2 md:gap-3'>
 				<p>Найдено: 124 книги</p>
-				<label className='flex w-full sm:w-fit cursor-pointer flex-col sm:flex-row sm:items-center'>
+				<label className='flex w-full cursor-pointer flex-col sm:w-fit sm:flex-row sm:items-center'>
 					<span className='hidden sm:inline'>Сортировка:</span>{' '}
 					<Select>
 						<SelectTrigger
