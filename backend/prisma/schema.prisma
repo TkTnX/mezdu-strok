@@ -11,3 +11,117 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model User {
+  id String @id @default(cuid())
+
+  name String
+  username String @unique
+  bio String?
+  avatar String?
+
+  email String @unique
+  password String
+
+  favorites Favorite[]
+  reviews Review[]
+  reviewLikes ReviewLike[]
+  quotes Quote[]
+
+  createdAt DateTime @default(now())
+}
+
+model Book {
+  id String @id @default(cuid())
+  title String
+  year Int
+  preview String
+  tags String[]
+  description String?
+  pages Int
+
+  authorId String
+  author Author @relation(fields: [authorId], references: [id])
+  genreId String
+  genres Genre @relation(fields: [genreId], references: [id])
+  publisherId String
+  publisher Publisher @relation(fields: [publisherId], references: [id])
+  favorites Favorite[]
+  reviews Review[]
+  quotes Quote[]
+
+  createdAt DateTime @default(now())
+}
+
+model Author {
+  id String @id @default(cuid())
+  name String
+  avatar String
+  bio String
+
+  books Book[]
+  createdAt DateTime @default(now())
+
+}
+
+model Genre {
+  id String @id @default(cuid())
+  name String
+  books Book[]
+  createdAt DateTime @default(now())
+}
+
+model Publisher {
+  id String @id @default(cuid())
+  name String
+  books Book[]
+  createdAt DateTime @default(now())
+}
+
+model Favorite {
+  id String @id @default(cuid())
+  bookId String
+  book Book @relation(fields: [bookId], references: [id])
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id String @id @default(cuid())
+  bookId String
+  book Book @relation(fields: [bookId], references: [id])
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  review String
+  rating Int
+  s Int
+  p Int
+  l Int
+  i Int
+  o Int
+  a Int
+
+  likes ReviewLike[]
+
+  createdAt DateTime @default(now())
+}
+
+model ReviewLike {
+  id String @id @default(cuid())
+  reviewId String
+  review Review @relation(fields: [reviewId], references: [id])
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Quote {
+  id String @id @default(cuid())
+  quote String
+  bookId String
+  book Book @relation(fields: [bookId], references: [id])
+  authorId String
+  author User @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+}
