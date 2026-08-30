@@ -34,16 +34,17 @@ model User {
 model Book {
   id String @id @default(cuid())
   title String
-  year Int
-  preview String
-  tags String[]
   description String?
+  year Int
+  preview String?
+  tags String[]
   pages Int
+  rating Int?
 
   authorId String
   author Author @relation(fields: [authorId], references: [id])
   genreId String
-  genres Genre @relation(fields: [genreId], references: [id])
+  genre Genre @relation(fields: [genreId], references: [id])
   publisherId String
   publisher Publisher @relation(fields: [publisherId], references: [id])
   favorites Favorite[]
