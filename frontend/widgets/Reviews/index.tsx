@@ -1,0 +1,55 @@
+import { Review } from '@/entities'
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue
+} from '@/shared'
+
+export const Reviews = () => {
+	return (
+		<div className='w-87.5 flex-1 rounded-xl'>
+			<div className='flex items-center justify-between'>
+				<p className='text-2xl font-semibold'>Рецензии</p>
+				<label className='flex cursor-pointer items-center gap-3'>
+					<span className='font-semibold'>Сортировать по:</span>{' '}
+					<Select>
+						<SelectTrigger className={'bg-accent-light w-60'}>
+							<SelectValue placeholder='Новые' />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem
+								className={'cursor-pointer'}
+								value='Старые'
+							>
+								Старые
+							</SelectItem>
+							<SelectItem
+								className={'cursor-pointer'}
+								value='Новые'
+							>
+								Новые
+							</SelectItem>
+							<SelectItem
+								className={'cursor-pointer'}
+								value='Выше оценка'
+							>
+								Выше оценка
+							</SelectItem>
+							<SelectItem
+								className={'cursor-pointer'}
+								value='Ниже оценка'
+							>
+								Ниже оценка
+							</SelectItem>
+						</SelectContent>
+					</Select>
+				</label>
+            </div>
+            <div className='max-w-200 mx-auto mt-10'>
+                <Review />
+            </div>
+		</div>
+	)
+}

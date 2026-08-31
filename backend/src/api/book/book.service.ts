@@ -26,7 +26,7 @@ export class BookService {
   public async getById(id: string) {
     const book = await this.prismaService.book.findUnique({
       where: { id },
-      include: { author: true, genre: true, publisher: true },
+      include: { author: true, genre: true, publisher: true, _count: {select: {reviews: true}} },
     });
 
     if (!book) {

@@ -94,6 +94,7 @@ model Review {
   book Book @relation(fields: [bookId], references: [id])
   userId String
   user User @relation(fields: [userId], references: [id])
+  title String
   review String
   rating Int
   s Int

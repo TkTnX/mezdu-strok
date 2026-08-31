@@ -16,9 +16,10 @@ const BookPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 				<ChevronRight size={16} />
 				<p>{book.title}</p>
             </div>
-            <BigBook />
+            <BigBook book={book} />
 		</section>
 	)
 }
+
 
 export default BookPage
