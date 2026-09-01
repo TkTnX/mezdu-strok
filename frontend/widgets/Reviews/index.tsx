@@ -9,13 +9,17 @@ import {
 
 export const Reviews = () => {
 	return (
-		<div className='lg:w-87.5 mx-auto lg:mx-0 flex-1 rounded-xl'>
-			<div className='flex flex-col sm:flex-row gap-3 sm:items-center justify-between'>
-				<p className='text-4xl sm:text-2xl font-semibold'>Рецензии</p>
-				<label className='flex flex-wrap cursor-pointer items-center gap-3'>
+		<div className='mx-auto mt-5 max-w-285 rounded-xl'>
+			<div className='flex flex-col justify-between gap-3 sm:flex-row sm:items-center'>
+				<p className='text-4xl font-semibold sm:text-2xl'>Рецензии</p>
+				<label className='flex cursor-pointer flex-wrap items-center gap-3'>
 					<span className='font-semibold'>Сортировать по:</span>{' '}
 					<Select>
-						<SelectTrigger className={'bg-accent-light flex-1 vsm:flex-none vsm:w-60'}>
+						<SelectTrigger
+							className={
+								'bg-accent-light vsm:flex-none vsm:w-60 flex-1'
+							}
+						>
 							<SelectValue placeholder='Новые' />
 						</SelectTrigger>
 						<SelectContent>
@@ -46,10 +50,10 @@ export const Reviews = () => {
 						</SelectContent>
 					</Select>
 				</label>
-            </div>
-            <div className='max-w-200 mx-auto mt-10'>
-                <Review />
-            </div>
+			</div>
+			<div className='mx-auto mt-10 max-w-200'>
+				<Review />
+			</div>
 		</div>
 	)
 }

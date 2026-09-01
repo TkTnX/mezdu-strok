@@ -1,6 +1,7 @@
 import { Button, IBook } from '@/shared'
+import { AddReview } from '@/widgets/AddReview'
 import { Reviews } from '@/widgets/Reviews'
-import { BookAudioIcon } from 'lucide-react'
+import { BookAudioIcon, Bookmark } from 'lucide-react'
 import Image from 'next/image'
 
 interface Props {
@@ -43,7 +44,7 @@ export const BigBook = ({ book }: Props) => {
 								</p>
 							))}
 						</div>
-						<div className='my-3 flex flex-1 items-start gap-4 md:mt-8'>
+						<div className='my-3 flex items-start gap-4 md:mt-8'>
 							<div className='flex items-center gap-2'>
 								<BookAudioIcon />
 								<p className='font-bold'>78</p>
@@ -53,16 +54,13 @@ export const BigBook = ({ book }: Props) => {
 							</p>
 						</div>
 						<div className='flex flex-col gap-1 md:mb-10 lg:flex-row lg:gap-5'>
-							<Button className={'h-12 flex-1 px-6 py-2 lg:py-0'}>
-								Написать рецензию
-							</Button>
 							<Button
 								className={
-									'h-12 flex-1 border-black px-6 py-2 text-black lg:py-0'
+									'border-main text-main h-10 w-10 hover:text-white sm:h-15 sm:w-15 lg:py-0'
 								}
 								variant={'outline'}
 							>
-								В избранное
+								<Bookmark />
 							</Button>
 						</div>
 					</div>
@@ -135,8 +133,9 @@ export const BigBook = ({ book }: Props) => {
 						<span className='ml-4 font-normal'>{book.pages}</span>
 					</p>
 				</div>
-				<Reviews />
+				<AddReview />
 			</div>
+			<Reviews />
 		</div>
 	)
 }
