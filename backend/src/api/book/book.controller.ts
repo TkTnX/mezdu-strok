@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create.dto';
 
@@ -7,8 +7,8 @@ export class BookController {
   public constructor(private readonly bookService: BookService) { }
   
   @Get()
-  public getAll() {
-    return this.bookService.getAll(); 
+  public getAll(@Query() query: Record<string, any>) {
+    return this.bookService.getAll(query); 
   }
 
   @Get(':id')

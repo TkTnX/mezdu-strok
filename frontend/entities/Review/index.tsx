@@ -1,4 +1,4 @@
-import { BookAudioIcon, HeartHandshakeIcon } from 'lucide-react'
+import { HeartHandshakeIcon } from 'lucide-react'
 import Image from 'next/image'
 
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 
 export const Review = ({ className }: Props) => {
 	return (
-		<div className='bg-accent-light rounded-2xl p-2'>
+		<div className={`bg-accent-light rounded-2xl p-2 ${className}`}>
 			<div className='bg-main/10 flex items-center justify-between rounded-2xl p-2'>
 				<div className='flex items-center gap-2'>
 					<Image
@@ -17,29 +17,33 @@ export const Review = ({ className }: Props) => {
 						height={43}
 						className='rounded-full'
 					/>
-					<p className='font-bold'>Тимур Г.</p>
+					<p className='text-sm font-bold sm:text-base'>Тимур Г.</p>
 				</div>
 				<div className='text-right'>
-					<p className='text-main text-3xl font-bold'>78</p>
+					<p className='text-main vsm:text-3xl text-2xl font-bold'>
+						78
+					</p>
 					<div className='flex items-center gap-1'>
-						<button className='font-semibold text-[#2365c7]'>
+						<button className='text-xs font-semibold text-[#2365c7] sm:text-base'>
 							8
 						</button>
-						<button className='font-semibold text-[#2365c7]'>
+						<button className='text-xs font-semibold text-[#2365c7] sm:text-base'>
 							9
 						</button>
-						<button className='font-semibold text-[#2365c7]'>
+						<button className='text-xs font-semibold text-[#2365c7] sm:text-base'>
 							10
 						</button>
-						<button className='font-semibold text-[#2365c7]'>
+						<button className='text-xs font-semibold text-[#2365c7] sm:text-base'>
 							10
 						</button>
-						<button className='text-main font-semibold'>9</button>
+						<button className='text-main text-xs font-semibold sm:text-base'>
+							9
+						</button>
 					</div>
 				</div>
 			</div>
-			<h5 className='mt-2 text-2xl font-bold'>Название</h5>
-			<p className='mt-2 text-lg'>
+			<h5 className='mt-2 text-xl font-bold md:text-2xl'>Название</h5>
+			<p className='mt-2 text-xs sm:text-base md:text-lg'>
 				Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet
 				ut veniam voluptatum quis. Minima ex maxime cumque enim
 				incidunt, possimus iure natus! Aliquam commodi dicta ratione.
@@ -65,9 +69,9 @@ export const Review = ({ className }: Props) => {
 				maiores dolorum eligendi temporibus ipsum soluta eveniet odit
 				cum. Fugiat vitae sunt cumque culpa, nihil maiores commodi sint?
 			</p>
-			<p className='text-xs text-secondary'>19.03.2025</p>
+			<p className='text-secondary text-xs'>19.03.2025</p>
 			<div className='mt-3'>
-				<button className='flex items-center text-white  gap-2 border px-4 py-2 rounded-full border-main bg-main/30'>
+				<button className='border-main bg-main/30 flex items-center gap-2 rounded-full border px-4 py-2 text-white'>
 					<HeartHandshakeIcon />
 					14
 				</button>

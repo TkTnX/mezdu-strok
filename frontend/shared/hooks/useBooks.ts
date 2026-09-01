@@ -3,10 +3,10 @@ import { IBook, ICreateBook } from '@/shared/types'
 import { useMutation, useQuery } from '@tanstack/react-query'
 
 export function useBooks() {
-	const useGetBooks = () =>
+	const useGetBooks = ({ take, sort }: { take?: number; sort?: string }) =>
 		useQuery({
 			queryKey: ['books'],
-			queryFn: (): Promise<IBook[]> => getBooks()
+			queryFn: (): Promise<IBook[]> => getBooks({ take, sort })
 		})
 
 	const useGetBookById = (id: string) =>

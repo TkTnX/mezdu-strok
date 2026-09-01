@@ -10,7 +10,7 @@ import {
 export class BookService {
   public constructor(private readonly prismaService: PrismaService) {}
 
-  public async getAll() {
+  public async getAll(query: Record<string, any>) {
     const books = await this.prismaService.book.findMany({
       include: {
         author: true,
@@ -18,6 +18,11 @@ export class BookService {
         publisher: true,
         _count: { select: { reviews: true } },
       },
+      orderBy: {
+        [query.sort && query.sort.split('-')[0]]:
+          query.sort && query.sort.split('-')[1],
+      },
+      take: +query?.take || undefined,
     });
 
     return books;
@@ -26,7 +31,12 @@ export class BookService {
   public async getById(id: string) {
     const book = await this.prismaService.book.findUnique({
       where: { id },
-      include: { author: true, genre: true, publisher: true, _count: {select: {reviews: true}} },
+      include: {
+        author: true,
+        genre: true,
+        publisher: true,
+        _count: { select: { reviews: true } },
+      },
     });
 
     if (!book) {

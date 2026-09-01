@@ -4,7 +4,7 @@ import { ErrorMessage, Skeleton, useBooks } from '@/shared'
 
 export const LibraryList = () => {
 	const { useGetBooks } = useBooks()
-	const { data, isPending, error } = useGetBooks()
+	const { data, isPending, error } = useGetBooks({})
 
 	if (error) return <ErrorMessage error={error} />
 

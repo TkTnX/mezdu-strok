@@ -1,8 +1,8 @@
 import { axiosInstance } from '@/shared/lib'
 import { ICreateBook } from '@/shared/types'
 
-export const getBooks = async () => {
-    const { data } = await axiosInstance.get('books')
+export const getBooks = async ({ take, sort }: { take?: number; sort?: string }) => {
+    const { data } = await axiosInstance.get(`books?take=${take}&sort=${sort}`)
     return data
 }
 

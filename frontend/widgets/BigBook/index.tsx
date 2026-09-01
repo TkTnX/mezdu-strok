@@ -1,4 +1,4 @@
-import { Button, IBook} from '@/shared'
+import { Button, IBook } from '@/shared'
 import { Reviews } from '@/widgets/Reviews'
 import { BookAudioIcon } from 'lucide-react'
 import Image from 'next/image'
@@ -10,24 +10,27 @@ interface Props {
 export const BigBook = ({ book }: Props) => {
 	return (
 		<div className=''>
-			<div className='mt-10 flex w-full items-end justify-between'>
-				<div className='flex gap-10'>
+			<div className='mt-10 flex w-full flex-col justify-between gap-4 lg:flex-row lg:items-end'>
+				<div className='vsm:flex-row flex flex-col gap-5 lg:gap-10'>
 					{book.preview ? (
-						<Image
-							src={book.preview}
-							width={250}
-							height={400}
-							alt={book.title}
-							className='rounded-xl'
-						/>
+						<div className='vsm:h-80 vsm:min-w-50 vsm:mx-0 relative mx-auto h-90 w-60 md:h-100 md:min-w-62.5'>
+							<Image
+								fill
+								src={book.preview}
+								alt={book.title}
+								className='rounded-xl'
+							/>
+						</div>
 					) : (
-						<div className='bg-accent-light flex h-100 w-62.5 items-center justify-center rounded-xl text-center text-2xl'>
+						<div className='bg-accent-light flex items-center justify-center rounded-xl text-center text-xl md:text-2xl'>
 							{book.title}
 						</div>
 					)}
-					<div className='flex max-w-125 flex-col'>
-						<h3 className='text-4xl font-bold'>{book.title}</h3>
-						<p className='text-secondary mt-2 text-xl'>
+					<div className='flex flex-col md:max-w-125'>
+						<h3 className='text-2xl font-bold md:text-4xl'>
+							{book.title}
+						</h3>
+						<p className='text-secondary text-sm md:mt-2 md:text-xl'>
 							{book.author.name}
 						</p>
 						<div className='mt-4 flex items-center gap-2'>
@@ -40,7 +43,7 @@ export const BigBook = ({ book }: Props) => {
 								</p>
 							))}
 						</div>
-						<div className='mt-8 flex flex-1 items-start gap-4'>
+						<div className='my-3 flex flex-1 items-start gap-4 md:mt-8'>
 							<div className='flex items-center gap-2'>
 								<BookAudioIcon />
 								<p className='font-bold'>78</p>
@@ -49,13 +52,13 @@ export const BigBook = ({ book }: Props) => {
 								({book._count.reviews} отзывов)
 							</p>
 						</div>
-						<div className='mb-10 flex gap-5'>
-							<Button className={'h-12 flex-1 px-6'}>
+						<div className='flex flex-col gap-1 md:mb-10 lg:flex-row lg:gap-5'>
+							<Button className={'h-12 flex-1 px-6 py-2 lg:py-0'}>
 								Написать рецензию
 							</Button>
 							<Button
 								className={
-									'h-12 flex-1 border-black px-6 text-black'
+									'h-12 flex-1 border-black px-6 py-2 text-black lg:py-0'
 								}
 								variant={'outline'}
 							>
@@ -64,7 +67,7 @@ export const BigBook = ({ book }: Props) => {
 						</div>
 					</div>
 				</div>
-				<div className='border-accent-light w-87.5 rounded-xl border px-4 py-3'>
+				<div className='border-accent-light rounded-xl border px-4 py-3 lg:w-87.5'>
 					<p className='font-semibold'>Оценки читателей</p>
 
 					<p className='bg-main mt-6 flex h-12 w-12 items-center justify-center rounded-full text-2xl font-bold text-white'>
@@ -107,12 +110,12 @@ export const BigBook = ({ book }: Props) => {
 					</div>
 				</div>
 			</div>
-			<div className='mt-20 flex items-start'>
-				<div className='max-w-150'>
+			<div className='mt-5 flex flex-col items-start gap-5 sm:mt-20 lg:flex-row'>
+				<div className='lg:max-w-100 xl:max-w-150'>
 					{book.description && (
 						<div>
 							<h5 className='text-2xl font-bold'>О книге</h5>
-							<p className='text-secondary mt-3'>
+							<p className='text-secondary mt-3 text-sm xl:text-base'>
 								{book.description}
 							</p>
 						</div>

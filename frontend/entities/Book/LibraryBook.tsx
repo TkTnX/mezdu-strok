@@ -8,20 +8,26 @@ interface Props {
 }
 
 export const LibraryBook = ({ book }: Props) => {
-	console.log(book)
 	return (
 		<div className='border-accent-light vsm:flex-row vsm:items-start hover:bg-accent-light relative flex flex-col items-center gap-5 rounded-lg border p-2 transition sm:p-4'>
 			<Link
 				href={`/library/${book.id}`}
 				className='absolute inset-0'
 			></Link>
-			<Image
-				src={'/images/books/book1.jpg'}
-				alt={book.title}
-				width={100}
-				className='rounded-lg'
-				height={200}
-			/>
+			{book.preview ? (
+				<Image
+					src={book.preview}
+					alt={book.title}
+					width={100}
+					className='rounded-lg'
+					height={200}
+				/>
+			) : (
+				<div className='bg-accent-light flex h-40 w-25 items-center justify-center rounded-xl text-center text-xs'>
+					{book.title}
+				</div>
+			)}
+
 			<div className='flex-1'>
 				<h3 className='vsm:text-lg font-semibold'>{book.title}</h3>
 				<p className='vsm:text-base text-secondary text-xs'>
