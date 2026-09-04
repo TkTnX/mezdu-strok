@@ -44,9 +44,10 @@ export const BigBook = ({ book }: Props) => {
 								</p>
 							))}
 						</div>
-						<div className='my-3 flex items-start gap-4 md:mt-8'>
-							<div className='flex items-center gap-2'>
-								<BookAudioIcon />
+						{/* TODO: Сделать функционал добавления книги */}
+						<div className='my-3 flex items-end gap-4 md:mt-8'>
+							<div className='flex items-center gap-2 text-4xl'>
+								<BookAudioIcon size={32} />
 								<p className='font-bold'>78</p>
 							</div>
 							<p className='text-secondary'>
@@ -100,7 +101,7 @@ export const BigBook = ({ book }: Props) => {
 							</p>
 						</div>
 						<div className='flex items-center justify-between'>
-							<p className='text-sm'>Оригинальность / почерк</p>
+							<p className='text-sm'>Общее впечатление</p>
 							<p className='border-main flex h-7 w-7 items-center justify-center rounded-full border font-bold'>
 								0
 							</p>
