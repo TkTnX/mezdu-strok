@@ -15,7 +15,8 @@ datasource db {
 model User {
   id String @id @default(cuid())
 
-  name String
+  firstname String
+  lastname String
   username String @unique
   bio String?
   avatar String?
@@ -97,12 +98,11 @@ model Review {
   title String
   review String
   rating Int
-  s Int
-  p Int
-  l Int
-  i Int
-  o Int
-  a Int
+  characters Int
+  idea Int
+  impression Int
+  language Int
+  story Int
 
   likes ReviewLike[]
 

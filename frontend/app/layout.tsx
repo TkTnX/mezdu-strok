@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/widgets'
 import { Providers } from '@/shared'
+import { ToastContainer } from 'react-toastify'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -21,19 +22,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
     return (
-        <html
-            suppressHydrationWarning={true}
-            lang='ru'
-            className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-        >
-            <Providers>
-                <body className='flex min-h-full flex-col'>
-                    <Header />
-                    <main className='flex flex-1'>
-                        {children}
-                    </main>
-                </body>
-            </Providers>
-        </html>
-    )
+		<html
+			suppressHydrationWarning={true}
+			lang='ru'
+			className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+		>
+			<Providers>
+				<body className='flex min-h-full flex-col'>
+					<Header />
+					<main className='flex flex-1'>{children}</main>
+					<ToastContainer />
+				</body>
+			</Providers>
+		</html>
+	)
 }

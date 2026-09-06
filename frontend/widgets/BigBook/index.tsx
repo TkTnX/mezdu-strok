@@ -48,7 +48,9 @@ export const BigBook = ({ book }: Props) => {
 						<div className='my-3 flex items-end gap-4 md:mt-8'>
 							<div className='flex items-center gap-2 text-4xl'>
 								<BookAudioIcon size={32} />
-								<p className='font-bold'>78</p>
+								<p className='font-bold'>
+									{book.rating || '?'}
+								</p>
 							</div>
 							<p className='text-secondary'>
 								({book._count.reviews} отзывов)
@@ -70,7 +72,7 @@ export const BigBook = ({ book }: Props) => {
 					<p className='font-semibold'>Оценки читателей</p>
 
 					<p className='bg-main mt-6 flex h-12 w-12 items-center justify-center rounded-full text-2xl font-bold text-white'>
-						78
+						{book.rating || '?'}
 					</p>
 					<p className='text-secondary'>
 						{book._count.reviews} оценок
@@ -134,9 +136,9 @@ export const BigBook = ({ book }: Props) => {
 						<span className='ml-4 font-normal'>{book.pages}</span>
 					</p>
 				</div>
-				<AddReview />
+				<AddReview bookId={book.id} />
 			</div>
-			<Reviews />
+			<Reviews bookId={book.id} />
 		</div>
 	)
 }

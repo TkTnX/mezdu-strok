@@ -1,4 +1,4 @@
-import { IAuthor, IGenre, IPublisher } from '.'
+import { IAuthor, IGenre, IPublisher, IReview } from '.'
 
 export interface IBook {
     id: string
@@ -16,6 +16,7 @@ export interface IBook {
     publisher: IPublisher
     createdAt: string
     rating?: number
+    reviews?: IReview[]
     _count: {
         reviews: number
     }

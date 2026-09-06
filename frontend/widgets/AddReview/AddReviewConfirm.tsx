@@ -1,14 +1,13 @@
-import { Button, cn, IRating } from "@/shared"
-import { countRating } from "@/shared/helpers"
-import { Check, Star } from "lucide-react"
+import { Button, cn } from '@/shared'
+import { Check, Star } from 'lucide-react'
 
 interface Props {
-	values: IRating
+	rating: number
+	isPending: boolean
 }
 
-export const AddReviewConfirm = ({ values }: Props) => {
-	const score = countRating(values)
-  return (
+export const AddReviewConfirm = ({ rating, isPending }: Props) => {
+	return (
 		<div className='p-4'>
 			<div className='border-secondary/40 flex w-full flex-col items-center justify-between gap-5 rounded-2xl border bg-[#fbfbfc] p-4 md:flex-row md:gap-0 xl:gap-3'>
 				<div className='vsm:flex-row flex flex-col items-start gap-3 md:max-w-80 xl:max-w-100 xl:items-center'>
@@ -28,9 +27,9 @@ export const AddReviewConfirm = ({ values }: Props) => {
 				<div className='flex w-full items-center justify-between gap-3 md:w-fit md:justify-center'>
 					<div className='vsm:items-end flex flex-col justify-between md:justify-end'>
 						<p
-							className={`flex text-5xl font-bold transition ${score == 90 ? 'text-[#e9ba12]' : ''}`}
+							className={`flex text-5xl font-bold transition ${rating == 90 ? 'text-[#e9ba12]' : ''}`}
 						>
-							{Math.ceil(score)}{' '}
+							{Math.ceil(rating)}{' '}
 							<span className='text-secondary text-sm'>/ 90</span>
 						</p>
 						{/* TODO: Сделать */}
@@ -39,11 +38,12 @@ export const AddReviewConfirm = ({ values }: Props) => {
 						</button>
 					</div>
 					<Button
-						disabled={true}
+						type='submit'
+						disabled={isPending}
 						className={cn(
 							'flex h-14 w-14 items-center justify-center rounded-full disabled:pointer-events-none disabled:opacity-50 xl:h-18 xl:w-18',
 							{
-								'bg-[#e9ba12]': score == 90
+								'bg-[#e9ba12]': rating == 90
 							}
 						)}
 					>
@@ -52,5 +52,5 @@ export const AddReviewConfirm = ({ values }: Props) => {
 				</div>
 			</div>
 		</div>
-  )
+	)
 }
