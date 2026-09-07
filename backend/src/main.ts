@@ -24,7 +24,7 @@ async function bootstrap() {
   app.use(
     session({
       store: redisStore,
-      secret: process.env.SESSION_SECRET as string,
+      secret: process.env.SESSION_SECRET || '123456',
       resave: false,
       saveUninitialized: false,
       cookie: {
