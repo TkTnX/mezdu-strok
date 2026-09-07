@@ -16,7 +16,7 @@ export const Reviews = ({ bookId }: Props) => {
 		isPending,
 		error
 	} = useGetReviews({ bookId, sortBy })
-
+	// todo: add pagination
 	return (
 		<div className='mx-auto mt-5 max-w-285 rounded-xl'>
 			<div className='flex flex-col justify-between gap-3 sm:flex-row sm:items-center'>

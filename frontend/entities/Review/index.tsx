@@ -7,6 +7,8 @@ type Props = {
 	className?: string
 }
 
+// TODO: Аккаунты (аутентификация) через Redis
+
 export const Review = ({ review, className }: Props) => {
 	return (
 		<div className={`bg-accent-light rounded-2xl p-2 ${className}`}>

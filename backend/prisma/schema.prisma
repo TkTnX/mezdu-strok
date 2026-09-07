@@ -15,11 +15,12 @@ datasource db {
 model User {
   id String @id @default(cuid())
 
-  firstname String
-  lastname String
+  firstname String?
+  lastname String?
   username String @unique
   bio String?
   avatar String?
+  role ERole @default(USER)
 
   email String @unique
   password String
@@ -126,4 +127,9 @@ model Quote {
   authorId String
   author User @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
+}
+
+enum ERole {
+  USER
+  ADMIN
 }
