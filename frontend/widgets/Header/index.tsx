@@ -4,7 +4,7 @@ import Link from 'next/link'
 export const Header = () => {
 	return (
 		<header className='border-border w-full border-b'>
-			<div className='flex h-15 w-full items-center justify-between gap-4 container'>
+			<div className='container flex h-15 w-full items-center justify-between gap-4'>
 				<Link className='text-2xl font-bold' href={'/'}>
 					Между строк
 				</Link>
@@ -19,7 +19,9 @@ export const Header = () => {
 				<div className='flex items-center gap-2 sm:gap-8'>
 					<SearchIcon className='block sm:hidden' />
 					<Bell />
-					<UserIcon />
+					<Link href={'/auth/login'}>
+						<UserIcon />
+					</Link>
 				</div>
 			</div>
 		</header>

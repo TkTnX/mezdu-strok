@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 140">
+<defs>
+ <linearGradient id="p" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9070ff"/><stop offset="1" stop-color="#5833d7"/></linearGradient>
+ <filter id="s"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-opacity=".16"/></filter>
+</defs>
+<g fill="#7a56f2">
+ <path d="M67 19l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/>
+ <path d="M105 11l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/>
+ <path d="M125 27l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/>
+</g>
+<g filter="url(#s)">
+ <path fill="#eae5ff" d="M27 58q29-17 61-1v50q-30-14-61 3z"/>
+ <path fill="#f5f2ff" d="M88 57q35-15 65 2v50q-30-15-65-2z"/>
+ <path fill="url(#p)" d="M27 58q30-16 61-1v48q-30-12-61 5z"/>
+ <path fill="#7651e8" d="M88 57q34-15 65 2v48q-30-14-65-2z"/>
+ <path fill="#fff" opacity=".82" d="M37 62q22-10 43-2v34q-20-8-43 1z"/>
+ <path fill="#fff" opacity=".78" d="M97 61q25-10 46 1v34q-23-9-46 0z"/>
+ <circle cx="88" cy="62" r="13" fill="#7651e8"/>
+ <path d="M80 58h16v15H80z" fill="#7651e8"/>
+ <path d="M82 64q6-8 12 0v10H82z" fill="#8c70ff"/>
+</g>
+</svg>

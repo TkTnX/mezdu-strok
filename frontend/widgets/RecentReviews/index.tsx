@@ -13,7 +13,7 @@ export const RecentReviews = () => {
 					Смотреть все
 				</Link>
 			</div>
-			<Review className="mt-4" />
+			{/* <Review  className="mt-4" /> */}
 		</section>
 	)
 }
