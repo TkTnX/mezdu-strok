@@ -7,7 +7,7 @@ import { Request } from 'express';
 export class AuthService {
   public constructor(private readonly prismaService: PrismaService) {}
 
-  async register(dto: RegisterDto, req: Request & {session: any}) {
+  async register(dto: RegisterDto, req: Request & { session: any }) {
     const isExists = await this.prismaService.user.findFirst({
       where: {
         OR: [{ email: dto.email }, { username: dto.username }],
@@ -29,31 +29,35 @@ export class AuthService {
       email: user.email,
     };
 
-
-
     return user;
   }
 
-  async login(dto: LoginDto, req: Request & {session: any}) {
-    const user = await this.prismaService.user.findUnique({
-      where: { email: dto.email },
+  async login(dto: LoginDto, req: Request & { session: any }) {
+    const user = await this.prismaService.user.findFirst({
+      where: {
+        OR: [{ email: dto.emailOrUsername }, { username: dto.emailOrUsername }],
+      },
     });
 
-    if (!user) throw new NotFoundException('Неверные данные хода!');
+    if (!user) throw new NotFoundException('Неверные данные входа!');
 
     const isValidPassword = bcrypt.compareSync(dto.password, user.password);
 
-    if (!isValidPassword) throw new NotFoundException('Неверные данные хода!');
+    if (!isValidPassword) throw new NotFoundException('Неверные данные входа!');
 
-    req.session.user = {id: user.id, username: user.username, email: user.email};
+    req.session.user = {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+    };
 
     return user;
   }
 
-  async logout(req: Request & {session: any}) {
+  async logout(req: Request & { session: any }) {
     req.session.destroy((err: any) => {
       if (err) {
-        console.log(err)
+        console.log(err);
       }
     });
   }

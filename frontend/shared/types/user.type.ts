@@ -16,3 +16,15 @@ export interface IUser {
     // quotes?: IQuote[]
     createdAt: string
 }
+
+export interface ILogin {
+    emailOrUsername: string
+    password: string
+}
+
+export interface IRegister {
+    username: string
+    email: string
+    password: string
+    passwordRepeat: string
+}

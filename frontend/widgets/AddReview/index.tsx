@@ -6,9 +6,8 @@ import { AddReviewTop } from './AddReviewTop'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { cn, useReviews } from '@/shared'
-import { countRating } from '@/shared/helpers'
+import { countRating, showErrorMessage } from '@/shared/helpers'
 import { toast } from 'react-toastify'
-import { AxiosError } from 'axios'
 
 interface Props {
 	bookId: string
@@ -40,14 +39,7 @@ export const AddReview = ({ bookId }: Props) => {
 			})
 			toast.success('Рецензия успешно создана')
 		},
-		onError: error => {
-			const err = error as AxiosError | Error
-			if (err instanceof AxiosError)
-				return err.response?.data.message.map((msg: string) =>
-					toast.error(msg)
-				)
-			return toast.error(err.message)
-		}
+		onError: error => showErrorMessage(error)
 	})
 
 	return (
