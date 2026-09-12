@@ -1,4 +1,6 @@
+'use client'
 import { Button, IBook } from '@/shared'
+import { useUserStore } from '@/shared/stores'
 import { AddReview } from '@/widgets/AddReview'
 import { Reviews } from '@/widgets/Reviews'
 import { BookAudioIcon, Bookmark } from 'lucide-react'
@@ -9,6 +11,8 @@ interface Props {
 }
 
 export const BigBook = ({ book }: Props) => {
+	const { user } = useUserStore()
+	console.log(user)
 	return (
 		<div className=''>
 			<div className='mt-10 flex w-full flex-col justify-between gap-4 lg:flex-row lg:items-end'>

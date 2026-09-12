@@ -1,12 +1,14 @@
 'use client'
 import {
 	Button,
+	getMe,
 	Input,
 	registerResolver,
 	RegisterResolverType,
 	useAuth
 } from '@/shared'
 import { showErrorMessage } from '@/shared/helpers'
+import { useUserStore } from '@/shared/stores'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
 	EyeIcon,
@@ -21,6 +23,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 export const RegisterForm = () => {
+	const { setUser } = useUserStore()
 	const router = useRouter()
 	const [showPass, setShowPass] = useState(false)
 	const [isConfirmed, setIsConfirmed] = useState(false)
@@ -34,7 +37,9 @@ export const RegisterForm = () => {
 	const { useRegisterMutation } = useAuth()
 	const { mutate, isPending } = useRegisterMutation({
 		onError: error => showErrorMessage(error),
-		onSuccess: () => {
+		onSuccess: async () => {
+			const user = await getMe()
+			setUser(user)
 			router.push('/')
 			toast.success('Вы успешно зарегистрировались!')
 		}

@@ -20,10 +20,12 @@ import { useState } from 'react'
 import { showErrorMessage } from '@/shared/helpers'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
+import { useUserStore } from '@/shared/stores'
 // TODO: FIX АДАПТИВ КАРТИНОК КНИГ
 export const LoginForm = () => {
 	const router = useRouter()
 	const [showPass, setShowPass] = useState('password')
+	const {setUser} = useUserStore()
 	const {
 		register,
 		handleSubmit,
@@ -37,6 +39,7 @@ export const LoginForm = () => {
 		onError: error => showErrorMessage(error),
 		onSuccess: async () => {
 			const user = await getMe()
+			setUser(user)
 			router.push('/')
 			toast.success('Вы успешно вошли в аккаунт!')
 			console.log(user)
