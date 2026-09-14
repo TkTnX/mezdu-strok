@@ -4,7 +4,6 @@ import { useUserStore } from '@/shared/stores'
 import { Bell, SearchIcon, UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect } from 'react'
-
 export const Header = () => {
 	const { user, setUser, setIsPending } = useUserStore()
 
@@ -39,9 +38,15 @@ export const Header = () => {
 				<div className='flex items-center gap-2 sm:gap-8'>
 					<SearchIcon className='block sm:hidden' />
 					<Bell />
-					<Link href={'/auth/login'}>
-						<UserIcon />
-					</Link>
+					{user ? (
+						<Link href={'/profile'}>
+							<UserIcon />
+						</Link>
+					) : (
+						<Link href={'/auth/login'}>
+							<UserIcon />
+						</Link>
+					)}
 				</div>
 			</div>
 		</header>

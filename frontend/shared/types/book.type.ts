@@ -16,6 +16,11 @@ export interface IBook {
     publisher: IPublisher
     createdAt: string
     rating?: number
+    story: number
+    characters: number
+    idea: number
+    impression: number
+    language: number
     reviews?: IReview[]
     _count: {
         reviews: number

@@ -42,6 +42,11 @@ model Book {
   tags String[]
   pages Int
   rating Int?
+   characters Int? @default(0)
+  idea Int? @default(0)
+  impression Int? @default(0)
+  language Int? @default(0)
+  story Int? @default(0)
 
   authorId String
   author Author @relation(fields: [authorId], references: [id])

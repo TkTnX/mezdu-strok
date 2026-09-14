@@ -1,4 +1,4 @@
-import { Button, cn } from '@/shared'
+import { Button, cn, HowRateCounts } from '@/shared'
 import { Check, Star } from 'lucide-react'
 
 interface Props {
@@ -33,9 +33,7 @@ export const AddReviewConfirm = ({ rating, isPending }: Props) => {
 							<span className='text-secondary text-sm'>/ 90</span>
 						</p>
 						{/* TODO: Сделать */}
-						<button className='text-main border-main border-b border-dashed text-xs text-nowrap'>
-							Как считается оценка?
-						</button>
+						 <HowRateCounts />
 					</div>
 					<Button
 						type='submit'

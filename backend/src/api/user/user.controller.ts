@@ -8,7 +8,7 @@ export class UserController {
   
   @Get('me')
   async getMe(@Req() req: Request & { session: any }) {
-    return this.userService.getById(req.session.user.id);
+    return this.userService.getMe(req)
     } 
 
   @Get(':id')

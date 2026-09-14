@@ -1,5 +1,5 @@
+import { LikeReview } from '@/features'
 import { IReview } from '@/shared'
-import { HeartHandshakeIcon } from 'lucide-react'
 import Image from 'next/image'
 
 type Props = {
@@ -7,23 +7,21 @@ type Props = {
 	className?: string
 }
 
-// TODO: Аккаунты (аутентификация) через Redis
-
 export const Review = ({ review, className }: Props) => {
+	const user = review.user
 	return (
 		<div className={`bg-accent-light rounded-2xl p-2 ${className}`}>
 			<div className='bg-main/10 flex items-center justify-between rounded-2xl p-2'>
 				<div className='flex items-center gap-2'>
 					<Image
-						src={review.user?.avatar || '/images/users/user1.png'}
+						src={user?.avatar || '/images/users/user1.png'}
 						alt={'User'}
 						width={43}
 						height={43}
 						className='rounded-full'
 					/>
 					<p className='text-sm font-bold sm:text-base'>
-						{`${review.user?.firstname} ${review.user?.lastname[0]}`}
-						.
+						{`${user?.firstname || user?.lastname ? `${user?.firstname} ${user?.lastname}` : `@${user?.username}`}`}
 					</p>
 				</div>
 				<div className='text-right'>
@@ -58,12 +56,7 @@ export const Review = ({ review, className }: Props) => {
 			<p className='text-secondary text-xs'>
 				{new Date(review.createdAt).toLocaleDateString('ru-RU')}
 			</p>
-			<div className='mt-3'>
-				<button className='border-main bg-main/30 flex items-center gap-2 rounded-full border px-4 py-2 text-white'>
-					<HeartHandshakeIcon />
-					{review._count?.likes}
-				</button>
-			</div>
+			<LikeReview likes={review._count?.likes || 0} id={review.id} />
 		</div>
 	)
 }

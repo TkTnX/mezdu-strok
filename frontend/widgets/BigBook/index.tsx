@@ -1,6 +1,5 @@
 'use client'
 import { Button, IBook } from '@/shared'
-import { useUserStore } from '@/shared/stores'
 import { AddReview } from '@/widgets/AddReview'
 import { Reviews } from '@/widgets/Reviews'
 import { BookAudioIcon, Bookmark } from 'lucide-react'
@@ -11,8 +10,6 @@ interface Props {
 }
 
 export const BigBook = ({ book }: Props) => {
-	const { user } = useUserStore()
-	console.log(user)
 	return (
 		<div className=''>
 			<div className='mt-10 flex w-full flex-col justify-between gap-4 lg:flex-row lg:items-end'>
@@ -85,31 +82,31 @@ export const BigBook = ({ book }: Props) => {
 						<div className='flex items-center justify-between'>
 							<p className='text-sm'>Сюжет / композиция</p>
 							<p className='border-main flex h-7 w-7 items-center justify-center rounded-full border font-bold'>
-								0
+								{book.story}
 							</p>
 						</div>
 						<div className='flex items-center justify-between'>
 							<p className='text-sm'>Персонажи / психология</p>
 							<p className='border-main flex h-7 w-7 items-center justify-center rounded-full border font-bold'>
-								0
+								{book.characters}
 							</p>
 						</div>
 						<div className='flex items-center justify-between'>
 							<p className='text-sm'>Язык / стиль</p>
 							<p className='border-main flex h-7 w-7 items-center justify-center rounded-full border font-bold'>
-								0
+								{book.language}
 							</p>
 						</div>
 						<div className='flex items-center justify-between'>
 							<p className='text-sm'>Идея / глубина</p>
 							<p className='border-main flex h-7 w-7 items-center justify-center rounded-full border font-bold'>
-								0
+								{book.idea}
 							</p>
 						</div>
 						<div className='flex items-center justify-between'>
 							<p className='text-sm'>Общее впечатление</p>
 							<p className='border-main flex h-7 w-7 items-center justify-center rounded-full border font-bold'>
-								0
+								{book.impression}
 							</p>
 						</div>
 					</div>
