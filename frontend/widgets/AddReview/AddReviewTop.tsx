@@ -22,7 +22,7 @@ export const AddReviewTop = () => {
 				<div className='bg-secondary vsm:block hidden h-10 w-px' />
 				<Link
 					className='bg-main hover:bg-main/80 block w-full rounded-xl px-5 py-3 text-center text-white transition'
-					href={'/login'}
+					href={'/auth/login'}
 				>
 					Войти
 				</Link>

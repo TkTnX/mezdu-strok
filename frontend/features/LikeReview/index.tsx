@@ -8,6 +8,8 @@ interface Props {
 	likes: number
 }
 
+// TODO: Добавление в избранное
+
 export const LikeReview = ({ id, likes }: Props) => {
 	const { useLikeReview } = useReviews()
 	const queryClient = useQueryClient()

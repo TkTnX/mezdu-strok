@@ -5,6 +5,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { Request } from 'express';
 
 @Injectable()
 export class BookService {
@@ -35,7 +36,12 @@ export class BookService {
         author: true,
         genre: true,
         publisher: true,
-        _count: { select: { reviews: true } },
+        _count: { select: { reviews: true, favorites: true } },
+        favorites: {
+          select: {
+            userId: true,
+          },
+        },
       },
     });
 
@@ -51,6 +57,40 @@ export class BookService {
 
     if (!book) {
       throw new BadRequestException('Книга не создана');
+    }
+
+    return book;
+  }
+
+  public async addToFav(id: string, req: Request & { session: any }) {
+    const book = await this.getById(id);
+
+    const isFav = await this.prismaService.favorite.findFirst({
+      where: {
+        OR: [
+          {
+            bookId: id,
+          },
+          {
+            userId: req.session.user.id,
+          },
+        ],
+      },
+    });
+
+    if (isFav) {
+      await this.prismaService.favorite.delete({
+        where: {
+          id: isFav.id,
+        },
+      });
+    } else {
+      await this.prismaService.favorite.create({
+        data: {
+          bookId: id,
+          userId: req.session.user.id,
+        },
+      });
     }
 
     return book;

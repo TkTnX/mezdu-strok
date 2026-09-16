@@ -1,8 +1,9 @@
 'use client'
-import { Button, IBook } from '@/shared'
+import { AddBookToFav } from '@/features'
+import {  IBook } from '@/shared'
 import { AddReview } from '@/widgets/AddReview'
 import { Reviews } from '@/widgets/Reviews'
-import { BookAudioIcon, Bookmark } from 'lucide-react'
+import { BookAudioIcon } from 'lucide-react'
 import Image from 'next/image'
 
 interface Props {
@@ -57,16 +58,7 @@ export const BigBook = ({ book }: Props) => {
 								({book._count.reviews} отзывов)
 							</p>
 						</div>
-						<div className='flex flex-col gap-1 md:mb-10 lg:flex-row lg:gap-5'>
-							<Button
-								className={
-									'border-main text-main h-10 w-10 hover:text-white sm:h-15 sm:w-15 lg:py-0'
-								}
-								variant={'outline'}
-							>
-								<Bookmark />
-							</Button>
-						</div>
+						<AddBookToFav likes={book.favorites} id={book.id} />
 					</div>
 				</div>
 				<div className='border-accent-light rounded-xl border px-4 py-3 lg:w-87.5'>

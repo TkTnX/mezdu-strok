@@ -22,8 +22,10 @@ export interface IBook {
     impression: number
     language: number
     reviews?: IReview[]
+    favorites: { userId: string }[]
     _count: {
         reviews: number
+        favorites: number
     }
 }
 

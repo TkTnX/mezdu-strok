@@ -1,6 +1,10 @@
-import { createBook, getBookById, getBooks } from '@/shared/api'
+import { addBookToFav, createBook, getBookById, getBooks } from '@/shared/api'
 import { IBook, ICreateBook } from '@/shared/types'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import {
+	useMutation,
+	UseMutationOptions,
+	useQuery
+} from '@tanstack/react-query'
 
 export function useBooks() {
 	const useGetBooks = ({ take, sort }: { take?: number; sort?: string }) =>
@@ -20,9 +24,21 @@ export function useBooks() {
 			mutationFn: (data: ICreateBook): Promise<IBook> => createBook(data)
 		})
 
+	const useAddBookToFav = (
+		options?: Omit<
+			UseMutationOptions<unknown, unknown, unknown>,
+			'mutationFn'
+		>
+	) =>
+		useMutation({
+			mutationFn: (id: string) => addBookToFav(id),
+			...options
+		})
+
 	return {
 		useGetBooks,
 		useGetBookById,
-		useCreateBook
+		useCreateBook,
+		useAddBookToFav
 	}
 }
