@@ -14,7 +14,7 @@ export interface IReview {
 	language: number
 	story: number
 	user?: IUser
-    _count?: { likes: number }
+	likes: { userId: string }[]
 }
 
 export interface ICreateReview {

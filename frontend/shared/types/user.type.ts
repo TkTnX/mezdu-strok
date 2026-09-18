@@ -14,6 +14,10 @@ export interface IUser {
     // favorites?: IFavorite[]
     reviews?: IReview[]
     // quotes?: IQuote[]
+    _count: {
+        reviews: number
+        favorites: number
+    }
     createdAt: string
 }
 

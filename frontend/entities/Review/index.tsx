@@ -56,7 +56,7 @@ export const Review = ({ review, className }: Props) => {
 			<p className='text-secondary text-xs'>
 				{new Date(review.createdAt).toLocaleDateString('ru-RU')}
 			</p>
-			<LikeReview likes={review._count?.likes || 0} id={review.id} />
+			<LikeReview  likes={review.likes} id={review.id} />
 		</div>
 	)
 }

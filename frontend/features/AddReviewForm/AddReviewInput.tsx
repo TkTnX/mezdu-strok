@@ -1,17 +1,15 @@
-import { IRating, ReviewResolverType } from '@/shared'
+import { ReviewResolverType } from '@/shared'
 import { Info } from 'lucide-react'
-import { Dispatch, SetStateAction } from 'react'
-import {  UseFormRegister } from 'react-hook-form'
+import { UseFormRegisterReturn } from 'react-hook-form'
 
 interface Props {
 	label: string
 	name: keyof ReviewResolverType
-	register: UseFormRegister<ReviewResolverType>
-	setValues: Dispatch<SetStateAction<IRating>>
-	values: Record<string, number>
+	register: UseFormRegisterReturn
+	value: number
 }
 
-export const AddReviewInput = ({ label, name, register, setValues, values }: Props) => {
+export const AddReviewInput = ({ label, name, register, value }: Props) => {
 	return (
 		<label className='flex-1'>
 			<p className='flex items-center justify-between text-xs font-semibold'>
@@ -19,13 +17,12 @@ export const AddReviewInput = ({ label, name, register, setValues, values }: Pro
 					{label} <Info size={14} className='min-w-3.5' />{' '}
 				</span>
 				<span className='text-main text-base font-bold'>
-					{values[name]}
+					{value}
 				</span>{' '}
 			</p>
 			<input
-				value={values[name]}
-				{...register(name)}
-				onChange={e => setValues(prev => ({...prev, [name]: +e.target.value}))}
+				defaultValue={1}
+				{...register}
 				min={1}
 				max={10}
 				name={name}

@@ -15,33 +15,29 @@ export class ReviewService {
       data: { ...dto, userId: req.session.user.id },
     });
 
-    if (!review) throw new BadGatewayException('Рецензия не создана');
-
-    const reviews = await this.prismaService.review.findMany({
-      where: { bookId: dto.bookId },
+    const averages = await this.prismaService.review.aggregate({
+      where: {
+        bookId: dto.bookId,
+      },
+      _avg: {
+        rating: true,
+        story: true,
+        idea: true,
+        impression: true,
+        language: true,
+        characters: true,
+      },
     });
 
     await this.prismaService.book.update({
       where: { id: dto.bookId },
       data: {
-        rating:
-          reviews.reduce((acc, review) => acc + review.rating, 0) /
-          reviews.length,
-        story:
-          reviews.reduce((acc, review) => acc + review.story, 0) /
-          reviews.length,
-        idea:
-          reviews.reduce((acc, review) => acc + review.idea, 0) /
-          reviews.length,
-        impression:
-          reviews.reduce((acc, review) => acc + review.impression, 0) /
-          reviews.length,
-        language:
-          reviews.reduce((acc, review) => acc + review.language, 0) /
-          reviews.length,
-        characters:
-          reviews.reduce((acc, review) => acc + review.characters, 0) /
-          reviews.length,
+        rating: averages._avg.rating ?? 0,
+        story: averages._avg.story ?? 0,
+        idea: averages._avg.idea ?? 0,
+        impression: averages._avg.impression ?? 0,
+        language: averages._avg.language ?? 0,
+        characters: averages._avg.characters ?? 0,
       },
     });
     return review;
@@ -63,12 +59,12 @@ export class ReviewService {
       },
     });
 
-    if(like) {
+    if (like) {
       await this.prismaService.reviewLike.delete({
         where: {
-          id: like.id
-        }
-      })
+          id: like.id,
+        },
+      });
     } else {
       await this.prismaService.reviewLike.create({
         data: {
@@ -90,9 +86,9 @@ export class ReviewService {
       },
       include: {
         user: true,
-        _count: {
+        likes: {
           select: {
-            likes: true,
+            userId: true,
           },
         },
       },

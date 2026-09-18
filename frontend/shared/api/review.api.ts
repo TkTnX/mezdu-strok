@@ -8,14 +8,14 @@ export async function createReview(body: ICreateReview) {
 }
 
 export async function likeReview(id: string) {
-    const { data } = await axiosInstance.post(`reviews/${id}/like`)
-    return data
+	const { data } = await axiosInstance.post(`reviews/${id}/like`)
+	return data
 }
 
 export async function getReviews(query: Record<string, string>) {
-    const { data } = await axiosInstance.get(`reviews`, {
-        params: query
-    })
+	const { data } = await axiosInstance.get(`reviews`, {
+		params: query
+	})
 
 	return data
 }

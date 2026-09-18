@@ -15,7 +15,8 @@ import {
 	EyeOffIcon,
 	Loader2Icon,
 	LockKeyhole,
-	Mail
+	Mail,
+	User
 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
@@ -40,8 +41,7 @@ export const RegisterForm = () => {
 		onSuccess: async () => {
 			const user = await getMe()
 			setUser(user)
-			router.push('/')
-			toast.success('Вы успешно зарегистрировались!')
+			router.push('/auth/register/more-info')
 		}
 	})
 
@@ -61,7 +61,7 @@ export const RegisterForm = () => {
 		>
 			<Input
 				label='Логин'
-				icon={<Mail size={20} className='text-secondary' />}
+				icon={<User size={20} className='text-secondary' />}
 				placeholder='user'
 				register={register('username', { required: true })}
 				error={errors.username?.message}

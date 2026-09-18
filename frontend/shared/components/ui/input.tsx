@@ -1,7 +1,8 @@
-import { RegisterOptions, UseFormRegisterReturn } from 'react-hook-form'
+import { cn } from '@/shared/lib'
+import {  UseFormRegisterReturn } from 'react-hook-form'
 
 interface Props {
-	label: string
+	label?: string
 	placeholder: string
 	icon: React.ReactNode
 	additional?: React.ReactNode
@@ -22,13 +23,13 @@ export const Input = ({
 	type
 }: Props) => {
 	return (
-		<label className={className}>
-			<span className='font-semibold text-black'>{label}</span>
+		<label >
+			{label && <span className='font-semibold text-black'>{label}</span>}
 			<div className='border-accent-light mt-2 flex w-full items-center gap-3 rounded-lg border p-3'>
 				{icon}
 				<input
 					{...register}
-					className='flex-1'
+					className={cn('flex-1', className)}
 					placeholder={placeholder}
 					type={type}
 				/>

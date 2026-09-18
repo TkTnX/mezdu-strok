@@ -42,7 +42,6 @@ export const LoginForm = () => {
 			setUser(user)
 			router.push('/')
 			toast.success('Вы успешно вошли в аккаунт!')
-			console.log(user)
 		}
 	})
 	return (

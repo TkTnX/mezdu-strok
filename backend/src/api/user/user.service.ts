@@ -1,3 +1,4 @@
+import { UpdateUserDto } from './dto';
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Request } from 'express';
@@ -13,6 +14,18 @@ export class UserService {
       omit: {
         password: true,
       },
+      include: {
+        reviews: {
+          select: {rating: true}
+        },
+        _count: {
+          select: {
+            favorites: true,
+            reviews: true,
+
+          }
+        }
+      }
     });
 
     if (!user) throw new NotFoundException('Пользователь не найден');
@@ -29,6 +42,17 @@ export class UserService {
     });
 
     if (!user) throw new NotFoundException('Пользователь не найден');
+
+    return user;
+  }
+
+  async update(req: Request & { session: any }, dto: UpdateUserDto) {
+    const user = await this.prismaService.user.update({
+      where: { id: req.session.user.id },
+      data: dto,
+    });
+
+    if (!user) throw new NotFoundException('Пользователь не обновлен');
 
     return user;
   }

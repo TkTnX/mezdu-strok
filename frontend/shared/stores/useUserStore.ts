@@ -10,8 +10,8 @@ interface UserStore {
 
 export const useUserStore = create<UserStore>(set => ({
     user: null,
-    setUser: (user: IUser) => set(() => ({ user })),
-    isPending: false,
+    setUser: (user: IUser | null) => set(() => ({ user })),
+    isPending: true,
     setIsPending: (isPending: boolean) => set(() => ({ isPending }))
 }))
 
