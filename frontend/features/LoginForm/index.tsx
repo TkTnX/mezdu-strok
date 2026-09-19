@@ -25,7 +25,7 @@ import { useUserStore } from '@/shared/stores'
 export const LoginForm = () => {
 	const router = useRouter()
 	const [showPass, setShowPass] = useState('password')
-	const {setUser} = useUserStore()
+	const { setUser } = useUserStore()
 	const {
 		register,
 		handleSubmit,
@@ -41,6 +41,7 @@ export const LoginForm = () => {
 			const user = await getMe()
 			setUser(user)
 			router.push('/')
+			router.refresh()
 			toast.success('Вы успешно вошли в аккаунт!')
 		}
 	})

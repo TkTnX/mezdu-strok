@@ -42,6 +42,7 @@ export const RegisterForm = () => {
 			const user = await getMe()
 			setUser(user)
 			router.push('/auth/register/more-info')
+			router.refresh()
 		}
 	})
 
