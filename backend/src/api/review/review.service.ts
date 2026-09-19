@@ -43,6 +43,9 @@ export class ReviewService {
     return review;
   }
 
+  // TODO: Защитить страницы (если зареган/не зареган)
+  // TODO: PROFILE PAGE
+
   public async like(id: string, req: Request & { session: any }) {
     await this.getById(id);
 
