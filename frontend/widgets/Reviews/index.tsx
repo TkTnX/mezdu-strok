@@ -5,22 +5,27 @@ import { ReviewsSort } from './ReviewsSort'
 import { useState } from 'react'
 
 interface Props {
-	bookId: string
+	bookId?: string
+	userId?: string
 }
 
-export const Reviews = ({ bookId }: Props) => {
+export const Reviews = ({ bookId, userId }: Props) => {
 	const [sortBy, setSortBy] = useState('createdAt-desc')
 	const { useGetReviews } = useReviews()
 	const {
 		data: reviews,
 		isPending,
 		error
-	} = useGetReviews({ bookId, sortBy })
+	} = useGetReviews({ bookId, userId, sortBy })
 	// todo: add pagination
 	return (
 		<div className='mx-auto mt-5 max-w-285 rounded-xl'>
 			<div className='flex flex-col justify-between gap-3 sm:flex-row sm:items-center'>
-				<p className='text-4xl font-semibold sm:text-2xl'>Рецензии</p>
+				{bookId && (
+					<p className='text-4xl font-semibold sm:text-2xl'>
+						Рецензии
+					</p>
+				)}
 				<ReviewsSort setSortBy={setSortBy} />
 			</div>
 			<div className='mx-auto mt-10 grid max-w-200 gap-5'>

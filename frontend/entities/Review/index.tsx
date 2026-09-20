@@ -1,6 +1,7 @@
 import { LikeReview } from '@/features'
-import { IReview } from '@/shared'
+import { cn, IReview } from '@/shared'
 import Image from 'next/image'
+import Link from 'next/link'
 
 type Props = {
 	review: IReview
@@ -11,18 +12,44 @@ export const Review = ({ review, className }: Props) => {
 	const user = review.user
 	return (
 		<div className={`bg-accent-light rounded-2xl p-2 ${className}`}>
-			<div className='bg-main/10 flex items-center justify-between rounded-2xl p-2'>
-				<div className='flex items-center gap-2'>
-					<Image
-						src={user?.avatar || '/images/users/user1.png'}
-						alt={'User'}
-						width={43}
-						height={43}
-						className='rounded-full'
-					/>
-					<p className='text-sm font-bold sm:text-base'>
-						{`${user?.firstname || user?.lastname ? `${user?.firstname} ${user?.lastname}` : `@${user?.username}`}`}
-					</p>
+			<div
+				className={cn(
+					'bg-main/10 flex items-center justify-between rounded-2xl p-2',
+					{ 'items-start': review.book }
+				)}
+			>
+				<div>
+					{review.book && (
+						<Link
+							href={`/library/${review.book.id}`}
+							className='mb-5 flex items-center gap-2'
+						>
+							<Image
+								src={
+									review.book.preview ||
+									'/images/users/user1.png'
+								}
+								alt={review.book.title}
+								width={43}
+								height={43}
+							/>
+							<p className='text-sm font-bold sm:text-base'>
+								{review.book.title}
+							</p>
+						</Link>
+					)}
+					<div className='flex items-center gap-2'>
+						<Image
+							src={user?.avatar || '/images/users/user1.png'}
+							alt={'User'}
+							width={43}
+							height={43}
+							className='rounded-full'
+						/>
+						<p className='text-sm font-bold sm:text-base'>
+							{`${user?.firstname || user?.lastname ? `${user?.firstname} ${user?.lastname}` : `@${user?.username}`}`}
+						</p>
+					</div>
 				</div>
 				<div className='text-right'>
 					<p className='text-main vsm:text-3xl text-2xl font-bold'>
@@ -56,7 +83,7 @@ export const Review = ({ review, className }: Props) => {
 			<p className='text-secondary text-xs'>
 				{new Date(review.createdAt).toLocaleDateString('ru-RU')}
 			</p>
-			<LikeReview  likes={review.likes} id={review.id} />
+			<LikeReview likes={review.likes} id={review.id} />
 		</div>
 	)
 }

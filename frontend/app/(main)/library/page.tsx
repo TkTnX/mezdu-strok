@@ -10,7 +10,7 @@ import { Filters, LibraryList } from '@/widgets'
 
 const LibraryPage = () => {
 	return (
-		<section className='vsm:pl-10! container flex-1 py-4'>
+		<section className='vsm:pl-10! flex-1 p-4'>
 			<div className='flex w-full flex-wrap items-center justify-between gap-4'>
 				<h1 className='text-3xl font-bold'>Каталог книг</h1>
 				<Button variant={'outline'} className='h-10'>

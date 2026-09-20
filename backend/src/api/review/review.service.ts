@@ -43,7 +43,6 @@ export class ReviewService {
     return review;
   }
 
-  // TODO: Защитить страницы (если зареган/не зареган)
   // TODO: PROFILE PAGE
 
   public async like(id: string, req: Request & { session: any }) {
@@ -82,10 +81,10 @@ export class ReviewService {
 
   public async get(query: Record<string, any>) {
     const sort = query.sortBy && query.sortBy.split('-');
-
     const reviews = await this.prismaService.review.findMany({
       where: {
         bookId: query.bookId || undefined,
+        userId: query.userId || undefined,
       },
       include: {
         user: true,
@@ -94,6 +93,9 @@ export class ReviewService {
             userId: true,
           },
         },
+        book: query.userId
+          ? { select: { title: true, id: true, preview: true } }
+          : undefined,
       },
       orderBy: {
         [sort[0]]: sort[1],

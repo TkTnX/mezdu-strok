@@ -23,7 +23,7 @@ export const Header = () => {
 
 	return (
 		<header className='border-border w-full border-b'>
-			<div className='container flex h-15 w-full items-center justify-between gap-4'>
+			<div className='flex h-15 w-full items-center justify-between gap-4 px-4'>
 				<Link className='text-2xl font-bold' href={'/'}>
 					Между строк
 				</Link>

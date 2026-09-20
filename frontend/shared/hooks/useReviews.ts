@@ -19,7 +19,7 @@ export function useReviews() {
 			...options
 		})
 	
-	const useGetReviews = (query: Record<string, string>) =>
+	const useGetReviews = (query: Record<string, unknown>) =>
 		useQuery({
 			queryKey: ['reviews', query],
 			queryFn: (): Promise<IReview[]> => getReviews(query)

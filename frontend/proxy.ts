@@ -4,7 +4,7 @@ import { cookies } from 'next/headers'
 
 const protectedRoutes = ['/profile', '/favorites', '/reviews', '/quotes']
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
 	const path = request.nextUrl.pathname
     const cookieStore = await cookies()
     const isAuth = cookieStore.get('connect.sid')

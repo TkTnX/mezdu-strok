@@ -5,6 +5,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { ReviewModule } from './api/review/review.module';
 import { UserModule } from './api/user/user.module';
 import { AuthModule } from './api/auth/auth.module';
+import { FavoriteModule } from './api/favorite/favorite.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { AuthModule } from './api/auth/auth.module';
     ReviewModule,
     UserModule,
     AuthModule,
+    FavoriteModule,
   ],
 })
 export class AppModule {}

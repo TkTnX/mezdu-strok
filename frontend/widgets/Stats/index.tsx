@@ -1,10 +1,14 @@
 'use client'
-import { Skeleton } from '@/shared'
+import { cn, Skeleton } from '@/shared'
 import { useUserStore } from '@/shared/stores'
 import { Info } from 'lucide-react'
 import Link from 'next/link'
 
-export const Stats = () => {
+interface Props {
+	isSmall?: boolean
+}
+
+export const Stats = ({ isSmall = false }: Props) => {
 	const { user, isPending } = useUserStore()
 
 	if (isPending) return <Skeleton className='mt-10 h-50 w-full' />
@@ -30,21 +34,57 @@ export const Stats = () => {
 			</div>
 		)
 	return (
-		<div className='mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
-			<div className='border-accent-light flex flex-col items-center justify-center rounded-xl border p-5 sm:items-start lg:p-10'>
+		<div
+			className={cn('mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4', {
+				'grid-cols-2': isSmall
+			})}
+		>
+			<div
+				className={cn(
+					'flex flex-col items-center justify-center sm:items-start',
+					{
+						'border-accent-light rounded-xl border p-5 lg:p-10':
+							!isSmall
+					}
+				)}
+			>
 				<h4 className='text-4xl font-bold'>{user?._count.favorites}</h4>
 				<p className='mt-3 font-medium'>Любимых книг</p>
 			</div>
-			<div className='border-accent-light flex flex-col items-center justify-center rounded-xl border p-5 sm:items-start lg:p-10'>
+			<div
+				className={cn(
+					'flex flex-col items-center justify-center sm:items-start',
+					{
+						'border-accent-light rounded-xl border p-5 lg:p-10':
+							!isSmall
+					}
+				)}
+			>
 				<h4 className='text-4xl font-bold'>{user?._count.reviews}</h4>
 				<p className='mt-3 font-medium'>Отзывов написано</p>
 			</div>
-			<div className='border-accent-light flex flex-col items-center justify-center rounded-xl border p-5 sm:items-start lg:p-10'>
+			<div
+				className={cn(
+					'flex flex-col items-center justify-center sm:items-start',
+					{
+						'border-accent-light rounded-xl border p-5 lg:p-10':
+							!isSmall
+					}
+				)}
+			>
 				<h4 className='text-4xl font-bold'>{user?._count.favorites}</h4>
 				{/* TODO: Добавить лайки авторов */}
 				<p className='mt-3 font-medium'>Любимых авторов</p>
 			</div>
-			<div className='border-accent-light flex flex-col items-center justify-center rounded-xl border p-5 sm:items-start lg:p-10'>
+			<div
+				className={cn(
+					'flex flex-col items-center justify-center sm:items-start',
+					{
+						'border-accent-light rounded-xl border p-5 lg:p-10':
+							!isSmall
+					}
+				)}
+			>
 				<h4 className='text-4xl font-bold'>
 					{user._count.reviews
 						? Math.ceil(

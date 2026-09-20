@@ -25,7 +25,7 @@
 	--color-border: var(--color-border);
 	--color-success: var(--color-success);
 
-	--breakpoint-vsm: 475px 
+	--breakpoint-vsm: 475px;
 }
 
 body {
@@ -34,7 +34,7 @@ body {
 }
 
 .container {
-	@apply w-full max-w-full px-4;
+	@apply w-full mx-auto max-w-7xl px-4;
 }
 
 input {

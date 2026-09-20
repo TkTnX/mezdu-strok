@@ -1,4 +1,4 @@
-import { IUser } from "."
+import { IBook, IUser } from "."
 
 export interface IReview {
 	id: string
@@ -15,6 +15,7 @@ export interface IReview {
 	story: number
 	user?: IUser
 	likes: { userId: string }[]
+	book?: IBook
 }
 
 export interface ICreateReview {

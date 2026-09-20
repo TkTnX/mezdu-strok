@@ -12,7 +12,7 @@ export async function likeReview(id: string) {
 	return data
 }
 
-export async function getReviews(query: Record<string, string>) {
+export async function getReviews(query: Record<string, unknown>) {
 	const { data } = await axiosInstance.get(`reviews`, {
 		params: query
 	})
