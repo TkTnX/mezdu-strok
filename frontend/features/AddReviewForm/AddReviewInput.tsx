@@ -1,4 +1,9 @@
-import { ReviewResolverType } from '@/shared'
+import {
+	ReviewResolverType,
+	Tooltip,
+	TooltipContent,
+	TooltipTrigger
+} from '@/shared'
 import { Info } from 'lucide-react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
@@ -7,15 +12,27 @@ interface Props {
 	name: keyof ReviewResolverType
 	register: UseFormRegisterReturn
 	value: number
+	tooltip: string
 }
 
-export const AddReviewInput = ({ label, name, register, value }: Props) => {
+export const AddReviewInput = ({
+	label,
+	tooltip,
+	name,
+	register,
+	value
+}: Props) => {
 	return (
 		<label className='flex-1'>
 			<p className='flex items-center justify-between text-xs font-semibold'>
-				<span className='flex items-center gap-1'>
-					{label} <Info size={14} className='min-w-3.5' />{' '}
-				</span>
+				<Tooltip>
+					<TooltipTrigger className='flex items-center gap-1'>
+						{label} <Info size={14} className='min-w-3.5' />
+					</TooltipTrigger>
+					<TooltipContent className='bg-bg border-main text-md border'>
+						{tooltip}
+					</TooltipContent>
+				</Tooltip>
 				<span className='text-main text-base font-bold'>
 					{value}
 				</span>{' '}

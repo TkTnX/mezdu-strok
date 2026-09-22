@@ -6,6 +6,7 @@ import { ReviewModule } from './api/review/review.module';
 import { UserModule } from './api/user/user.module';
 import { AuthModule } from './api/auth/auth.module';
 import { FavoriteModule } from './api/favorite/favorite.module';
+import { QuoteModule } from './api/quote/quote.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { FavoriteModule } from './api/favorite/favorite.module';
     UserModule,
     AuthModule,
     FavoriteModule,
+    QuoteModule,
   ],
 })
 export class AppModule {}

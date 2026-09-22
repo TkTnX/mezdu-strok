@@ -1,6 +1,6 @@
 'use client'
 import { AddBookToFav } from '@/features'
-import {  IBook } from '@/shared'
+import { IBook } from '@/shared'
 import { AddReview } from '@/widgets/AddReview'
 import { Reviews } from '@/widgets/Reviews'
 import { BookAudioIcon } from 'lucide-react'
@@ -12,7 +12,7 @@ interface Props {
 
 export const BigBook = ({ book }: Props) => {
 	return (
-		<div className=''>
+		<div className='w-full'>
 			<div className='mt-10 flex w-full flex-col justify-between gap-4 lg:flex-row lg:items-end'>
 				<div className='vsm:flex-row flex flex-col gap-5 lg:gap-10'>
 					{book.preview ? (
@@ -61,7 +61,7 @@ export const BigBook = ({ book }: Props) => {
 						<AddBookToFav likes={book.favorites} id={book.id} />
 					</div>
 				</div>
-				<div className='border-accent-light rounded-xl border px-4 py-3 lg:w-87.5'>
+				<div className='border-accent-light w-full rounded-xl border px-4 py-3 lg:w-87.5'>
 					<p className='font-semibold'>Оценки читателей</p>
 
 					<p className='bg-main mt-6 flex h-12 w-12 items-center justify-center rounded-full text-2xl font-bold text-white'>

@@ -21,7 +21,7 @@ export const Reviews = ({ bookId, userId }: Props) => {
 	return (
 		<div className='mx-auto mt-5 max-w-285 rounded-xl'>
 			<div className='flex flex-col justify-between gap-3 sm:flex-row sm:items-center'>
-				{bookId && (
+				{(bookId || (!bookId && !userId)) && (
 					<p className='text-4xl font-semibold sm:text-2xl'>
 						Рецензии
 					</p>

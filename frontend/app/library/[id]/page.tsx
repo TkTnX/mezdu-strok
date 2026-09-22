@@ -7,19 +7,23 @@ const BookPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 	const { id } = await params
 	const book = await getBookById(id)
 	return (
-		<section className='container mt-5'>
-			<div className='text-secondary flex-wrap flex items-center gap-4'>
-				<Link className='flex items-center gap-1 group' href={'/library'}>
+		<section className='mx-auto mt-5 px-5'>
+			<div className='text-secondary flex flex-wrap items-center gap-4'>
+				<Link
+					className='group flex items-center gap-1'
+					href={'/library'}
+				>
 					<MoveLeft className='text-black' />
-					<span className='group-hover:text-black transition'>Каталог</span>
+					<span className='transition group-hover:text-black'>
+						Каталог
+					</span>
 				</Link>
 				<ChevronRight size={16} />
 				<p>{book.title}</p>
-            </div>
-            <BigBook book={book} />
+			</div>
+			<BigBook book={book} />
 		</section>
 	)
 }
-
 
 export default BookPage

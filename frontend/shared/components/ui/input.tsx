@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib'
+import { cn } from '@/shared/lib/index'
 import {  UseFormRegisterReturn } from 'react-hook-form'
 
 interface Props {

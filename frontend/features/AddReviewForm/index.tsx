@@ -59,6 +59,7 @@ export const AddReviewForm = ({ bookId }: Props) => {
 						register={register('story', { valueAsNumber: true })}
 						name='story'
 						label='Сюжет / Композиция'
+						tooltip='Сюжет / Композиция - насколько хорошо построена история: развитие событий, темп, логика, кульминация и финал.'
 					/>
 					<div className='bg-secondary/20 hidden h-13 w-px sm:block' />
 				</div>
@@ -71,6 +72,7 @@ export const AddReviewForm = ({ bookId }: Props) => {
 
 						name='characters'
 						label='Персонажи / Психология'
+						tooltip='Персонажи / Психология - насколько глубоко раскрыты персонажи, их характеры, мотивация, эмоции и развитие.'
 					/>
 					<div className='bg-secondary/20 hidden h-13 w-px md:block lg:hidden xl:block' />
 				</div>
@@ -80,6 +82,7 @@ export const AddReviewForm = ({ bookId }: Props) => {
 						register={register('language', { valueAsNumber: true })}
 						name='language'
 						label='Язык / Стиль'
+						tooltip='Язык / Стиль - насколько выразительно автор использует язык: слог, диалоги, описания, образность и авторский стиль.'
 					/>
 					<div className='bg-secondary/20 hidden h-13 w-px sm:block' />
 				</div>
@@ -88,6 +91,7 @@ export const AddReviewForm = ({ bookId }: Props) => {
 					register={register('idea', { valueAsNumber: true })}
 					name='idea'
 					label='Идея / Глубина'
+					tooltip='Идея / Глубина - насколько интересны мысли и темы книги, её основная идея, подтекст и вопросы, которые она заставляет обдумать.'
 				/>
 			</div>
 			<div className='mt-3 px-4'>
@@ -96,11 +100,12 @@ export const AddReviewForm = ({ bookId }: Props) => {
 					register={register('impression', { valueAsNumber: true })}
 					name='impression'
 					label='Общее впечатление'
+					tooltip='Общее впечатление - насколько сильно книга повлияла лично на тебя и какие эмоции и ощущения оставила после прочтения.'
 				/>
 			</div>
 			<div className='text-main mt-3 px-4'>
 				<Input
-					className='placeholder:text-secondary'
+					className='placeholder:text-secondary w-full'
 					icon={<CaseSensitive />}
 					placeholder='Заголовок рецензии'
 					register={register('title')}

@@ -1,3 +1,4 @@
+'use client'
 import { LibraryBook } from '@/entities'
 import { ErrorMessage, Skeleton, useFavorites } from '@/shared'
 
