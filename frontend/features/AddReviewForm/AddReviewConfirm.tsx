@@ -32,7 +32,6 @@ export const AddReviewConfirm = ({ rating, isPending }: Props) => {
 							{Math.ceil(rating)}{' '}
 							<span className='text-secondary text-sm'>/ 90</span>
 						</p>
-						{/* TODO: Сделать */}
 						 <HowRateCounts />
 					</div>
 					<Button

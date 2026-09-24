@@ -9,3 +9,9 @@ export interface IQuote {
     author: IUser
     createdAt: string
 }
+
+export interface ICreateQuote {
+    quote: string
+    bookId: string
+
+}

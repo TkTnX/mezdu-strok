@@ -1,4 +1,5 @@
-import { IQuote } from '@/shared'
+import { IQuote, QuoteDropdown } from '@/shared'
+import { useUserStore } from '@/shared/stores'
 import { BookIcon, LucideQuote, MoreHorizontal } from 'lucide-react'
 
 interface Props {
@@ -6,15 +7,16 @@ interface Props {
 }
 
 export const Quote = ({ quote }: Props) => {
+	const {user} = useUserStore()
 	return (
 		<blockquote className='bg-accent-light/40 border-accent-light flex flex-col rounded-md border px-7 py-5'>
 			<div className='flex items-center justify-between'>
 				<LucideQuote size={32} className='text-main/30 rotate-180' />
-				<button>
-					<MoreHorizontal className='text-secondary' />
-				</button>
+				{quote.authorId === user?.id && (
+					<QuoteDropdown quoteId={quote.id} />
+				)}
 			</div>
-			<q className='font-cormorant mt-5 inline-block flex-1 text-4xl'>
+			<q className='font-cormorant mt-5 inline-block flex-1 text-2xl xl:text-4xl'>
 				{quote.quote}
 			</q>
 			<div className='mt-5'>

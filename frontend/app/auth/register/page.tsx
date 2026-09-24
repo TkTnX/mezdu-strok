@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const RegisterPage = () => {
-	// TODO: При регистрации показывать следующую форму с вводом имени, фамилии и тд
 	return (
 		<section className='mx-auto my-10 flex h-fit w-full max-w-125 flex-col items-center justify-center rounded-xl bg-white px-10 py-5 shadow-2xl'>
 			<Image

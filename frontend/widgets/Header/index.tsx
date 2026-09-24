@@ -20,7 +20,6 @@ export const Header = () => {
 
 		getMeFunc()
 	}, [setIsPending, setUser, user])
-
 	return (
 		<header className='border-border w-full border-b'>
 			<div className='flex h-15 w-full items-center justify-between gap-4 px-4'>

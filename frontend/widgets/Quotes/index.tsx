@@ -9,8 +9,7 @@ export const Quotes = () => {
 	if (error) return <ErrorMessage error={error} />
 
 	return (
-		<div className='mt-10 grid grid-cols-3 gap-5'>
-	
+		<div className='mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3'>
 			{isPending ? (
 				[...new Array(5)].map((_, index) => (
 					<Skeleton className='h-100 w-full' key={index} />

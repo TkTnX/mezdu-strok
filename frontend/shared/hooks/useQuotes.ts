@@ -1,6 +1,6 @@
-import { getQuotes } from "@/shared/api";
-import { IQuote } from "@/shared/types";
-import { useQuery } from "@tanstack/react-query";
+import { createQuote, deleteQuote, getQuotes } from "@/shared/api";
+import { ICreateQuote, IQuote } from "@/shared/types";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useQuotes() {
     const useGetQuotes = () => useQuery({
@@ -8,7 +8,17 @@ export function useQuotes() {
         queryFn: (): Promise<IQuote[]> => getQuotes()
     })
 
+    const useCreateQuote = () => useMutation({
+        mutationFn: (data: ICreateQuote) => createQuote(data)
+    })
+
+    const useDeleteQuote = () => useMutation({
+        mutationFn: (id: string) => deleteQuote(id)
+    })
+
     return {
-        useGetQuotes
+        useGetQuotes,
+        useCreateQuote,
+        useDeleteQuote
     }
 }

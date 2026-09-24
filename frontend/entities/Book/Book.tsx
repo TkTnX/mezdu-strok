@@ -9,13 +9,12 @@ interface Props {
 }
 
 export const Book = ({ book }: Props) => {
-
 	return (
 		<Link
 			href={`/library/${book.id}`}
 			className='flex w-full flex-col items-center text-center lg:block lg:text-left'
 		>
-			<div className='vsm:h-70 relative h-55 w-full max-w-55 sm:h-80'>
+			<div className='relative h-80 w-full max-w-55'>
 				{book.preview ? (
 					<Image
 						loading='eager'

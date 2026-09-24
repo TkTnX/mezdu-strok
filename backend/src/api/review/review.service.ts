@@ -1,10 +1,6 @@
 import { CreateReviewDto } from './dto/create.dto';
 import { PrismaService } from '@/src/prisma/prisma.service';
-import {
-  BadGatewayException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class ReviewService {
@@ -42,8 +38,6 @@ export class ReviewService {
     });
     return review;
   }
-
-  // TODO: PROFILE PAGE
 
   public async like(id: string, req: Request & { session: any }) {
     await this.getById(id);
@@ -93,9 +87,9 @@ export class ReviewService {
             userId: true,
           },
         },
-        book: query.userId
-          ? { select: { title: true, id: true, preview: true } }
-          : undefined,
+        book: query.bookId
+          ? undefined
+          : { select: { title: true, id: true, preview: true } },
       },
       orderBy: {
         [sort[0]]: sort[1],

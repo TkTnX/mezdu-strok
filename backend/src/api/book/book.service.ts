@@ -13,6 +13,12 @@ export class BookService {
 
   public async getAll(query: Record<string, any>) {
     const books = await this.prismaService.book.findMany({
+      where: {
+        title: {
+          contains: query?.title || undefined,
+          mode: 'insensitive',
+        },
+      },
       include: {
         author: true,
         genre: true,
@@ -25,7 +31,6 @@ export class BookService {
       },
       take: +query?.take || undefined,
     });
-
     return books;
   }
 

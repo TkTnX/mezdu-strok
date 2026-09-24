@@ -11,7 +11,6 @@ import {
 import { ReviewService } from './review.service';
 import { CreateReviewDto } from './dto/create.dto';
 import { AuthGuard } from '@/src/guards';
-// TODO: Пофиксить чтобы не было несколько запросов получения пользователя
 @Controller('reviews')
 export class ReviewController {
   constructor(private readonly reviewService: ReviewService) {}

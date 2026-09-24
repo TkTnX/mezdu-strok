@@ -21,7 +21,6 @@ import { showErrorMessage } from '@/shared/helpers'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { useUserStore } from '@/shared/stores'
-// TODO: FIX АДАПТИВ КАРТИНОК КНИГ
 export const LoginForm = () => {
 	const router = useRouter()
 	const [showPass, setShowPass] = useState('password')

@@ -127,6 +127,16 @@ export const AddReviewForm = ({ bookId }: Props) => {
 						placeholder='Текст рецензии (от 300 до 8500 символов)'
 						className='placeholder:text-secondary h-40! w-full resize-none px-3 outline-none'
 					></textarea>
+					<span
+						className={cn(
+							'text-secondary absolute right-3 bottom-3 text-sm',
+							{
+								'text-red-500': watch('review')?.length > 8500
+							}
+						)}
+					>
+						{watch('review')?.length}/8500
+					</span>
 				</label>
 				{errors.review && (
 					<p className='my-2 text-left text-xs text-red-500'>

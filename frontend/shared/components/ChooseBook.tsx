@@ -1,44 +1,64 @@
-import {
-	Combobox,
-	ComboboxContent,
-	ComboboxEmpty,
-	ComboboxInput,
-	ComboboxItem,
-	ComboboxList
-} from '@/shared/components/ui'
+'use client'
+import { ErrorMessage, Input, Skeleton } from '@/shared/components/ui'
 import { useBooks } from '@/shared/hooks'
-import { IBook } from '@/shared/types'
+import { BookIcon } from 'lucide-react'
+import { useState } from 'react'
+import { useDebounce } from 'use-debounce'
 
-interface Props {
-	label?: string
-	icon: React.ReactNode
-}
 
-export const ChooseBook = ({ label, icon }: Props) => {
+export const ChooseBook = ({
+	setBookId,
+	bookId,
+
+}: {
+	setBookId: (id: string | null) => void
+		bookId: string | null
+		
+}) => {
+	const [text, setText] = useState('')
+	const [value] = useDebounce(text, 1000)
 	const { useGetBooks } = useBooks()
-	const { data, isPending, error } = useGetBooks({})
+	const { data, isPending, error } = useGetBooks({
+		query: `title=${value}`
+	})
 	return (
-		<label>
-			{label && <span className='font-semibold text-black'>{label}</span>}
-			<div className='border-accent-light mt-2 flex w-full items-center gap-3 rounded-lg border p-3'>
-				{icon}
-				<Combobox
-					items={data}
-					itemToStringValue={(book: IBook) => book.title}
-				>
-					<ComboboxInput placeholder='Выберите книгу' />
-					<ComboboxContent>
-						<ComboboxEmpty>Книги не найдены</ComboboxEmpty>
-						<ComboboxList>
-							{item => (
-								<ComboboxItem key={item} value={item}>
-									{item.title}
-								</ComboboxItem>
-							)}
-						</ComboboxList>
-					</ComboboxContent>
-				</Combobox>
-			</div>
-		</label>
+		<div>
+			<Input
+				value={text}
+				onChange={setText}
+				icon={<BookIcon className='text-main' />}
+				placeholder='Выбрать книгу'
+			/>
+			{value && !bookId && (
+				<div className='mt-3'>
+					{error ? (
+						<ErrorMessage error={error} />
+					) : isPending ? (
+						[...new Array(5)].map((_, index) => (
+							<Skeleton className='h-5 w-full' key={index} />
+						))
+					) : data.length > 0 ? (
+						data.map(book => (
+							<button
+								onClick={() => {
+									setBookId(book.id)
+									setText(book.title)
+								}}
+								type='button'
+								key={book.id}
+								className='bg-accent-light/40 w-full rounded-2xl p-2 text-left'
+							>
+								<h4 className='text-sm'>{book.title}</h4>
+								<p className='text-xs'>{book.author.name}</p>
+							</button>
+						))
+					) : (
+						<p className='text-secondary text-center text-xs'>
+							Книг не найдено
+						</p>
+					)}
+				</div>
+			)}
+		</div>
 	)
 }

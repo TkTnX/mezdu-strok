@@ -5,12 +5,19 @@ import {
 	UseMutationOptions,
 	useQuery
 } from '@tanstack/react-query'
-
 export function useBooks() {
-	const useGetBooks = ({ take, sort }: { take?: number; sort?: string }) =>
+	const useGetBooks = ({
+		take,
+		sort,
+		query
+	}: {
+		take?: number
+		sort?: string
+		query?: string
+	}) =>
 		useQuery({
-			queryKey: ['books'],
-			queryFn: (): Promise<IBook[]> => getBooks({ take, sort })
+			queryKey: ['books', query],
+			queryFn: (): Promise<IBook[]> => getBooks({ take, sort, query })
 		})
 
 	const useGetBookById = (id: string) =>
