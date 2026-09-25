@@ -1,13 +1,14 @@
 'use client'
-import { Button, cn, Skeleton } from '@/shared'
+import { cn, EditProfile, Skeleton } from '@/shared'
 import { useUserStore } from '@/shared/stores'
-import { Favorites, Stats, Reviews } from '@/widgets'
+import { Favorites, Stats, Reviews, Quotes } from '@/widgets'
 import { UserCircle2Icon } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 export const Profile = () => {
+	const [open, setOpen] = useState(false)
 	const [selectedTab, setSelectedTab] = useState(0)
 	const router = useRouter()
 	const { user, isPending } = useUserStore()
@@ -19,7 +20,12 @@ export const Profile = () => {
 					{isPending ? (
 						<Skeleton className='h-full w-full rounded-full' />
 					) : user?.avatar ? (
-						<Image src={user.avatar} alt={user.username} fill />
+						<Image
+							className='rounded-full'
+							src={user.avatar}
+							alt={user.username}
+							fill
+						/>
 					) : (
 						<UserCircle2Icon className='text-main h-50 w-50' />
 					)}
@@ -42,9 +48,7 @@ export const Profile = () => {
 						</div>
 					)}
 				</div>
-				<Button variant={'outline'} className={'h-10'}>
-					Редактировать профиль
-				</Button>
+				<EditProfile open={open} setOpen={setOpen} user={user} />
 			</div>
 			<div className='border-accent-light mt-10 border-b'>
 				<ul className='flex items-center overflow-x-auto'>
@@ -83,13 +87,14 @@ export const Profile = () => {
 					</li>
 				</ul>
 			</div>
-			{user && selectedTab === 0 ? (
-				<Reviews userId={user.id} />
-			) : selectedTab === 1 ? (
-				''
-			) : (
-				<Favorites />
-			)}
+			{user &&
+				(selectedTab === 0 ? (
+					<Reviews userId={user.id} />
+				) : selectedTab === 1 ? (
+					<Quotes userId={user.id} />
+				) : (
+					<Favorites />
+				))}
 		</section>
 	)
 }

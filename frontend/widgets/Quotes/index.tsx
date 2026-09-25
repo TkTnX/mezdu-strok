@@ -2,9 +2,9 @@
 import { Quote } from '@/entities'
 import { ErrorMessage, Skeleton, useQuotes } from '@/shared'
 
-export const Quotes = () => {
+export const Quotes = ({userId}: {userId?:string}) => {
 	const { useGetQuotes } = useQuotes()
-	const { data, isPending, error } = useGetQuotes()
+	const { data, isPending, error } = useGetQuotes({authorId: userId})
 
 	if (error) return <ErrorMessage error={error} />
 

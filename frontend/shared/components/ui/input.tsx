@@ -13,6 +13,7 @@ interface Props {
 	type?: string
 	value?: string
 	onChange?: Dispatch<SetStateAction<string>>
+	defaultValue?: string
 }
 
 export const Input = ({
@@ -25,7 +26,8 @@ export const Input = ({
 	error,
 	type,
 	value,
-	onChange
+	onChange,
+	defaultValue
 }: Props) => {
 	return (
 		<label>
@@ -39,6 +41,7 @@ export const Input = ({
 					className={cn('flex-1', className)}
 					placeholder={placeholder}
 					type={type}
+					defaultValue={defaultValue}
 				/>
 				{additional}
 			</div>

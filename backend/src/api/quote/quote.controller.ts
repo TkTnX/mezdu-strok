@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { QuoteService } from './quote.service';
 import { CreateQuoteDto } from './dto';
 import { Request } from 'express';
@@ -9,8 +19,8 @@ export class QuoteController {
   constructor(private readonly quoteService: QuoteService) {}
 
   @Get()
-  getAll() {
-    return this.quoteService.getAll();
+  getAll(@Query() query: Record<string, any>) {
+    return this.quoteService.getAll(query);
   }
 
   @UseGuards(AuthGuard)

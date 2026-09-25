@@ -3,10 +3,11 @@ import { ICreateQuote, IQuote } from "@/shared/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useQuotes() {
-    const useGetQuotes = () => useQuery({
-        queryKey: ['quotes'],
-        queryFn: (): Promise<IQuote[]> => getQuotes()
-    })
+    const useGetQuotes = (query: Record<string,unknown>) =>
+		useQuery({
+			queryKey: ['quotes', query],
+			queryFn: (): Promise<IQuote[]> => getQuotes(query)
+		})
 
     const useCreateQuote = () => useMutation({
         mutationFn: (data: ICreateQuote) => createQuote(data)

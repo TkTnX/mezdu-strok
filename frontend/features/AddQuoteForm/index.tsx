@@ -35,7 +35,7 @@ export const AddQuoteForm = () => {
 			{
 				onSuccess: () => {
 					toast.success('Цитата успешно добавлена!')
-					queryClient.invalidateQueries({ queryKey: ['quotes'] })
+					queryClient.invalidateQueries({ queryKey: ['quotes', {}] })
 					
 				}
 			}

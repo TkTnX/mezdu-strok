@@ -3,12 +3,14 @@ import { PrismaService } from '@/src/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Request } from 'express';
 
+
 @Injectable()
 export class QuoteService {
   public constructor(private readonly prismaService: PrismaService) {}
 
-  async getAll() {
+  async getAll(query: Record<string, any>) {
     const quotes = await this.prismaService.quote.findMany({
+      where: query,
       include: {
         author: { select: { firstname: true, lastname: true, username: true } },
         book: {
@@ -21,7 +23,6 @@ export class QuoteService {
         },
       },
     });
-
     return quotes || [];
   }
 

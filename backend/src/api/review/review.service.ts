@@ -74,7 +74,7 @@ export class ReviewService {
   }
 
   public async get(query: Record<string, any>) {
-    const sort = query.sortBy && query.sortBy.split('-');
+    const sort = query?.sortBy && query.sortBy.split('-');
     const reviews = await this.prismaService.review.findMany({
       where: {
         bookId: query.bookId || undefined,
@@ -92,8 +92,9 @@ export class ReviewService {
           : { select: { title: true, id: true, preview: true } },
       },
       orderBy: {
-        [sort[0]]: sort[1],
+        [sort?.[0]]: sort?.[1],
       },
+      take: +query?.take || undefined,
     });
 
     if (!reviews) throw new NotFoundException('Рецензии не найдены');

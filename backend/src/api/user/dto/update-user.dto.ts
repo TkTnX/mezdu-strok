@@ -15,4 +15,8 @@ export class UpdateUserDto {
 
   @IsOptional()
   avatar?: string | null;
+
+  @IsString({ message: 'Имя пользователя должно быть строкой' })
+  @IsOptional()
+  username?: string;
 }

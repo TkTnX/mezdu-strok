@@ -16,16 +16,15 @@ export class UserService {
       },
       include: {
         reviews: {
-          select: {rating: true}
+          select: { rating: true },
         },
         _count: {
           select: {
             favorites: true,
             reviews: true,
-
-          }
-        }
-      }
+          },
+        },
+      },
     });
 
     if (!user) throw new NotFoundException('Пользователь не найден');
@@ -51,9 +50,13 @@ export class UserService {
       where: { id: req.session.user.id },
       data: dto,
     });
-
+    console.log(user);
     if (!user) throw new NotFoundException('Пользователь не обновлен');
 
     return user;
   }
 }
+
+// TODO: Обработка дубликата юзернейма
+// TODO: загрузка аватарки
+// TODO: Проверить чтоб всё работало при регистрации

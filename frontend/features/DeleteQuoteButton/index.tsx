@@ -11,7 +11,7 @@ export const DeleteQuoteButton = ({ quoteId }: { quoteId: string }) => {
 		mutate(quoteId, {
 			onSuccess: () => {
 				toast.success('Цитата успешно удалена!')
-				queryClient.invalidateQueries({ queryKey: ['quotes'] })
+				queryClient.invalidateQueries({ queryKey: ['quotes', {}] })
 			}
 		})
 
