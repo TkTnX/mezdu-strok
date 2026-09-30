@@ -12,7 +12,7 @@ export async function proxy(request: NextRequest) {
     const isProtectedRoute = protectedRoutes.some(route => path.includes(route))
 
 	if (isAuth) {
-		if (path.includes('/auth') ) {
+		if (path.includes('/auth') && path !== '/auth/register/more-info' ) {
 			return NextResponse.redirect(new URL('/', request.url))
 		}
 	} else {

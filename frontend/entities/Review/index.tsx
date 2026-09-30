@@ -44,7 +44,8 @@ export const Review = ({ review, className }: Props) => {
 							alt={'User'}
 							width={43}
 							height={43}
-							className='rounded-full'
+							className='rounded-full w-10.75 h-10.75 object-cover'
+							unoptimized
 						/>
 						<p className='text-sm font-bold sm:text-base'>
 							{`${user?.firstname || user?.lastname ? `${user?.firstname} ${user?.lastname}` : `@${user?.username}`}`}

@@ -21,10 +21,11 @@ export const Profile = () => {
 						<Skeleton className='h-full w-full rounded-full' />
 					) : user?.avatar ? (
 						<Image
-							className='rounded-full'
+							className='rounded-full object-cover'
 							src={user.avatar}
 							alt={user.username}
 							fill
+							unoptimized
 						/>
 					) : (
 						<UserCircle2Icon className='text-main h-50 w-50' />

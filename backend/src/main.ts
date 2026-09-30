@@ -4,6 +4,8 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import session from 'express-session';
 import { createClient } from 'redis';
 import { RedisStore } from 'connect-redis';
+import { join } from 'path';
+import * as express from 'express';
 async function bootstrap() {
   const logger = new Logger();
 
@@ -20,6 +22,8 @@ async function bootstrap() {
     client: redisClient,
     prefix: 'sess:',
   });
+
+  app.use('/uploads', express.static(join(process.cwd(), 'upload')));
 
   app.use(
     session({

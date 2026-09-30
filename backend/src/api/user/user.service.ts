@@ -1,11 +1,15 @@
 import { UpdateUserDto } from './dto';
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { Request } from 'express';
 
 @Injectable()
 export class UserService {
-  public constructor(private readonly prismaService: PrismaService) {}
+  public constructor(
+    private readonly prismaService: PrismaService,
+    private readonly configService: ConfigService,
+  ) {}
 
   async getMe(req: Request & { session: any }) {
     if (!req.session.user) return null;
@@ -45,18 +49,28 @@ export class UserService {
     return user;
   }
 
-  async update(req: Request & { session: any }, dto: UpdateUserDto) {
+  async update(
+    req: Request & { session: any },
+    dto: UpdateUserDto,
+    file: Express.Multer.File,
+  ) {
+    let avatar: string | undefined;
+    console.log(`FILE `, file);
+    if (file) {
+      avatar = `${this.configService.getOrThrow('SERVER_URL')}/uploads/${file.filename}`;
+    }
+
     const user = await this.prismaService.user.update({
       where: { id: req.session.user.id },
-      data: dto,
+      data: {
+        ...dto,
+        ...(avatar && { avatar }),
+      },
     });
-    console.log(user);
     if (!user) throw new NotFoundException('Пользователь не обновлен');
 
     return user;
   }
 }
 
-// TODO: Обработка дубликата юзернейма
 // TODO: загрузка аватарки
-// TODO: Проверить чтоб всё работало при регистрации

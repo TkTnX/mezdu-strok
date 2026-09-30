@@ -4,6 +4,8 @@ import {
 	getMe,
 	Input,
 	IUser,
+	updateUserRegResolver,
+	UpdateUserRegType,
 	updateUserResolver,
 	UpdateUserType,
 	useUser
@@ -14,6 +16,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AtSignIcon, Loader2Icon, User, UserCircle2Icon } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -27,9 +30,10 @@ export const AddMoreInfoForm = ({ user, setOpen }: Props) => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors }
-	} = useForm<UpdateUserType>({
-		resolver: zodResolver(updateUserResolver)
+		formState: { errors },
+		watch
+	} = useForm<UpdateUserType | UpdateUserRegType>({
+		resolver: zodResolver(user ? updateUserResolver : updateUserRegResolver)
 	})
 	const { setUser } = useUserStore()
 	const { useUpdateUser } = useUser()
@@ -47,23 +51,52 @@ export const AddMoreInfoForm = ({ user, setOpen }: Props) => {
 				router.push('/')
 			}
 			setUser(newUser)
-			setOpen(false)
+			setOpen?.(false)
 		}
 	})
-	console.log(user)
+
+	const onSubmit = (data: UpdateUserType | UpdateUserRegType) => {
+		const formData = new FormData()
+
+		formData.append('firstname', data.firstname)
+		formData.append('lastname', data.lastname)
+
+		if (data.username) {
+			formData.append('username', data.username)
+		}
+
+		if (data.bio) {
+			formData.append('bio', data.bio)
+		}
+		console.log(data)
+		if (data.avatar?.[0]) {
+			formData.append('avatar', data.avatar[0])
+		}
+
+		mutate(formData)
+	}
 	return (
 		<form
-			onSubmit={handleSubmit(data => mutate({ ...data, avatar: null }))}
+			onSubmit={handleSubmit(onSubmit)}
 			className='mt-4 grid w-full gap-3'
 		>
-			<label className='flex flex-col items-center justify-center'>
-				{user?.avatar ? (
+			<label className='flex cursor-pointer flex-col items-center justify-center'>
+				{watch().avatar?.[0] ? (
+					<Image
+						src={URL.createObjectURL(watch().avatar[0])}
+						alt=''
+						width={128}
+						height={128}
+						className='h-32 w-32 rounded-full object-cover'
+					/>
+				) : user?.avatar ? (
 					<Image
 						alt='Аватар пользователя'
-						className='rounded-full'
+						className='h-32 w-32 rounded-full object-cover'
 						src={user.avatar}
 						width={128}
 						height={128}
+						unoptimized
 					/>
 				) : (
 					<span className='bg-accent-light text-main cursor-pointer rounded-full'>
@@ -78,18 +111,11 @@ export const AddMoreInfoForm = ({ user, setOpen }: Props) => {
 				<input
 					accept='image/*'
 					{...register('avatar')}
+
 					hidden
 					type='file'
 				/>
 			</label>
-			<Input
-				label='Имя'
-				icon={<User size={20} className='text-secondary' />}
-				placeholder='Иван'
-				register={register('firstname', { required: true })}
-				error={errors.firstname?.message}
-				defaultValue={user?.firstname}
-			/>
 			{user && (
 				<Input
 					label='Юзернейм'
@@ -101,6 +127,15 @@ export const AddMoreInfoForm = ({ user, setOpen }: Props) => {
 				/>
 			)}
 			<Input
+				label='Имя'
+				icon={<User size={20} className='text-secondary' />}
+				placeholder='Иван'
+				register={register('firstname', { required: true })}
+				error={errors.firstname?.message}
+				defaultValue={user?.firstname}
+			/>
+
+			<Input
 				label='Фамилия'
 				icon={<User size={20} className='text-secondary' />}
 				placeholder='Иванов'
@@ -108,6 +143,7 @@ export const AddMoreInfoForm = ({ user, setOpen }: Props) => {
 				error={errors.lastname?.message}
 				defaultValue={user?.lastname}
 			/>
+
 			<label className='w-full items-start'>
 				<span className='font-semibold text-black'>Описание</span>
 
