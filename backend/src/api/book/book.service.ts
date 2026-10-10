@@ -12,13 +12,39 @@ export class BookService {
   public constructor(private readonly prismaService: PrismaService) {}
 
   public async getAll(query: Record<string, any>) {
-    const books = await this.prismaService.book.findMany({
-      where: {
+    const { rating, take, sort, title, ...restQuery } = query;
+    console.log(restQuery);
+
+    const where = {
+      ...(title && {
         title: {
-          contains: query?.title || undefined,
-          mode: 'insensitive',
+          contains: title,
+          mode: 'insensitive' as const,
         },
-      },
+      }),
+
+      ...Object.fromEntries(
+        Object.entries({
+          authorId: restQuery.author,
+          genreId: restQuery.genre,
+          publisherId: restQuery.publisher,
+        }).filter(([, value]) => value),
+      ),
+
+      ...(rating &&
+        (() => {
+          const [operator, value] = rating.split('-');
+
+          return {
+            rating: {
+              [operator]: Number(value),
+            },
+          };
+        })()),
+    };
+
+    const books = await this.prismaService.book.findMany({
+      where,
       include: {
         author: true,
         genre: true,
@@ -26,12 +52,30 @@ export class BookService {
         _count: { select: { reviews: true } },
       },
       orderBy: {
-        [query.sort && query.sort.split('-')[0]]:
-          query.sort && query.sort.split('-')[1],
+        [sort && sort.split('-')[0]]: sort && sort.split('-')[1],
       },
-      take: +query?.take || undefined,
+      take: +take || undefined,
     });
     return books;
+  }
+
+  public async getFilters() {
+    const [authors, genres, publishers] = await Promise.all([
+      this.prismaService.author.findMany({
+        select: { id: true, name: true },
+        orderBy: { name: 'asc' },
+      }),
+      this.prismaService.genre.findMany({
+        select: { id: true, name: true },
+        orderBy: { name: 'asc' },
+      }),
+      this.prismaService.publisher.findMany({
+        select: { id: true, name: true },
+        orderBy: { name: 'asc' },
+      }),
+    ]);
+
+    return { authors, genres, publishers };
   }
 
   public async getById(id: string) {

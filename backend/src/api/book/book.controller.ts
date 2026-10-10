@@ -22,6 +22,11 @@ export class BookController {
     return this.bookService.getAll(query);
   }
 
+  @Get('filters')
+  public getFilters() {
+    return this.bookService.getFilters();
+    }
+
   @Get(':id')
   public getById(@Param('id') id: string) {
     return this.bookService.getById(id);

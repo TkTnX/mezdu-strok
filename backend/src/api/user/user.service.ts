@@ -73,4 +73,3 @@ export class UserService {
   }
 }
 
-// TODO: загрузка аватарки

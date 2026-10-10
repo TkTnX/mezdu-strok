@@ -1,10 +1,15 @@
 'use client'
 import { LibraryBook } from '@/entities'
 import { ErrorMessage, Skeleton, useBooks } from '@/shared'
+import { useSearchParams } from 'next/navigation'
 
 export const LibraryList = () => {
+	const searchParams = useSearchParams()
+	const params = new URLSearchParams(searchParams.toString())
 	const { useGetBooks } = useBooks()
-	const { data, isPending, error } = useGetBooks({})
+	const { data, isPending, error } = useGetBooks({
+		query: params.toString()
+	})
 
 	if (error) return <ErrorMessage error={error} />
 

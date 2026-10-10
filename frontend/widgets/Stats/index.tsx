@@ -39,7 +39,7 @@ export const Stats = ({ isSmall = false }: Props) => {
 				'grid-cols-2': isSmall
 			})}
 		>
-			<div
+			<Link href={'/favorites'}
 				className={cn(
 					'flex flex-col items-center justify-center sm:items-start',
 					{
@@ -50,8 +50,9 @@ export const Stats = ({ isSmall = false }: Props) => {
 			>
 				<h4 className='text-4xl font-bold'>{user?._count.favorites}</h4>
 				<p className='mt-3 font-medium'>Любимых книг</p>
-			</div>
-			<div
+			</Link>
+			<Link
+				href={'/reviews'}
 				className={cn(
 					'flex flex-col items-center justify-center sm:items-start',
 					{
@@ -62,7 +63,7 @@ export const Stats = ({ isSmall = false }: Props) => {
 			>
 				<h4 className='text-4xl font-bold'>{user?._count.reviews}</h4>
 				<p className='mt-3 font-medium'>Отзывов написано</p>
-			</div>
+			</Link>
 			<div
 				className={cn(
 					'flex flex-col items-center justify-center sm:items-start',
