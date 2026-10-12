@@ -68,7 +68,6 @@ export const AddMoreInfoForm = ({ user, setOpen }: Props) => {
 		if (data.bio) {
 			formData.append('bio', data.bio)
 		}
-		console.log(data)
 		if (data.avatar?.[0]) {
 			formData.append('avatar', data.avatar[0])
 		}

@@ -6,13 +6,14 @@ import Link from 'next/link'
 
 interface Props {
 	book: IBook
+	className?: string
 }
 
-export const Book = ({ book }: Props) => {
+export const Book = ({ book, className }: Props) => {
 	return (
 		<Link
 			href={`/library/${book.id}`}
-			className='flex w-full flex-col items-center text-center lg:block lg:text-left'
+			className={`flex flex-col items-center text-center lg:block lg:text-left ${className}`}
 		>
 			<div className='relative h-80 w-full max-w-55'>
 				{book.preview ? (

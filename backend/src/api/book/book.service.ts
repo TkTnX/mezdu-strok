@@ -13,7 +13,6 @@ export class BookService {
 
   public async getAll(query: Record<string, any>) {
     const { rating, take, sort, title, ...restQuery } = query;
-    console.log(restQuery);
 
     const where = {
       ...(title && {

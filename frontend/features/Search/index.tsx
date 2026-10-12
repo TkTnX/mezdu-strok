@@ -1,0 +1,37 @@
+'use client'
+import { SearchIcon, X } from 'lucide-react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
+
+export const Search = () => {
+	const router = useRouter()
+	const searchParams = useSearchParams()
+	const [value, setValue] = useState(searchParams.get('value') || '')
+
+	const onSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+		e.preventDefault()
+		if (!value) return
+		router.push(`/search?value=${value}`)
+	}
+
+	return (
+		<form
+			onSubmit={e => onSubmit(e)}
+			className='bg-accent-light hidden max-w-112.5 flex-1 items-center gap-2 rounded-full p-2 sm:flex'
+		>
+			<SearchIcon size={16} />
+			<input
+				value={value}
+				onChange={e => setValue(e.target.value)}
+				className='flex-1'
+				type='text'
+				placeholder='Поиск по книгам и авторам'
+			/>
+			{value && (
+				<button onClick={() => setValue('')}>
+					<X size={16} />
+				</button>
+			)}
+		</form>
+	)
+}

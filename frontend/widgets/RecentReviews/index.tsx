@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export const RecentReviews = () => {
 	const { useGetReviews } = useReviews()
-	const { data, isPending, error } = useGetReviews({ take: 2 })
+	const { data, isPending, error } = useGetReviews({ take: 2, sortBy: 'createdAt-desc' })
 	return (
 		<section className='mt-8'>
 			<div className='flex flex-wrap items-center justify-between gap-2'>
