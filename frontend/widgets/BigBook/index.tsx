@@ -36,7 +36,7 @@ export const BigBook = ({ book }: Props) => {
 						<p className='text-secondary text-sm md:mt-2 md:text-xl'>
 							{book.author.name}
 						</p>
-						<div className='mt-4 flex items-center gap-2'>
+						<div className='mt-4 flex flex-wrap items-center gap-2'>
 							{book.tags.map((tag, i) => (
 								<p
 									className='text-secondary bg-accent-light rounded-lg px-2 py-1 text-center text-sm'

@@ -33,7 +33,7 @@ export const LibraryBook = ({ book }: Props) => {
 				<p className='vsm:text-base text-secondary text-xs'>
 					{book.author.name}
 				</p>
-				<div className='vsm:flex-row vsm:items-center mt-2 flex flex-col gap-2'>
+				<div className='vsm:flex-row vsm:items-center mt-2 flex flex-col flex-wrap gap-2'>
 					{book.tags.map((tag, i) => (
 						<p
 							className='text-secondary bg-accent-light rounded-lg px-2 py-1 text-center text-sm'

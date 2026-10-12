@@ -9,8 +9,10 @@ export const getBooks = async ({
 	take?: number
 	sort?: string
 	query?: string
-	}) => {
-	const { data } = await axiosInstance.get(`books?take=${take}&sort=${sort}&${new URLSearchParams(query)}`)
+}) => {
+	const { data } = await axiosInstance.get(
+		`books?${take ? `take=${take}&` : ''}${sort ? `sort=${sort}&` : ''}${new URLSearchParams(query)}`
+	)
 	return data
 }
 

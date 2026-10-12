@@ -1,9 +1,16 @@
 'use client'
+import { cn } from '@/shared'
 import { SearchIcon, X } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
-export const Search = () => {
+interface Props {
+	open?: boolean
+	setOpen?: React.Dispatch<React.SetStateAction<boolean>>
+	className?: string
+}
+
+export const Search = ({ setOpen, open, className }: Props) => {
 	const router = useRouter()
 	const searchParams = useSearchParams()
 	const [value, setValue] = useState(searchParams.get('value') || '')
@@ -17,7 +24,10 @@ export const Search = () => {
 	return (
 		<form
 			onSubmit={e => onSubmit(e)}
-			className='bg-accent-light hidden max-w-112.5 flex-1 items-center gap-2 rounded-full p-2 sm:flex'
+			className={cn(
+				'bg-accent-light hidden max-w-112.5 flex-1 items-center gap-2 rounded-full p-2 sm:flex',
+				className
+			)}
 		>
 			<SearchIcon size={16} />
 			<input
@@ -27,8 +37,14 @@ export const Search = () => {
 				type='text'
 				placeholder='Поиск по книгам и авторам'
 			/>
-			{value && (
-				<button onClick={() => setValue('')}>
+			{(value || open) && (
+				<button
+					type='button'
+					onClick={() => {
+						setValue('')
+						setOpen?.(false)
+					}}
+				>
 					<X size={16} />
 				</button>
 			)}
