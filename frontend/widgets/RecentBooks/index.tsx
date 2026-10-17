@@ -1,9 +1,13 @@
 'use client'
 import { Book } from '@/entities'
-import { ErrorMessage, Skeleton, useBooks } from '@/shared'
+import { cn, ErrorMessage, Skeleton, useBooks } from '@/shared'
 import Link from 'next/link'
 
-export const RecentBooks = () => {
+interface Props {
+	className?:string
+}
+
+export const RecentBooks = ({className}: Props) => {
 	const { useGetBooks } = useBooks()
 	const { data, isPending, error } = useGetBooks({
 		take: 4,
@@ -13,7 +17,9 @@ export const RecentBooks = () => {
 	return (
 		<section className='mt-8'>
 			<div className='flex flex-wrap justify-between gap-3 md:items-center'>
-				<h2 className='text-2xl font-bold'>Недавно добавленные</h2>
+				<h2 className='text-2xl font-bold'>
+					Недавно добавленные книги
+				</h2>
 				<Link
 					className='text-main text-lg font-medium transition hover:opacity-80'
 					href={'/library'}
@@ -24,7 +30,7 @@ export const RecentBooks = () => {
 			{error ? (
 				<ErrorMessage error={error} />
 			) : (
-				<div className='mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4'>
+				<div className={cn('mt-5 grid grid-cols-3 gap-3 lg:grid-cols-4', className)}>
 					{isPending
 						? [...new Array(4)].map((_, i) => (
 								<Skeleton

@@ -9,6 +9,7 @@ export interface IUser {
     avatar?: string
     email: string
     password: string
+    role: ERole
 
 
     // favorites?: IFavorite[]
@@ -31,4 +32,9 @@ export interface IRegister {
     email: string
     password: string
     passwordRepeat: string
+}
+
+export enum ERole {
+    USER = 'USER',
+    ADMIN = 'ADMIN'
 }

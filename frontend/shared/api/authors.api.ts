@@ -1,0 +1,7 @@
+import { axiosInstance } from "@/shared/lib"
+import { IAuthor } from "@/shared/types"
+
+export const getAuthors = async ({take}: {take: number}): Promise<IAuthor[]> => {
+	const { data } = await axiosInstance.get('authors', {params: {take}})
+	return data
+}

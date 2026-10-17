@@ -1,9 +1,13 @@
 'use client'
 import { Review } from '@/entities'
-import { ErrorMessage, Skeleton, useReviews } from '@/shared'
+import { cn, ErrorMessage, Skeleton, useReviews } from '@/shared'
 import Link from 'next/link'
 
-export const RecentReviews = () => {
+interface Props {
+	className?:string
+}
+
+export const RecentReviews = ({ className }: Props) => {
 	const { useGetReviews } = useReviews()
 	const { data, isPending, error } = useGetReviews({ take: 2, sortBy: 'createdAt-desc' })
 	return (
@@ -17,7 +21,7 @@ export const RecentReviews = () => {
 					Смотреть все
 				</Link>
 			</div>
-			<div className='mt-5 grid gap-5 xl:grid-cols-2'>
+			<div className={cn('mt-5 grid gap-5 xl:grid-cols-2', className)}>
 				{error ? (
 					<ErrorMessage error={error} />
 				) : isPending ? (

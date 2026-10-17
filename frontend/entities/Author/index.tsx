@@ -1,18 +1,19 @@
-import { IAuthor } from '@/shared'
+import { cn, IAuthor } from '@/shared'
 import Image from 'next/image'
 import Link from 'next/link'
 
 interface Props {
 	author: IAuthor
+	imageClassName?: string
 }
 
-export const Author = ({ author }: Props) => {
+export const Author = ({ author, imageClassName }: Props) => {
 	return (
 		<Link
-			className='flex w-fit flex-col text-center'
+			className='flex w-fit flex-col items-center text-center'
 			href={`/authors/${author.id}`}
 		>
-			<div className='relative h-80 w-80'>
+			<div className={cn('relative h-80 w-80', imageClassName)}>
 				<Image
 					fill
 					src={author.avatar}

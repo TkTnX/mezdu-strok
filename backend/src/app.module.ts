@@ -8,6 +8,8 @@ import { AuthModule } from './api/auth/auth.module';
 import { FavoriteModule } from './api/favorite/favorite.module';
 import { QuoteModule } from './api/quote/quote.module';
 import { SearchModule } from './api/search/search.module';
+import { AuthorModule } from './api/author/author.module';
+import { PublisherModule } from './api/publisher/publisher.module';
 
 
 @Module({
@@ -24,6 +26,8 @@ import { SearchModule } from './api/search/search.module';
     FavoriteModule,
     QuoteModule,
     SearchModule,
+    AuthorModule,
+    PublisherModule,
   ],
 })
 export class AppModule {}
