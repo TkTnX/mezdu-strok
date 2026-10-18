@@ -23,3 +23,7 @@ const AdminPage = () => {
 }
 
 export default AdminPage
+
+// TODO: Добавление книги
+// TODO: Добавление автора
+// TODO: Добавление издательства

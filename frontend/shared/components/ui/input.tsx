@@ -5,7 +5,7 @@ import { UseFormRegisterReturn } from 'react-hook-form'
 interface Props {
 	label?: string
 	placeholder: string
-	icon: React.ReactNode
+	icon?: React.ReactNode
 	additional?: React.ReactNode
 	className?: string
 	register?: UseFormRegisterReturn
@@ -33,7 +33,7 @@ export const Input = ({
 		<label>
 			{label && <span className='font-semibold text-black'>{label}</span>}
 			<div className='border-accent-light mt-2 flex w-full items-center gap-3 rounded-lg border p-3'>
-				{icon}
+				{icon && icon}
 				<input
 					value={value}
 					onChange={(e) => onChange?.(e.target.value)}
