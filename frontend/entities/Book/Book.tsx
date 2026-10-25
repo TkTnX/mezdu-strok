@@ -13,7 +13,7 @@ export const Book = ({ book, className }: Props) => {
 	return (
 		<Link
 			href={`/library/${book.id}`}
-			className={`flex flex-col items-center text-center lg:block lg:text-left ${className}`}
+			className={`flex flex-col items-center text-center min-w-55 lg:block lg:text-left ${className}`}
 		>
 			<div className='relative h-80 w-full max-w-55'>
 				{book.preview ? (
@@ -24,6 +24,7 @@ export const Book = ({ book, className }: Props) => {
 						src={book.preview}
 						alt={book.title}
 						className='rounded-lg'
+						unoptimized
 					/>
 				) : (
 					<div className='bg-accent-light flex h-full w-full items-center justify-center rounded-xl text-center text-2xl'>

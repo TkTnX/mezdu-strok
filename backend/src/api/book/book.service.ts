@@ -99,8 +99,22 @@ export class BookService {
     return book;
   }
 
-  public async create(data: CreateBookDto) {
-    const book = await this.prismaService.book.create({ data });
+  public async create(data: CreateBookDto, file: Express.Multer.File) {
+    let preview: string | undefined;
+    console.log(file);
+    if (file) {
+      preview = `${process.env.SERVER_URL}/uploads/${file.filename}`;
+    }
+    console.log(preview);
+    const book = await this.prismaService.book.create({
+      data: {
+        ...data,
+        preview,
+        tags: data.tags.split(',').map((tag) => tag.trim()),
+        year: Number(data.year),
+        pages: Number(data.pages),
+      },
+    });
 
     if (!book) {
       throw new BadRequestException('Книга не создана');

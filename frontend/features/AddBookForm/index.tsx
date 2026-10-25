@@ -1,21 +1,79 @@
+/* eslint-disable react-hooks/incompatible-library */
 'use client'
-import { bookResolver, BookResolverType, Button, Input } from '@/shared'
+import {
+	bookResolver,
+	BookResolverType,
+	Button,
+	ErrorMessage,
+	Input,
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	useBooks,
+	useFilters
+} from '@/shared'
+import { useAdminStore } from '@/shared/stores'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Plus } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import { useEffect } from 'react'
+import { Controller, useForm, useWatch } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 export const AddBookForm = () => {
+	const { useCreateBook } = useBooks()
+	const { mutate, isPending: createBookPending } = useCreateBook()
+	const { useGetFilters } = useFilters()
+	const { data, isPending, error } = useGetFilters()
+
+	const { setBookData, setOpenAddBook } = useAdminStore()
 	const {
 		handleSubmit,
 		register,
-		formState: { errors }
+		formState: { errors },
+		control,
+		reset
 	} = useForm<BookResolverType>({
 		resolver: zodResolver(bookResolver)
 	})
 
+	const formData = useWatch({ control })
+
+	useEffect(() => {
+		setBookData({
+			title: formData.title || '',
+			description: formData.description || '',
+			preview: formData.preview,
+			authorId: formData.authorId || '',
+			genreId: formData.genreId || '',
+			publisherId: formData.publisherId || '',
+			pages: formData.pages || 0,
+			year: formData.year || 0,
+			tags: formData.tags || ''
+		})
+	}, [formData, setBookData])
+
 	const onSubmit = (values: BookResolverType) => {
-		console.log(values)
+		const formData = new FormData()
+
+		Object.entries(values).forEach(([key, value]) => {
+			console.log(key, value)
+			formData.append(key, value)
+		})
+
+		if (values.preview) {
+			formData.append('preview', values.preview[0])
+		}
+
+		mutate(formData, {
+			onSuccess: () => {
+				toast.success('Книга успешно добавлена!')
+				reset()
+				setOpenAddBook(false)
+			}
+		})
 	}
+
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
@@ -29,6 +87,7 @@ export const AddBookForm = () => {
 
 				<input
 					accept='image/*'
+
 					{...register('preview')}
 
 					hidden
@@ -47,46 +106,177 @@ export const AddBookForm = () => {
 				<textarea
 					{...register('description')}
 					placeholder='Интересная книга'
-					className='outline-none border-accent-light mt-2 flex h-50 w-full resize-none items-center gap-3 rounded-lg border p-3'
+					className='border-accent-light mt-2 flex h-50 w-full resize-none items-center gap-3 rounded-lg border p-3 outline-none'
 				></textarea>
 			</label>
 			<Input
 				label='Год'
-				register={register('year')}
+				type='number'
+				register={register('year', { valueAsNumber: true })}
 				placeholder='2000'
 				error={errors.year?.message}
 			/>
 			<Input
 				label='Теги'
 				register={register('tags')}
-				placeholder='#тег #тег #тег'
+				placeholder='тег, тег, тег'
 				error={errors.tags?.message}
 			/>
 			<Input
 				label='Количество страниц'
-				register={register('pages')}
+				register={register('pages', { valueAsNumber: true })}
 				placeholder='342'
+				type='number'
 				error={errors.pages?.message}
 			/>
-			<Input
-				label='Автор'
-				register={register('authorId')}
-				placeholder='Автор'
-				error={errors.authorId?.message}
+			<Controller
+				name='authorId'
+				control={control}
+				render={({ field }) => (
+					<Select value={field.value} onValueChange={field.onChange}>
+						<label>
+							<span className='font-semibold text-black'>
+								Автор
+							</span>
+							<SelectTrigger className={'mt-2 h-12! w-full'}>
+								<span className='text-gray-500'>
+									{formData.authorId
+										? data?.authors.find(
+												p =>
+													String(p.id) ===
+													formData.authorId
+											)?.name
+										: 'Автор'}
+								</span>
+							</SelectTrigger>
+						</label>
+						<SelectContent>
+							{error ? (
+								<ErrorMessage error={error} />
+							) : isPending ? (
+								[...new Array(5)].map((_, index) => (
+									<SelectItem
+										className={'h-10 w-full'}
+										key={index}
+									/>
+								))
+							) : (
+								data.authors.map(author => (
+									<SelectItem
+										value={author.id}
+										className={'cursor-pointer'}
+										key={author.id}
+									>
+										{author.name}
+									</SelectItem>
+								))
+							)}
+						</SelectContent>
+					</Select>
+				)}
 			/>
-			<Input
-				label='Жанр'
-				register={register('genreId')}
-				placeholder='Жанр'
-				error={errors.tags?.message}
+			<Controller
+				name='genreId'
+				control={control}
+				render={({ field }) => (
+					<Select value={field.value} onValueChange={field.onChange}>
+						<label>
+							<span className='font-semibold text-black'>
+								Жанр
+							</span>
+							<SelectTrigger className={'mt-2 h-12! w-full'}>
+								<span className='text-gray-500'>
+									{formData.genreId
+										? data?.genres.find(
+												p =>
+													String(p.id) ===
+													formData.genreId
+											)?.name
+										: 'Жанр'}
+								</span>
+							</SelectTrigger>
+						</label>
+						<SelectContent>
+							{error ? (
+								<ErrorMessage error={error} />
+							) : isPending ? (
+								[...new Array(5)].map((_, index) => (
+									<SelectItem
+										className={'h-10 w-full'}
+										key={index}
+									/>
+								))
+							) : (
+								data.genres.map(genre => (
+									<SelectItem
+										value={genre.id}
+										className={'cursor-pointer'}
+										key={genre.id}
+									>
+										{genre.name}
+									</SelectItem>
+								))
+							)}
+						</SelectContent>
+					</Select>
+				)}
 			/>
-			<Input
-				label='Издательство'
-				register={register('publisherId')}
-				placeholder='Издательство'
-				error={errors.tags?.message}
+			<Controller
+				name='publisherId'
+				control={control}
+				render={({ field }) => (
+					<Select value={field.value} onValueChange={field.onChange}>
+						<label>
+							<span className='font-semibold text-black'>
+								Издательство
+							</span>
+							<SelectTrigger className={'mt-2 h-12! w-full'}>
+								<span className='text-gray-500'>
+									{formData.publisherId
+										? data?.publishers.find(
+												p =>
+													String(p.id) ===
+													formData.publisherId
+											)?.name
+										: 'Издательство'}
+								</span>
+							</SelectTrigger>
+						</label>
+						<SelectContent>
+							{error ? (
+								<ErrorMessage error={error} />
+							) : isPending ? (
+								[...new Array(5)].map((_, index) => (
+									<SelectItem
+										className={'h-10 w-full'}
+										key={index}
+									/>
+								))
+							) : (
+								data.publishers.map(publisher => (
+									<SelectItem
+										value={publisher.id}
+										className={'cursor-pointer'}
+										key={publisher.id}
+									>
+										{publisher.name}
+									</SelectItem>
+								))
+							)}
+						</SelectContent>
+					</Select>
+				)}
 			/>
-			<Button className={'col-span-2 h-10'}>Добавить</Button>
+
+			<Button
+				disabled={isPending || createBookPending}
+				className={
+					'col-span-2 h-10 disabled:pointer-events-none disabled:opacity-50'
+				}
+				type='submit'
+			>
+				Добавить
+			</Button>
 		</form>
 	)
 }

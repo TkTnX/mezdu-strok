@@ -7,15 +7,16 @@ export const bookResolver = z.object({
 		.min(3, 'Минимальная длина заголовка - 3 символа'),
 	description: z
 		.string('Описание обязательно')
-		.nonempty('Описание обязательно')
-		.min(300, 'Минимальная длина рецензии - 300 символов'),
+		.nonempty('Описание обязательно'),
 	authorId: z.string('Автор обязателен').nonempty('Автор обязателен'),
 	genreId: z.string('Жанр обязателен').nonempty('Жанр обязателен'),
-	publisherId: z.string('Издательство обязательно').nonempty('Издательство обязательно'),
-	preview: z.string().optional(),
+	publisherId: z
+		.string('Издательство обязательно')
+		.nonempty('Издательство обязательно'),
+	preview: z.any().optional(),
 	pages: z.number('Количество страниц обязательно').min(1),
 	year: z.number('Год обязателен').min(1),
-	tags: z.array(z.string()).min(1, 'Минимальное количество тегов - 1')
+	tags: z.string()
 })
 
 export type BookResolverType = z.infer<typeof bookResolver>

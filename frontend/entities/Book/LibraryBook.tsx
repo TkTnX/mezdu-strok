@@ -21,6 +21,7 @@ export const LibraryBook = ({ book }: Props) => {
 					width={100}
 					className='rounded-lg'
 					height={200}
+					unoptimized
 				/>
 			) : (
 				<div className='bg-accent-light flex h-40 w-25 items-center justify-center rounded-xl text-center text-xs'>

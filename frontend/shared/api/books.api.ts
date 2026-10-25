@@ -21,8 +21,8 @@ export const getBookById = async (id: string) => {
 	return data
 }
 
-export const createBook = async (body: ICreateBook) => {
-	const { data } = await axiosInstance.post('books', body)
+export const createBook = async (formData: FormData) => {
+	const { data } = await axiosInstance.post('books', formData)
 	return data
 }
 

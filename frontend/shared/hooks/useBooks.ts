@@ -28,7 +28,8 @@ export function useBooks() {
 
 	const useCreateBook = () =>
 		useMutation({
-			mutationFn: (data: ICreateBook): Promise<IBook> => createBook(data)
+			mutationFn: (formData: FormData): Promise<IBook> =>
+				createBook(formData)
 		})
 
 	const useAddBookToFav = (

@@ -18,20 +18,19 @@ export class CreateBookDto {
   description?: string;
 
   @IsNotEmpty({ message: 'Год не должен быть пустым' })
-  @IsNumber({}, { message: 'Год должен быть числом' })
-  year!: number;
+  @IsString({ message: 'Год должен быть строкой' })
+  year!: string;
 
   @IsString({ message: 'Изображение должно быть строкой' })
   preview?: string;
 
   @IsNotEmpty({ message: 'Теги не должны быть пустыми' })
-  @IsArray({ message: 'Теги должны быть массивом' })
-  @IsString({ each: true, message: 'Каждый тег должен быть строкой' })
-  tags!: string[];
+  @IsString({ message: 'Теги должны быть строкой' })
+  tags!: string;
 
   @IsNotEmpty({ message: 'Количество страниц не должно быть пустым' })
-  @IsNumber({}, { message: 'Количество страниц должно быть числом' })
-  pages!: number;
+  @IsString({ message: 'Количество страниц должно быть строкой' })
+  pages!: string;
 
   @IsNotEmpty({ message: 'Автор не должен быть пустым' })
   @IsString({ message: 'Автор должен быть строкой' })

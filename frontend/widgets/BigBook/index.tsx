@@ -22,6 +22,7 @@ export const BigBook = ({ book }: Props) => {
 								src={book.preview}
 								alt={book.title}
 								className='rounded-xl'
+								unoptimized
 							/>
 						</div>
 					) : (

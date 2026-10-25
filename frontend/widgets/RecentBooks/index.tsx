@@ -4,13 +4,12 @@ import { cn, ErrorMessage, Skeleton, useBooks } from '@/shared'
 import Link from 'next/link'
 
 interface Props {
-	className?:string
+	className?: string
 }
 
-export const RecentBooks = ({className}: Props) => {
+export const RecentBooks = ({ className }: Props) => {
 	const { useGetBooks } = useBooks()
 	const { data, isPending, error } = useGetBooks({
-		take: 4,
 		sort: 'createdAt-desc'
 	})
 
@@ -30,7 +29,12 @@ export const RecentBooks = ({className}: Props) => {
 			{error ? (
 				<ErrorMessage error={error} />
 			) : (
-				<div className={cn('mt-5 grid grid-cols-3 gap-3 lg:grid-cols-4', className)}>
+				<div
+					className={cn(
+						'mt-5 grid grid-cols-3 gap-3 lg:grid-cols-4',
+						className
+					)}
+				>
 					{isPending
 						? [...new Array(4)].map((_, i) => (
 								<Skeleton
