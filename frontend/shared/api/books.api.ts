@@ -1,6 +1,4 @@
 import { axiosInstance } from '@/shared/lib'
-import { ICreateBook } from '@/shared/types'
-
 export const getBooks = async ({
 	take,
 	sort,

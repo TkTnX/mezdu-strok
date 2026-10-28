@@ -25,7 +25,6 @@ export const AddBookForm = () => {
 	const { mutate, isPending: createBookPending } = useCreateBook()
 	const { useGetFilters } = useFilters()
 	const { data, isPending, error } = useGetFilters()
-
 	const { setBookData, setOpenAddBook } = useAdminStore()
 	const {
 		handleSubmit,
@@ -55,11 +54,9 @@ export const AddBookForm = () => {
 
 	const onSubmit = (values: BookResolverType) => {
 		const formData = new FormData()
-
-		Object.entries(values).forEach(([key, value]) => {
-			console.log(key, value)
+		Object.entries(values).forEach(([key, value]) =>
 			formData.append(key, value)
-		})
+		)
 
 		if (values.preview) {
 			formData.append('preview', values.preview[0])
@@ -77,19 +74,16 @@ export const AddBookForm = () => {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className='grid grid-cols-2 gap-3 pb-4'
+			className='grid grid-cols-2 gap-3 overflow-x-hidden pb-4'
 		>
 			<label className='block cursor-pointer'>
 				<span className='font-semibold text-black'>Изображение</span>
 				<span className='bg-accent-light text-main mt-2 flex w-full cursor-pointer items-center justify-center'>
 					<Plus size={64} className='stroke-main' strokeWidth={1} />
 				</span>
-
 				<input
 					accept='image/*'
-
 					{...register('preview')}
-
 					hidden
 					type='file'
 				/>
@@ -102,7 +96,6 @@ export const AddBookForm = () => {
 			/>
 			<label>
 				<span className='font-semibold text-black'>Описание</span>
-
 				<textarea
 					{...register('description')}
 					placeholder='Интересная книга'
@@ -188,9 +181,7 @@ export const AddBookForm = () => {
 								<span className='text-gray-500'>
 									{formData.genreId
 										? data?.genres.find(
-												p =>
-													String(p.id) ===
-													formData.genreId
+												p => p.id === formData.genreId
 											)?.name
 										: 'Жанр'}
 								</span>
@@ -267,7 +258,6 @@ export const AddBookForm = () => {
 					</Select>
 				)}
 			/>
-
 			<Button
 				disabled={isPending || createBookPending}
 				className={

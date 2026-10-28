@@ -101,11 +101,9 @@ export class BookService {
 
   public async create(data: CreateBookDto, file: Express.Multer.File) {
     let preview: string | undefined;
-    console.log(file);
     if (file) {
       preview = `${process.env.SERVER_URL}/uploads/${file.filename}`;
     }
-    console.log(preview);
     const book = await this.prismaService.book.create({
       data: {
         ...data,

@@ -1,5 +1,7 @@
-import { getPublishers } from "@/shared/api";
-import { useQuery } from "@tanstack/react-query";
+import { createPublisher, getPublishers } from "@/shared/api";
+import { PublisherResolverType } from "@/shared/resolvers";
+import { IPublisher } from "@/shared/types";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function usePublishers() {
     const useGetPublishers = ({ take }: { take: number }) =>
@@ -7,8 +9,16 @@ export function usePublishers() {
 			queryKey: ['publishers'],
 			queryFn: () => getPublishers({take})
 		})
+	
+	const useCreatePublisher = () =>
+		useMutation({
+			mutationFn: (
+				values: PublisherResolverType
+			): Promise<IPublisher> => createPublisher(values)
+		})
 
     return {
-		useGetPublishers
+		useGetPublishers,
+		useCreatePublisher
 	}
 }

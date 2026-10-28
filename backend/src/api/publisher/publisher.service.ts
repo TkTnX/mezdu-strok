@@ -1,3 +1,4 @@
+import { CreatePublisherDto } from './dto/create-publisher.dto';
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 
@@ -12,5 +13,9 @@ export class PublisherService {
         });
     
         return publishers || [];
-      }
+  }
+  
+  public create(dto: CreatePublisherDto) {
+    return this.prismaService.publisher.create({ data: {name: dto.title} });
+  }
 }

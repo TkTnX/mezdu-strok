@@ -1,5 +1,5 @@
 import { addBookToFav, createBook, getBookById, getBooks } from '@/shared/api'
-import { IBook, ICreateBook } from '@/shared/types'
+import { IBook } from '@/shared/types'
 import {
 	useMutation,
 	UseMutationOptions,

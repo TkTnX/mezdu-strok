@@ -1,5 +1,5 @@
 export interface IFilters {
-    genres: Array<{ id: number; name: string }>;
-    authors: Array<{ id: number; name: string }>;
-    publishers: Array<{ id: number; name: string }>
+    genres: Array<{ id: string; name: string }>;
+    authors: Array<{ id: string; name: string }>;
+    publishers: Array<{ id: string; name: string }>
 }

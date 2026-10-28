@@ -9,6 +9,7 @@ interface Props {
 	className?: string
 }
 
+
 export const Book = ({ book, className }: Props) => {
 	return (
 		<Link

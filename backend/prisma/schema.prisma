@@ -64,7 +64,7 @@ model Book {
 model Author {
   id String @id @default(cuid())
   name String
-  avatar String
+  avatar String?
   bio String
 
   books Book[]

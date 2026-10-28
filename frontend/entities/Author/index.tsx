@@ -19,6 +19,7 @@ export const Author = ({ author, imageClassName }: Props) => {
 					src={author.avatar}
 					className='rounded-full object-cover'
 					alt={author.name}
+					unoptimized
 				/>
 			</div>
 			<p className='mt-auto text-2xl font-bold'>{author.name}</p>
