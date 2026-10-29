@@ -2,7 +2,6 @@ import { AddAuthorForm } from '@/features'
 import { useAdminStore } from '@/shared/stores'
 import { X } from 'lucide-react'
 import Image from 'next/image'
-
 export const AddAuthor = () => {
 	const { setOpenAddAuthor, authorData } = useAdminStore()
 

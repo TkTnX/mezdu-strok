@@ -10,7 +10,7 @@ interface Props {
 export const Author = ({ author, imageClassName }: Props) => {
 	return (
 		<Link
-			className='flex w-fit flex-col items-center text-center'
+			className='flex w-full flex-col items-center text-center'
 			href={`/authors/${author.id}`}
 		>
 			<div className={cn('relative h-80 w-80', imageClassName)}>

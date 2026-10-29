@@ -13,8 +13,8 @@ const AdminPage = () => {
 			<div className='flex-1'>
 				<AdminStats />
 				<RecentReviews className={'flex flex-col'} />
-				<RecentBooks className='flex flex-wrap justify-center sm:justify-start' />
-				<RecentAuthors className='flex flex-wrap justify-center sm:justify-start' />
+				<RecentBooks />
+				<RecentAuthors />
 				<RecentPublishers className='flex flex-wrap justify-center sm:justify-start' />
 			</div>
 			<AdminAside />

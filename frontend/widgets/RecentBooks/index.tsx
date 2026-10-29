@@ -29,12 +29,7 @@ export const RecentBooks = ({ className }: Props) => {
 			{error ? (
 				<ErrorMessage error={error} />
 			) : (
-				<div
-					className={cn(
-						'mt-5 grid grid-cols-3 gap-3 lg:grid-cols-4',
-						className
-					)}
-				>
+				<div className={cn('mt-5 grid grid-cols-3 gap-3', className)}>
 					{isPending
 						? [...new Array(4)].map((_, i) => (
 								<Skeleton
