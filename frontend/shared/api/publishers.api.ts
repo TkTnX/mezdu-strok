@@ -1,15 +1,21 @@
 import { axiosInstance } from "@/shared/lib"
 import { PublisherResolverType } from "@/shared/resolvers"
-import { IAuthor } from "@/shared/types"
+import {  IPublisher } from "@/shared/types"
 
-export const getPublishers = async ({take}: {take: number}): Promise<IAuthor[]> => {
+export const getPublishers = async ({take}: {take?: number}): Promise<IPublisher[]> => {
 	const { data } = await axiosInstance.get('publishers', {params: {take}})
+	return data
+}
+
+export const getPublisher = async (id: string): Promise<IPublisher> => {
+	const { data } = await axiosInstance.get(`publishers/${id}`)
+	
 	return data
 }
 
 export const createPublisher = async (
 	values: PublisherResolverType
-): Promise<IAuthor> => {
+): Promise<IPublisher> => {
 	const { data } = await axiosInstance.post('publishers', values)
 	return data
 }

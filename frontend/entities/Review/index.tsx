@@ -35,6 +35,7 @@ export const Review = ({ review, className, isAdmin }: Props) => {
 								alt={review.book.title}
 								width={43}
 								height={43}
+								unoptimized
 							/>
 							<p className='text-sm font-bold sm:text-base'>
 								{review.book.title}

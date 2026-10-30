@@ -34,7 +34,7 @@ body {
 }
 
 .container {
-	@apply w-full mx-auto max-w-7xl px-4;
+	@apply mx-auto w-full max-w-7xl px-4;
 }
 
 input {
@@ -43,4 +43,8 @@ input {
 
 button {
 	cursor: pointer;
+}
+
+h1 {
+	@apply text-main;
 }

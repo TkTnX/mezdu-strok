@@ -19,6 +19,15 @@ const BookPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 					</span>
 				</Link>
 				<ChevronRight size={16} />
+				<Link
+					className='group flex items-center gap-1'
+					href={`/publishers/${book.publisher.id}`}
+				>
+					<span className='transition group-hover:text-black'>
+						{book.publisher.name}
+					</span>
+				</Link>
+				<ChevronRight size={16} />
 				<p>{book.title}</p>
 			</div>
 			<BigBook book={book} />

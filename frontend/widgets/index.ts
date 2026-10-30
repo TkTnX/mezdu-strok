@@ -18,3 +18,5 @@ export * from './RecentAuthors'
 export * from './RecentPublishers'
 export * from './AddBook'
 export * from './AddAuthor'
+
+// TODO: Страница авторов, страница автора, переход на страницу автора через книгу

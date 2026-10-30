@@ -14,6 +14,11 @@ export class PublisherController {
     return this.publisherService.getPublishers(query);
   }
 
+  @Get(':id')
+  public getPublisher(@Param('id') id: string) {
+    return this.publisherService.getPublisher(id)
+    }
+
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(ERole.ADMIN)
   @Post()

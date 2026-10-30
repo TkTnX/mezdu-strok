@@ -9,10 +9,10 @@ export const REVIEWS_SORT = [
 	},
 	{
 		label: 'Выше оценка',
-		value: 'rating-asc'
+		value: 'rating-desc'
 	},
 	{
 		label: 'Ниже оценка',
-		value: 'rating-desc'
+		value: 'rating-asc'
 	}
 ]

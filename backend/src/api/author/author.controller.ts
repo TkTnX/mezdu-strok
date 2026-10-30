@@ -28,6 +28,11 @@ export class AuthorController {
     return this.authorService.getAuthors(query);
   }
 
+  @Get(':id')
+    public getAuthor(@Param('id') id: string) {
+      return this.authorService.getAuthor(id);
+    }
+
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(ERole.ADMIN)
   @Post()

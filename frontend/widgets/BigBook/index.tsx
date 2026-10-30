@@ -5,6 +5,7 @@ import { AddReview } from '@/widgets/AddReview'
 import { Reviews } from '@/widgets/Reviews'
 import { BookAudioIcon } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface Props {
 	book: IBook
@@ -34,9 +35,9 @@ export const BigBook = ({ book }: Props) => {
 						<h3 className='text-2xl font-bold md:text-4xl'>
 							{book.title}
 						</h3>
-						<p className='text-secondary text-sm md:mt-2 md:text-xl'>
+						<Link href={`/authors/${book.author.id}`} className='text-secondary text-sm md:mt-2 md:text-xl'>
 							{book.author.name}
-						</p>
+						</Link>
 						<div className='mt-4 flex flex-wrap items-center gap-2'>
 							{book.tags.map((tag, i) => (
 								<p
@@ -119,12 +120,15 @@ export const BigBook = ({ book }: Props) => {
 						Год издания:{' '}
 						<span className='ml-4 font-normal'>{book.year}</span>
 					</p>
-					<p className='mt-3 font-bold'>
+					<Link
+						href={`/publishers/${book.publisher.id}`}
+						className='mt-3 block font-bold'
+					>
 						Издательство:{' '}
 						<span className='ml-4 font-normal'>
 							{book.publisher.name}
 						</span>
-					</p>
+					</Link>
 					<p className='mt-3 font-bold'>
 						Страниц:{' '}
 						<span className='ml-4 font-normal'>{book.pages}</span>

@@ -6,13 +6,28 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 export class PublisherService {
   public constructor(private readonly prismaService: PrismaService) {}
 
-  public getPublishers(query: Record<string, any>) {
+  public async getPublishers(query: Record<string, any>) {
     const { take } = query;
-    const publishers = this.prismaService.publisher.findMany({
-      take: +take,
+    const publishers = await this.prismaService.publisher.findMany({
+      take: take ? +take : undefined,
     });
 
     return publishers || [];
+  }
+
+  public async getPublisher(id: string) {
+    const publisher = await this.prismaService.publisher.findUnique({
+      where: { id },
+      include: {
+        books: {
+          include: { author: true, _count: { select: { reviews: true } } },
+        },
+      },
+    });
+
+    if (!publisher) throw new NotFoundException('Издательство не найдено');
+
+    return publisher;
   }
 
   public create(dto: CreatePublisherDto) {
@@ -20,7 +35,6 @@ export class PublisherService {
   }
 
   public async delete(id: string) {
-    console.log(id);
     const publisher = await this.prismaService.publisher.findUnique({
       where: { id },
     });
