@@ -154,4 +154,14 @@ export class BookService {
 
     return book;
   }
+
+  public async delete(id: string) {
+    const book = await this.prismaService.book.findUnique({
+      where: { id },
+    });
+
+    if (!book) throw new NotFoundException('Книга не найдена');
+
+    return this.prismaService.book.delete({ where: { id } });
+  }
 }

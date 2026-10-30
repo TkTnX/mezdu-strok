@@ -5,9 +5,10 @@ import Link from 'next/link'
 
 interface Props {
 	className?: string
+	isAdmin?: boolean
 }
 
-export const RecentAuthors = ({ className }: Props) => {
+export const RecentAuthors = ({ className, isAdmin = false }: Props) => {
 	const { useGetAuthors } = useAuthors()
 	const { data, isPending, error } = useGetAuthors({ take: 4 })
 
@@ -41,7 +42,8 @@ export const RecentAuthors = ({ className }: Props) => {
 								/>
 							))
 						: data.map(author => (
-								<Author
+							<Author
+								isAdmin={isAdmin}
 									imageClassName={'w-30 h-30'}
 									key={author.id}
 									author={author}

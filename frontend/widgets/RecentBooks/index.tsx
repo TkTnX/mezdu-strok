@@ -5,9 +5,10 @@ import Link from 'next/link'
 
 interface Props {
 	className?: string
+	isAdmin?: boolean
 }
 
-export const RecentBooks = ({ className }: Props) => {
+export const RecentBooks = ({ className, isAdmin = false }: Props) => {
 	const { useGetBooks } = useBooks()
 	const { data, isPending, error } = useGetBooks({
 		sort: 'createdAt-desc'
@@ -29,7 +30,12 @@ export const RecentBooks = ({ className }: Props) => {
 			{error ? (
 				<ErrorMessage error={error} />
 			) : (
-				<div className={cn('mt-5 grid grid-cols-3 gap-3', className)}>
+				<div
+					className={cn(
+						'mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3',
+						className
+					)}
+				>
 					{isPending
 						? [...new Array(4)].map((_, i) => (
 								<Skeleton
@@ -37,7 +43,13 @@ export const RecentBooks = ({ className }: Props) => {
 									key={i}
 								/>
 							))
-						: data.map(book => <Book key={book.id} book={book} />)}
+						: data.map(book => (
+								<Book
+									isAdmin={isAdmin}
+									key={book.id}
+									book={book}
+								/>
+							))}
 				</div>
 			)}
 		</section>

@@ -1,6 +1,10 @@
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { PrismaService } from '@/src/prisma/prisma.service';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 
 @Injectable()
 export class AuthorService {
@@ -16,7 +20,7 @@ export class AuthorService {
   }
 
   public async create(dto: CreateAuthorDto, file: Express.Multer.File) {
- let avatar: string | undefined;
+    let avatar: string | undefined;
     if (file) {
       avatar = `${process.env.SERVER_URL}/uploads/${file.filename}`;
     }
@@ -32,5 +36,15 @@ export class AuthorService {
     }
 
     return author;
+  }
+
+  public async delete(id: string) {
+    const author = await this.prismaService.author.findUnique({
+      where: { id },
+    });
+
+    if (!author) throw new NotFoundException('Автор не найден');
+
+    return this.prismaService.author.delete({ where: { id } });
   }
 }

@@ -123,4 +123,12 @@ export class ReviewService {
 
     return review;
   }
+
+  public async delete(id: string) {
+    const review = await this.prismaService.review.findUnique({ where: { id } });
+
+    if (!review) throw new NotFoundException('Рецензия не найдена');
+
+    return this.prismaService.review.delete({ where: { id } });
+  }
 }

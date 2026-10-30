@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -10,7 +11,9 @@ import {
 } from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { CreateReviewDto } from './dto/create.dto';
-import { AuthGuard } from '@/src/guards';
+import { AuthGuard, RolesGuard } from '@/src/guards';
+import { Roles } from '@/src/decorators';
+import { ERole } from '@/src/generated/prisma/enums';
 @Controller('reviews')
 export class ReviewController {
   constructor(private readonly reviewService: ReviewService) {}
@@ -30,5 +33,12 @@ export class ReviewController {
   @Get()
   get(@Query() query: Record<string, any>) {
     return this.reviewService.get(query);
+  }
+
+  @UseGuards(AuthGuard, RolesGuard)
+  @Roles(ERole.ADMIN)
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.reviewService.delete(id);
   }
 }

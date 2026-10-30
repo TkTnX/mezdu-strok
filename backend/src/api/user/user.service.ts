@@ -32,7 +32,6 @@ export class UserService {
     });
 
     if (!user) throw new NotFoundException('Пользователь не найден');
-
     return user;
   }
 
@@ -72,4 +71,3 @@ export class UserService {
     return user;
   }
 }
-

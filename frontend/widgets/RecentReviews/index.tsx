@@ -4,10 +4,11 @@ import { cn, ErrorMessage, Skeleton, useReviews } from '@/shared'
 import Link from 'next/link'
 
 interface Props {
-	className?:string
+	className?: string
+	isAdmin: boolean
 }
 
-export const RecentReviews = ({ className }: Props) => {
+export const RecentReviews = ({ className, isAdmin = false }: Props) => {
 	const { useGetReviews } = useReviews()
 	const { data, isPending, error } = useGetReviews({ take: 2, sortBy: 'createdAt-desc' })
 	return (
@@ -30,7 +31,11 @@ export const RecentReviews = ({ className }: Props) => {
 					))
 				) : (
 					data.map(review => (
-						<Review key={review.id} review={review} />
+						<Review
+							isAdmin={isAdmin}
+							key={review.id}
+							review={review}
+						/>
 					))
 				)}
 			</div>

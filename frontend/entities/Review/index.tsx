@@ -1,4 +1,4 @@
-import { LikeReview } from '@/features'
+import { LikeReview, DeleteButton } from '@/features'
 import { cn, IReview } from '@/shared'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -6,12 +6,15 @@ import Link from 'next/link'
 type Props = {
 	review: IReview
 	className?: string
+	isAdmin?: boolean
 }
 
-export const Review = ({ review, className }: Props) => {
+export const Review = ({ review, className, isAdmin }: Props) => {
 	const user = review.user
 	return (
-		<div className={`bg-accent-light rounded-2xl p-2 ${className}`}>
+		<div
+			className={`bg-accent-light relative rounded-2xl p-2 ${className}`}
+		>
 			<div
 				className={cn(
 					'bg-main/10 flex items-center justify-between rounded-2xl p-2',
@@ -44,7 +47,7 @@ export const Review = ({ review, className }: Props) => {
 							alt={'User'}
 							width={43}
 							height={43}
-							className='rounded-full w-10.75 h-10.75 object-cover'
+							className='h-10.75 w-10.75 rounded-full object-cover'
 							unoptimized
 						/>
 						<p className='text-sm font-bold sm:text-base'>
@@ -85,6 +88,7 @@ export const Review = ({ review, className }: Props) => {
 				{new Date(review.createdAt).toLocaleDateString('ru-RU')}
 			</p>
 			<LikeReview likes={review.likes} id={review.id} />
+			{isAdmin && <DeleteButton id={review.id} table='reviews' />}
 		</div>
 	)
 }

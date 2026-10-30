@@ -98,7 +98,7 @@ model Favorite {
 model Review {
   id String @id @default(cuid())
   bookId String
-  book Book @relation(fields: [bookId], references: [id])
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
   userId String
   user User @relation(fields: [userId], references: [id])
   title String
@@ -118,7 +118,7 @@ model Review {
 model ReviewLike {
   id String @id @default(cuid())
   reviewId String
-  review Review @relation(fields: [reviewId], references: [id])
+  review Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
   userId String
   user User @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
@@ -135,6 +135,6 @@ model Quote {
 }
 
 enum ERole {
-  USER
+  USER 
   ADMIN
 }
