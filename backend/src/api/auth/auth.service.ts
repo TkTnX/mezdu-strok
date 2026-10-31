@@ -2,7 +2,7 @@ import { LoginDto, RegisterDto } from '@/src/api/auth/dto';
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import bcrypt from 'bcryptjs';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 @Injectable()
 export class AuthService {
   public constructor(private readonly prismaService: PrismaService) {}
@@ -42,7 +42,7 @@ export class AuthService {
 
     if (!user) throw new NotFoundException('Неверные данные входа!');
 
-    const isValidPassword = bcrypt.compareSync(dto.password, user.password);
+    const isValidPassword = bcrypt.compareSync(dto.password, user.password!);
 
     if (!isValidPassword) throw new NotFoundException('Неверные данные входа!');
 
@@ -62,5 +62,30 @@ export class AuthService {
         console.log(err);
       }
     });
+  }
+
+  async googleLogin(googleUser: any) {
+    console.log(googleUser);
+
+    
+    const user = await this.prismaService.user.upsert({
+      where: {
+        email: googleUser.email,
+      },
+      update: {
+        googleId: googleUser.id,
+      },
+      create: {
+        email: googleUser.email,
+        username: `${googleUser.email.split('@')[0]}`,
+        avatar: googleUser.picture,
+        googleId: googleUser.id,
+        firstname: googleUser.firstName,
+        lastname: googleUser.lastName,
+        role: 'USER',
+      },
+    });
+
+    return user;
   }
 }

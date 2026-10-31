@@ -39,10 +39,4 @@ export const NAV_ITEMS = [
 		href: '/profile',
 		icon: <User />
 	},
-
-	{
-		label: 'Настройки',
-		href: '/settings',
-		icon: <Settings />
-	}
 ]

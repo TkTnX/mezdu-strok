@@ -1,4 +1,4 @@
-import { LoginForm } from '@/features'
+import { GoogleButton, LoginForm } from '@/features'
 import { Button } from '@/shared'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,18 +18,7 @@ const LoginPage = () => {
 				пользоваться сервисом полностью.
 			</p>
 			<LoginForm />
-			<Button
-				variant={'outline'}
-				className={'border-accent-light mt-5 h-10 w-full text-black'}
-			>
-				<Image
-					src={'/images/icons/google.svg'}
-					alt='Google icon'
-					width={20}
-					height={20}
-				/>
-				Войти с помощью Google
-			</Button>
+			<GoogleButton />
 			<p className='text-secondary mt-5 flex gap-1 text-sm'>
 				Нет аккаунта?
 				<Link

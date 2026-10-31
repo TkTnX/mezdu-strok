@@ -10,3 +10,9 @@ export const register = async (body: Omit<IRegister, 'passwordRepeat'>) => {
 	const { data } = await axiosInstance.post('auth/register', body)
 	return data
 }
+
+export const logout = async () => {
+    const { data } = await axiosInstance.post('auth/logout')
+    return data
+}
+

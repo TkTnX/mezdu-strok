@@ -1,4 +1,5 @@
 'use client'
+import { LogoutButton } from '@/features'
 import { cn, EditProfile, Skeleton } from '@/shared'
 import { useUserStore } from '@/shared/stores'
 import { Favorites, Stats, Reviews, Quotes } from '@/widgets'
@@ -49,7 +50,10 @@ export const Profile = () => {
 						</div>
 					)}
 				</div>
-				<EditProfile open={open} setOpen={setOpen} user={user} />
+				<div className='flex flex-wrap gap-3'>
+					<EditProfile open={open} setOpen={setOpen} user={user} />
+					<LogoutButton />
+				</div>
 			</div>
 			<div className='border-accent-light mt-10 border-b'>
 				<ul className='flex items-center overflow-x-auto'>

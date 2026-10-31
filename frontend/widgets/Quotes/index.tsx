@@ -2,9 +2,9 @@
 import { Quote } from '@/entities'
 import { ErrorMessage, Skeleton, useQuotes } from '@/shared'
 
-export const Quotes = ({userId}: {userId?:string}) => {
+export const Quotes = ({ userId }: { userId?: string }) => {
 	const { useGetQuotes } = useQuotes()
-	const { data, isPending, error } = useGetQuotes({authorId: userId})
+	const { data, isPending, error } = useGetQuotes({ authorId: userId })
 
 	if (error) return <ErrorMessage error={error} />
 
@@ -17,7 +17,7 @@ export const Quotes = ({userId}: {userId?:string}) => {
 			) : data.length > 0 ? (
 				data.map(quote => <Quote quote={quote} key={quote.id} />)
 			) : (
-				<p className='text-secondary col-span-3 text-center text-3xl font-bold'>
+				<p className='text-secondary col-span-4 text-center'>
 					Цитат нет!
 				</p>
 			)}

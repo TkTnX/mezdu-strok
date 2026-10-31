@@ -19,12 +19,10 @@ export const Reviews = ({ bookId, userId }: Props) => {
 	} = useGetReviews({ bookId, userId, sortBy })
 	// todo: add pagination
 	return (
-		<div className='mx-auto mt-5 max-w-285 rounded-xl'>
+		<div className=' rounded-xl'>
 			<div className='flex flex-col justify-between gap-3 sm:flex-row sm:items-center'>
 				{(bookId || (!bookId && !userId)) && (
-					<p className='text-4xl font-semibold sm:text-2xl'>
-						Рецензии
-					</p>
+					<h1 className='text-2xl font-bold sm:text-4xl'>Рецензии</h1>
 				)}
 				<ReviewsSort setSortBy={setSortBy} />
 			</div>
@@ -37,7 +35,7 @@ export const Reviews = ({ bookId, userId }: Props) => {
 					))
 				) : (
 					reviews?.map(review => (
-						<Review key={review.id}  review={review} />
+						<Review key={review.id} review={review} />
 					))
 				)}
 			</div>

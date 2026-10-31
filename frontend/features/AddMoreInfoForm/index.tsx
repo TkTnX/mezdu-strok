@@ -163,7 +163,7 @@ export const AddMoreInfoForm = ({ user, setOpen }: Props) => {
 				{isPending ? (
 					<Loader2Icon size={20} className='mx-auto animate-spin' />
 				) : user ? (
-					'Редакитровать'
+					'Изменить'
 				) : (
 					'Закончить регистрацию'
 				)}

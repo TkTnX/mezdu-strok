@@ -23,7 +23,8 @@ model User {
   role ERole @default(USER)
 
   email String @unique
-  password String
+  password String?
+  googleId  String? @unique
 
   favorites Favorite[]
   reviews Review[]

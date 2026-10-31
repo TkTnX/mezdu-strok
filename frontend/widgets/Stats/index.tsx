@@ -52,7 +52,7 @@ export const Stats = ({ isSmall = false }: Props) => {
 				<p className='mt-3 font-medium'>Любимых книг</p>
 			</Link>
 			<Link
-				href={'/reviews'}
+				href={'/profile'}
 				className={cn(
 					'flex flex-col items-center justify-center sm:items-start',
 					{

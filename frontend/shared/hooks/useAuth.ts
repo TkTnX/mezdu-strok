@@ -1,4 +1,4 @@
-import { login, register } from '@/shared/api'
+import { googleAuth, login, logout, register } from '@/shared/api'
 import { ILogin, IRegister } from '@/shared/types'
 import { useMutation, UseMutationOptions } from '@tanstack/react-query'
 
@@ -26,8 +26,22 @@ export function useAuth() {
 			...options
 		})
 
+	const useLogoutMutation = (
+		options?: Omit<
+			UseMutationOptions<unknown, unknown, unknown>,
+			'mutationFn'
+		>
+	) =>
+		useMutation({
+			mutationFn: () => logout(),
+			...options
+		})
+	
+
+
 	return {
 		useLoginMutation,
-		useRegisterMutation
+		useRegisterMutation,
+		useLogoutMutation,
 	}
 }
