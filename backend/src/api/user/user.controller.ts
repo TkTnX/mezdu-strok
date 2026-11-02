@@ -26,10 +26,7 @@ export class UserController {
     return this.userService.getMe(req);
   }
 
-  @Get(':id')
-  async getById(@Param('id') id: string) {
-    return this.userService.getById(id);
-  }
+
 
   @UseGuards(AuthGuard)
   @Patch('me')
@@ -54,5 +51,12 @@ export class UserController {
     file: Express.Multer.File,
   ) {
     return this.userService.update(req, dto, file);
+  }
+
+
+  @Get(':username')
+  async getUserByUsername(@Param('username') username: string) {
+    console.log(username)
+    return this.userService.getUserByUsername(username)
   }
 }

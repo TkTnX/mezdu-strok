@@ -42,7 +42,7 @@ export const Review = ({ review, className, isAdmin }: Props) => {
 							</p>
 						</Link>
 					)}
-					<div className='flex items-center gap-2'>
+					<Link href={`/users/${user?.username}`} className='flex items-center gap-2'>
 						<Image
 							src={user?.avatar || '/images/users/user1.png'}
 							alt={'User'}
@@ -54,7 +54,7 @@ export const Review = ({ review, className, isAdmin }: Props) => {
 						<p className='text-sm font-bold sm:text-base'>
 							{`${user?.firstname || user?.lastname ? `${user?.firstname} ${user?.lastname}` : `@${user?.username}`}`}
 						</p>
-					</div>
+					</Link>
 				</div>
 				<div className='text-right'>
 					<p className='text-main vsm:text-3xl text-2xl font-bold'>

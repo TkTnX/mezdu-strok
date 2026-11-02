@@ -6,9 +6,10 @@ import Link from 'next/link'
 
 interface Props {
 	isSmall?: boolean
+	isProfile?: boolean
 }
 
-export const Stats = ({ isSmall = false }: Props) => {
+export const Stats = ({ isSmall = false, isProfile = false }: Props) => {
 	const { user, isPending } = useUserStore()
 
 	if (isPending) return <Skeleton className='mt-10 h-50 w-full' />
@@ -39,7 +40,8 @@ export const Stats = ({ isSmall = false }: Props) => {
 				'grid-cols-2': isSmall
 			})}
 		>
-			<Link href={'/favorites'}
+			<Link
+				href={!isProfile ? '/favorites' : ''}
 				className={cn(
 					'flex flex-col items-center justify-center sm:items-start',
 					{
@@ -52,7 +54,7 @@ export const Stats = ({ isSmall = false }: Props) => {
 				<p className='mt-3 font-medium'>Любимых книг</p>
 			</Link>
 			<Link
-				href={'/profile'}
+				href={!isProfile ? '/profile' : ''}
 				className={cn(
 					'flex flex-col items-center justify-center sm:items-start',
 					{
@@ -64,7 +66,8 @@ export const Stats = ({ isSmall = false }: Props) => {
 				<h4 className='text-4xl font-bold'>{user?._count.reviews}</h4>
 				<p className='mt-3 font-medium'>Отзывов написано</p>
 			</Link>
-			<div
+			<Link
+				href={!isProfile ? '/favorites' : ''}
 				className={cn(
 					'flex flex-col items-center justify-center sm:items-start',
 					{
@@ -74,9 +77,8 @@ export const Stats = ({ isSmall = false }: Props) => {
 				)}
 			>
 				<h4 className='text-4xl font-bold'>{user?._count.favorites}</h4>
-				{/* TODO: Добавить лайки авторов */}
 				<p className='mt-3 font-medium'>Любимых авторов</p>
-			</div>
+			</Link>
 			<div
 				className={cn(
 					'flex flex-col items-center justify-center sm:items-start',
@@ -101,3 +103,4 @@ export const Stats = ({ isSmall = false }: Props) => {
 		</div>
 	)
 }
+

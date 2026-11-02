@@ -1,5 +1,5 @@
 'use client'
-import { AddBookToFav } from '@/features'
+import { AddToFavButton } from '@/features'
 import { IBook } from '@/shared'
 import { AddReview } from '@/widgets/AddReview'
 import { Reviews } from '@/widgets/Reviews'
@@ -48,7 +48,6 @@ export const BigBook = ({ book }: Props) => {
 								</p>
 							))}
 						</div>
-						{/* TODO: Сделать функционал добавления книги */}
 						<div className='my-3 flex items-end gap-4 md:mt-8'>
 							<div className='flex items-center gap-2 text-4xl'>
 								<BookAudioIcon size={32} />
@@ -60,7 +59,7 @@ export const BigBook = ({ book }: Props) => {
 								({book._count.reviews} отзывов)
 							</p>
 						</div>
-						<AddBookToFav likes={book.favorites} id={book.id} />
+						<AddToFavButton table='books' likes={book.favorites} id={book.id} />
 					</div>
 				</div>
 				<div className='border-accent-light w-full rounded-xl border px-4 py-3 lg:w-87.5'>

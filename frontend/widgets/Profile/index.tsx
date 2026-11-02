@@ -1,19 +1,34 @@
 'use client'
 import { LogoutButton } from '@/features'
-import { cn, EditProfile, Skeleton } from '@/shared'
+import { cn, EditProfile, IUser, Skeleton } from '@/shared'
 import { useUserStore } from '@/shared/stores'
-import { Favorites, Stats, Reviews, Quotes } from '@/widgets'
+import {
+	FavoriteBooks,
+	Stats,
+	Reviews,
+	Quotes,
+	FavoriteAuthors
+} from '@/widgets'
 import { UserCircle2Icon } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-export const Profile = () => {
+interface Props {
+	userByUsername?: IUser
+}
+
+export const Profile = ({ userByUsername }: Props) => {
 	const [open, setOpen] = useState(false)
 	const [selectedTab, setSelectedTab] = useState(0)
 	const router = useRouter()
-	const { user, isPending } = useUserStore()
-	if (!user && !isPending) return router.push('/auth/login')
+	const { user: profileUser, isPending } = useUserStore()
+	const user = userByUsername || profileUser
+
+	if (!profileUser && !isPending && !userByUsername) {
+		router.push('/auth/login')
+		return
+	}
 	return (
 		<section className='container mt-10'>
 			<div className='flex flex-col items-center justify-between gap-10 sm:items-stretch lg:flex-row lg:items-start'>
@@ -46,16 +61,25 @@ export const Profile = () => {
 							<p className='mt-2 text-lg xl:text-xl'>
 								{user?.bio ? user?.bio : 'Нет описания'}
 							</p>
-							<Stats isSmall={true} />
+							<Stats
+								isProfile={!!userByUsername}
+								isSmall={true}
+							/>
 						</div>
 					)}
 				</div>
-				<div className='flex flex-wrap gap-3'>
-					<EditProfile open={open} setOpen={setOpen} user={user} />
-					<LogoutButton />
-				</div>
+				{!userByUsername && (
+					<div className='flex flex-wrap gap-3'>
+						<EditProfile
+							open={open}
+							setOpen={setOpen}
+							user={user}
+						/>
+						<LogoutButton />
+					</div>
+				)}
 			</div>
-			<div className='border-accent-light mt-10 border-b'>
+			<div className='border-accent-light mt-10 mb-5 border-b'>
 				<ul className='flex items-center overflow-x-auto'>
 					<li>
 						<button
@@ -98,7 +122,10 @@ export const Profile = () => {
 				) : selectedTab === 1 ? (
 					<Quotes userId={user.id} />
 				) : (
-					<Favorites />
+					<div>
+						<FavoriteBooks />
+						<FavoriteAuthors />
+					</div>
 				))}
 		</section>
 	)

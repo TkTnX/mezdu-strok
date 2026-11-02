@@ -1,4 +1,5 @@
 import { LibraryBook } from '@/entities'
+import { AddToFavButton } from '@/features'
 import { getAuthor } from '@/shared'
 import Image from 'next/image'
 
@@ -8,7 +9,7 @@ const AuthorPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
 	return (
 		<section className='vsm:pl-10! flex-1 p-4'>
-			<div className='border-accent-light flex gap-3 border-b pb-4'>
+			<div className='border-accent-light flex flex-wrap gap-3 border-b pb-4'>
 				<Image
 					src={author.avatar}
 					width={300}
@@ -22,6 +23,11 @@ const AuthorPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 						{author.name}
 					</h1>
 					<p className='mt-2'>{author.bio}</p>
+					<AddToFavButton
+						table='authors'
+						id={author.id}
+						likes={author.favorites}
+					/>
 				</div>
 			</div>
 			<div className='mt-5'>

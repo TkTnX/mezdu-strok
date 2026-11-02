@@ -24,6 +24,7 @@ export class AuthorService {
       where: { id },
       include: {
         books: { include: { _count: { select: { reviews: true } } } },
+        favorites: {select: {userId: true}}
       },
     });
     if (!author) throw new NotFoundException('Автор не найден');

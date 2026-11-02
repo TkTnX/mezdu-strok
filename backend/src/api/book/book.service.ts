@@ -121,39 +121,6 @@ export class BookService {
     return book;
   }
 
-  public async addToFav(id: string, req: Request & { session: any }) {
-    const book = await this.getById(id);
-
-    const isFav = await this.prismaService.favorite.findFirst({
-      where: {
-        OR: [
-          {
-            bookId: id,
-          },
-          {
-            userId: req.session.user.id,
-          },
-        ],
-      },
-    });
-
-    if (isFav) {
-      await this.prismaService.favorite.delete({
-        where: {
-          id: isFav.id,
-        },
-      });
-    } else {
-      await this.prismaService.favorite.create({
-        data: {
-          bookId: id,
-          userId: req.session.user.id,
-        },
-      });
-    }
-
-    return book;
-  }
 
   public async delete(id: string) {
     const book = await this.prismaService.book.findUnique({

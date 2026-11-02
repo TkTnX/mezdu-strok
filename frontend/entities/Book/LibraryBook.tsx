@@ -1,4 +1,5 @@
 import { IBook } from '@/shared'
+import { declensions } from '@/shared/helpers'
 import { MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -59,8 +60,11 @@ export const LibraryBook = ({ book }: Props) => {
 						</p>
 						<p className='text-secondary flex items-center gap-2'>
 							<MessageCircle size={18} />
-							{/* TODO: Склонения */}
-							{book._count.reviews} отзывов
+							{declensions(book._count.reviews, [
+								'отзыв',
+								'отзыва',
+								'отзывов'
+							])}
 						</p>
 					</div>
 				</div>

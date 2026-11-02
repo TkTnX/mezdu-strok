@@ -35,18 +35,6 @@ export class UserService {
     return user;
   }
 
-  async getById(id: string) {
-    const user = await this.prismaService.user.findUnique({
-      where: { id },
-      omit: {
-        password: true,
-      },
-    });
-
-    if (!user) throw new NotFoundException('Пользователь не найден');
-
-    return user;
-  }
 
   async update(
     req: Request & { session: any },
@@ -69,5 +57,18 @@ export class UserService {
     if (!user) throw new NotFoundException('Пользователь не обновлен');
 
     return user;
+  }
+
+  public async getUserByUsername(username: string) {
+    console.log(username)
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        username
+      }
+    })
+
+    if (!user) throw new NotFoundException('Пользователь не найден!')
+    
+    return user
   }
 }

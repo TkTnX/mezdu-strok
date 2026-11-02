@@ -64,14 +64,6 @@ export class BookController {
     return this.bookService.create(dto, file);
   }
 
-  @UseGuards(AuthGuard)
-  @Post(':id/like')
-  public addToFav(
-    @Param('id') id: string,
-    @Req() req: Request & { session: any },
-  ) {
-    return this.bookService.addToFav(id, req);
-  }
 
   @UseGuards(AuthGuard)
   @Delete(':id')

@@ -9,3 +9,8 @@ export async function updateUser(body: FormData) {
 	const { data } = await axiosInstance.patch('users/me', body)
 	return data
 }
+
+export async function getUser(username: string) {
+	const { data } = await axiosInstance.get(`users/${username}`)
+	return data
+}

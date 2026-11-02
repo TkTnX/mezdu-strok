@@ -11,12 +11,17 @@ interface Props {
 
 export const Author = ({ author, imageClassName, isAdmin }: Props) => {
 	return (
-		<div className='relative flex flex-col '>
+		<div className='relative flex flex-col'>
 			<Link
 				className='flex w-full flex-col items-center text-center'
 				href={`/authors/${author.id}`}
 			>
-				<div className={cn('relative h-80 w-80 ', imageClassName)}>
+				<div
+					className={cn(
+						'relative h-80 w-full max-w-80',
+						imageClassName
+					)}
+				>
 					<Image
 						fill
 						src={author.avatar}
@@ -25,8 +30,8 @@ export const Author = ({ author, imageClassName, isAdmin }: Props) => {
 						unoptimized
 					/>
 				</div>
-				<p className='mt-auto text-2xl font-bold '>{author.name}</p>
-				<p className='mt-2 '>
+				<p className='mt-auto text-2xl font-bold'>{author.name}</p>
+				<p className='mt-2'>
 					{author.bio.length > 100
 						? author.bio.slice(0, 100) + '...'
 						: author.bio}

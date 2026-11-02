@@ -6,9 +6,18 @@ import { Request } from 'express';
 export class FavoriteService {
   public constructor(private readonly prismaService: PrismaService) {}
 
-  public async getAll(req: Request & { session: any }) {
+  public async getAll(req: Request & { session: any }, table: string) {
     const favorites = await this.prismaService.favorite.findMany({
-      where: { userId: req.session.user.id },
+      where: {
+        AND: [
+          {
+            userId: req.session.user.id,
+          },
+          {
+            type: table,
+          },
+        ],
+      },
       include: {
         book: {
           include: {
@@ -16,11 +25,54 @@ export class FavoriteService {
             _count: { select: { reviews: true } },
           },
         },
+        author: true,
       },
     });
 
     if (!favorites) throw new NotFoundException('Избранные не найдены!');
 
     return favorites;
+  }
+
+  public async setFav(
+    table: string,
+    id: string,
+    req: Request & { session: any },
+  ) {
+    const tableWithoutS = table.slice(0, -1);
+
+    const isFav = await this.prismaService.favorite.findFirst({
+      where: {
+        AND: [
+          {
+            type: table,
+          },
+          {
+            [`${tableWithoutS}Id`]: id,
+          },
+          {
+            userId: req.session.user.id,
+          },
+        ],
+      },
+    });
+
+    if (isFav) {
+      await this.prismaService.favorite.delete({
+        where: {
+          id: isFav.id,
+        },
+      });
+    } else {
+      await this.prismaService.favorite.create({
+        data: {
+          [`${tableWithoutS}Id`]: id,
+          userId: req.session.user.id,
+          type: table,
+        },
+      });
+    }
+
+    return { message: 'Значение изменено!' };
   }
 }

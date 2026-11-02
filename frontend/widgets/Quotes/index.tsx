@@ -17,7 +17,7 @@ export const Quotes = ({ userId }: { userId?: string }) => {
 			) : data.length > 0 ? (
 				data.map(quote => <Quote quote={quote} key={quote.id} />)
 			) : (
-				<p className='text-secondary col-span-4 text-center'>
+				<p className='text-secondary col-span-4 -mt-5 text-center'>
 					Цитат нет!
 				</p>
 			)}

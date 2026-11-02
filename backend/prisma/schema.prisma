@@ -69,6 +69,7 @@ model Author {
   bio String
 
   books Book[]
+  favorites Favorite[]
   createdAt DateTime @default(now())
 
 }
@@ -89,9 +90,12 @@ model Publisher {
 
 model Favorite {
   id String @id @default(cuid())
-  bookId String
-  book Book @relation(fields: [bookId], references: [id])
+  bookId String?
+  book Book? @relation(fields: [bookId], references: [id])
+  authorId String?
+  author Author? @relation(fields: [authorId], references: [id])
   userId String
+  type String 
   user User @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }

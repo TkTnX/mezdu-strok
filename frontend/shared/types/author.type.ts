@@ -1,13 +1,14 @@
 import { IBook } from "."
 
 export interface IAuthor {
-    id: string
-    name: string
-    avatar: string
-    bio: string
+	id: string
+	name: string
+	avatar: string
+	bio: string
 
-    books: IBook[]
-    createdAt: string
+	favorites: { userId: string }[]
+	books: IBook[]
+	createdAt: string
 }
 
 export interface ICreateAuthor {
