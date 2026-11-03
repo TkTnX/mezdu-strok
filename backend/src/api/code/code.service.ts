@@ -1,3 +1,5 @@
+import { EmailDto } from '@/src/api/code/dto';
+import { emailTemplate } from '@/src/lib';
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { BadGatewayException, Injectable } from '@nestjs/common';
 
@@ -5,16 +7,29 @@ import { BadGatewayException, Injectable } from '@nestjs/common';
 export class CodeService {
   public constructor(private readonly prismaService: PrismaService) {}
 
+  public async sendCode(dto: EmailDto) {
+    const { subject, to } = dto;
+    const code = await this.generateCode();
+
+    await emailTemplate(
+      to,
+      subject,
+      `<h1>Восстановление пароля</h1> <p>Код: ${code.code}</p>`,
+    );
+
+    return true;
+  }
+
   public async generateCode() {
     const now = new Date();
     const code = await this.prismaService.code.create({
       data: {
-        code: String(Math.ceil(Math.random() * 100000)),
+        code: String(Math.ceil(Math.random() * 1000000)),
         expiresAt: new Date(now.setMinutes(now.getMinutes() + 5)),
       },
     });
-      
-      if (!code) throw new BadGatewayException('Не удалось создать код')
-      return code
+
+    if (!code) throw new BadGatewayException('Не удалось создать код');
+    return code;
   }
 }

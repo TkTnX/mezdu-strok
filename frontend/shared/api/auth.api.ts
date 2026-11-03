@@ -15,4 +15,12 @@ export const logout = async () => {
     const { data } = await axiosInstance.post('auth/logout')
     return data
 }
+export const resetPassword = async (body: {
+	code: string
+	email: string
+	newPassword: string
+}) => {
+	const { data } = await axiosInstance.post('auth/reset-password', body)
+	return data
+}
 

@@ -14,7 +14,6 @@ interface Props {
 	value?: string
 	onChange?: Dispatch<SetStateAction<string>>
 	defaultValue?: string
-	name?: string
 }
 
 export const Input = ({
@@ -27,7 +26,6 @@ export const Input = ({
 	error,
 	type,
 	value,
-	name,
 	onChange,
 	defaultValue
 }: Props) => {
@@ -37,7 +35,6 @@ export const Input = ({
 			<div className='border-accent-light mt-2 flex w-full items-center gap-3 rounded-lg border p-3'>
 				{icon && icon}
 				<input
-					name={name}
 					value={value}
 					onChange={e => onChange?.(e.target.value)}
 					{...register}

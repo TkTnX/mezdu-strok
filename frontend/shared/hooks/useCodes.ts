@@ -9,7 +9,7 @@ export function useCodes() {
 		>
 	) =>
 		useMutation({
-			mutationFn: (email: string) => sendCodeToEmail(email),
+			mutationFn: ({email, subject}: {email: string, subject: string}) => sendCodeToEmail(email, subject),
 			...options
 		})
 

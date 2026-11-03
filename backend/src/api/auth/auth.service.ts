@@ -1,4 +1,4 @@
-import { LoginDto, RegisterDto } from '@/src/api/auth/dto';
+import { LoginDto, RegisterDto, ResetPasswordDto } from '@/src/api/auth/dto';
 import { CodeService } from '@/src/api/code/code.service';
 import { emailTemplate } from '@/src/lib';
 import { PrismaService } from '@/src/prisma/prisma.service';
@@ -69,24 +69,33 @@ export class AuthService {
     });
   }
 
-  async resetPassword(email: string) {
+  async resetPassword(dto: ResetPasswordDto) {
+    console.log(dto);
     const user = await this.prismaService.user.findUnique({
       where: {
-        email,
+        email: dto.email,
       },
     });
 
-    if (!user) throw new NotFoundException('Неверные данные!');
+    if (!user) throw new NotFoundException('Пользователь не найден!');
 
-    const code = await this.codeService.generateCode()
+    const code = await this.prismaService.code.findFirst({
+      where: {
+        code: dto.code,
+      },
+    });
 
-    await emailTemplate(email, 'Восстановление пароля', `<h1>Восстановление пароля</h1> <p>Код: ${code}</p>`)
+    if (!code) throw new NotFoundException('Код не подходит!');
 
-    return true
+    const salt = bcrypt.genSaltSync(10);
+    const password = await bcrypt.hash(dto.newPassword, salt);
+    return await this.prismaService.user.update({
+      where: { id: user.id },
+      data: { password },
+    });
   }
 
   async googleLogin(googleUser: any) {
-
     const user = await this.prismaService.user.upsert({
       where: {
         email: googleUser.email,

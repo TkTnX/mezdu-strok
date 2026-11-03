@@ -1,4 +1,4 @@
-import { login, logout, register } from '@/shared/api'
+import { login, logout, register, resetPassword } from '@/shared/api'
 import { ILogin, IRegister } from '@/shared/types'
 import { useMutation, UseMutationOptions } from '@tanstack/react-query'
 
@@ -36,10 +36,22 @@ export function useAuth() {
 			mutationFn: () => logout(),
 			...options
 		})
+	
+	const useResetPassword = (
+		options?: Omit<
+			UseMutationOptions<unknown, unknown, unknown>,
+			'mutationFn'
+		>
+	) =>
+		useMutation({
+			mutationFn: (body: {email:string, code: string, newPassword: string}) => resetPassword(body),
+			...options
+		})
 
 	return {
 		useLoginMutation,
 		useRegisterMutation,
-		useLogoutMutation
+		useLogoutMutation,
+		useResetPassword
 	}
 }
