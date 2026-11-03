@@ -10,6 +10,7 @@ import { QuoteModule } from './api/quote/quote.module';
 import { SearchModule } from './api/search/search.module';
 import { AuthorModule } from './api/author/author.module';
 import { PublisherModule } from './api/publisher/publisher.module';
+import { CodeModule } from './api/code/code.module';
 
 
 @Module({
@@ -28,6 +29,7 @@ import { PublisherModule } from './api/publisher/publisher.module';
     SearchModule,
     AuthorModule,
     PublisherModule,
+    CodeModule,
   ],
 })
 export class AppModule {}

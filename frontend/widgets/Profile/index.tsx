@@ -62,7 +62,7 @@ export const Profile = ({ userByUsername }: Props) => {
 								{user?.bio ? user?.bio : 'Нет описания'}
 							</p>
 							<Stats
-								isProfile={!!userByUsername}
+								profile={userByUsername}
 								isSmall={true}
 							/>
 						</div>

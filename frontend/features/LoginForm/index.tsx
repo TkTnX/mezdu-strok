@@ -21,6 +21,7 @@ import { showErrorMessage } from '@/shared/helpers'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 import { useUserStore } from '@/shared/stores'
+import Link from 'next/link'
 export const LoginForm = () => {
 	const router = useRouter()
 	const [showPass, setShowPass] = useState('password')
@@ -80,9 +81,12 @@ export const LoginForm = () => {
 				type={showPass}
 				error={errors.password?.message}
 			/>
-			<button className='text-main w-fit text-left font-semibold hover:opacity-80'>
+			<Link
+				href={'/auth/reset-password'}
+				className='text-main w-fit text-left font-semibold hover:opacity-80'
+			>
 				Забыли пароль?
-			</button>
+			</Link>
 
 			<Button
 				disabled={isPending}

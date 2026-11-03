@@ -1,20 +1,21 @@
 'use client'
-import { cn, Skeleton } from '@/shared'
+import { cn, IUser, Skeleton } from '@/shared'
 import { useUserStore } from '@/shared/stores'
 import { Info } from 'lucide-react'
 import Link from 'next/link'
 
 interface Props {
 	isSmall?: boolean
-	isProfile?: boolean
+	profile?: IUser
 }
 
-export const Stats = ({ isSmall = false, isProfile = false }: Props) => {
-	const { user, isPending } = useUserStore()
+export const Stats = ({ isSmall = false, profile }: Props) => {
+	const { user: takenUser, isPending } = useUserStore()
+	const user = profile || takenUser
 
 	if (isPending) return <Skeleton className='mt-10 h-50 w-full' />
-
-	if (!user)
+	console.log(user)
+	if (!user && !profile)
 		return (
 			<div className='border-main vsm:flex-row mt-10 flex flex-col items-center justify-between gap-2 rounded-2xl border bg-[#f7f5fe] px-4 py-6'>
 				<div className='vsm:flex-row vsm:items-center flex flex-col items-start gap-4'>
@@ -41,7 +42,7 @@ export const Stats = ({ isSmall = false, isProfile = false }: Props) => {
 			})}
 		>
 			<Link
-				href={!isProfile ? '/favorites' : ''}
+				href={!profile ? '/favorites' : ''}
 				className={cn(
 					'flex flex-col items-center justify-center sm:items-start',
 					{
@@ -54,7 +55,7 @@ export const Stats = ({ isSmall = false, isProfile = false }: Props) => {
 				<p className='mt-3 font-medium'>Любимых книг</p>
 			</Link>
 			<Link
-				href={!isProfile ? '/profile' : ''}
+				href={!profile ? '/profile' : ''}
 				className={cn(
 					'flex flex-col items-center justify-center sm:items-start',
 					{
@@ -67,7 +68,7 @@ export const Stats = ({ isSmall = false, isProfile = false }: Props) => {
 				<p className='mt-3 font-medium'>Отзывов написано</p>
 			</Link>
 			<Link
-				href={!isProfile ? '/favorites' : ''}
+				href={!profile ? '/favorites' : ''}
 				className={cn(
 					'flex flex-col items-center justify-center sm:items-start',
 					{
@@ -89,7 +90,7 @@ export const Stats = ({ isSmall = false, isProfile = false }: Props) => {
 				)}
 			>
 				<h4 className='text-4xl font-bold'>
-					{user._count.reviews
+					{user?._count.reviews
 						? Math.ceil(
 								user.reviews!.reduce(
 									(acc, review) => acc + review.rating,
@@ -103,4 +104,3 @@ export const Stats = ({ isSmall = false, isProfile = false }: Props) => {
 		</div>
 	)
 }
-

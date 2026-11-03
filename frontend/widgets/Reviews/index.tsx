@@ -19,7 +19,7 @@ export const Reviews = ({ bookId, userId }: Props) => {
 	} = useGetReviews({ bookId, userId, sortBy })
 	// todo: add pagination
 	return (
-		<div className=' rounded-xl'>
+		<div className='mt-4 rounded-xl'>
 			<div className='flex flex-col justify-between gap-3 sm:flex-row sm:items-center'>
 				{(bookId || (!bookId && !userId)) && (
 					<h1 className='text-2xl font-bold sm:text-4xl'>Рецензии</h1>
@@ -33,10 +33,14 @@ export const Reviews = ({ bookId, userId }: Props) => {
 					[...new Array(3)].map((_, index) => (
 						<Skeleton key={index} className='h-100 w-full' />
 					))
-				) : (
+				) : reviews.length > 0 ? (
 					reviews?.map(review => (
 						<Review key={review.id} review={review} />
 					))
+				) : (
+					<p className='text-secondary col-span-4 text-center'>
+						Нет рецензий!
+					</p>
 				)}
 			</div>
 		</div>

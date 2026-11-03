@@ -12,9 +12,7 @@ export interface IUser {
     role: ERole
 
 
-    // favorites?: IFavorite[]
     reviews?: IReview[]
-    // quotes?: IQuote[]
     _count: {
         reviews: number
         favorites: number

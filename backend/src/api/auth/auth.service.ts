@@ -1,11 +1,16 @@
 import { LoginDto, RegisterDto } from '@/src/api/auth/dto';
+import { CodeService } from '@/src/api/code/code.service';
+import { emailTemplate } from '@/src/lib';
 import { PrismaService } from '@/src/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';
 @Injectable()
 export class AuthService {
-  public constructor(private readonly prismaService: PrismaService) {}
+  public constructor(
+    private readonly prismaService: PrismaService,
+    private readonly codeService: CodeService,
+  ) {}
 
   async register(dto: RegisterDto, req: Request & { session: any }) {
     const isExists = await this.prismaService.user.findFirst({
@@ -64,10 +69,24 @@ export class AuthService {
     });
   }
 
-  async googleLogin(googleUser: any) {
-    console.log(googleUser);
+  async resetPassword(email: string) {
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        email,
+      },
+    });
 
-    
+    if (!user) throw new NotFoundException('Неверные данные!');
+
+    const code = await this.codeService.generateCode()
+
+    await emailTemplate(email, 'Восстановление пароля', `<h1>Восстановление пароля</h1> <p>Код: ${code}</p>`)
+
+    return true
+  }
+
+  async googleLogin(googleUser: any) {
+
     const user = await this.prismaService.user.upsert({
       where: {
         email: googleUser.email,

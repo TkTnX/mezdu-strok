@@ -1,4 +1,4 @@
-import { googleAuth, login, logout, register } from '@/shared/api'
+import { login, logout, register } from '@/shared/api'
 import { ILogin, IRegister } from '@/shared/types'
 import { useMutation, UseMutationOptions } from '@tanstack/react-query'
 
@@ -13,8 +13,7 @@ export function useAuth() {
 			mutationFn: (body: ILogin) => login(body),
 			...options
 		})
-	
-	
+
 	const useRegisterMutation = (
 		options?: Omit<
 			UseMutationOptions<unknown, unknown, unknown>,
@@ -22,7 +21,8 @@ export function useAuth() {
 		>
 	) =>
 		useMutation({
-			mutationFn: (body: Omit<IRegister, 'passwordRepeat'>) => register(body),
+			mutationFn: (body: Omit<IRegister, 'passwordRepeat'>) =>
+				register(body),
 			...options
 		})
 
@@ -36,12 +36,10 @@ export function useAuth() {
 			mutationFn: () => logout(),
 			...options
 		})
-	
-
 
 	return {
 		useLoginMutation,
 		useRegisterMutation,
-		useLogoutMutation,
+		useLogoutMutation
 	}
 }

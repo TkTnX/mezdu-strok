@@ -18,7 +18,10 @@ import { ConfigService } from '@nestjs/config';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService, private readonly configService: ConfigService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly configService: ConfigService,
+  ) {}
 
   @HttpCode(HttpStatus.CREATED)
   @Post('register')
@@ -37,13 +40,22 @@ export class AuthController {
     return this.authService.logout(req);
   }
 
+  @Post('reset-password') 
+  resetPassword(@Body() dto: {email: string}) {
+    return this.authService.resetPassword(dto.email)
+  }
+    
+    
   @Get('google')
   @UseGuards(AuthGuard('google'))
   async googleAuth() {}
 
   @Get('google/redirect')
   @UseGuards(AuthGuard('google'))
-  async googleAuthRedirect(@Req() req: RequestType & { user: any, session: any }, @Res() res: Response) {
+  async googleAuthRedirect(
+    @Req() req: RequestType & { user: any; session: any },
+    @Res() res: Response,
+  ) {
     const user = await this.authService.googleLogin(req.user);
 
     req.session.user = {

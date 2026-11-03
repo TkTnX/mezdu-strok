@@ -139,6 +139,13 @@ model Quote {
   createdAt DateTime @default(now())
 }
 
+model Code {
+  id String @id @default(cuid())
+  code String 
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}
+
 enum ERole {
   USER 
   ADMIN
