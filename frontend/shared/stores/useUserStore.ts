@@ -4,14 +4,14 @@ import { create } from 'zustand'
 interface UserStore {
     user: IUser | null
     isPending: boolean
-    setUser: (user: IUser) => void
+    setUser: (user: IUser | null) => void
     setIsPending: (isPending: boolean) => void
 }
 
 export const useUserStore = create<UserStore>(set => ({
     user: null,
-    setUser: (user: IUser | null) => set(() => ({ user })),
+    setUser: (user) => set(() => ({ user })),
     isPending: true,
-    setIsPending: (isPending: boolean) => set(() => ({ isPending }))
+    setIsPending: (isPending) => set(() => ({ isPending }))
 }))
 

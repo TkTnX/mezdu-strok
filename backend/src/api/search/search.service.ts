@@ -44,4 +44,18 @@ export class SearchService {
       genres,
     };
   }
+
+  public async stats() {
+    const books = await this.prismaService.book.count();
+    const authors = await this.prismaService.author.count();
+    const publishers = await this.prismaService.publisher.count();
+    const reviews = await this.prismaService.review.count();
+
+    return {
+      books,
+      authors,
+      publishers,
+      reviews,
+    };
+  }
 }

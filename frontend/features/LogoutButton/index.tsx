@@ -1,15 +1,18 @@
 'use client'
 import { Button, useAuth } from '@/shared'
+import { useUserStore } from '@/shared/stores'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 export const LogoutButton = () => {
 	const router = useRouter()
 	const { useLogoutMutation } = useAuth()
+	const {setUser} = useUserStore()
 	const { mutate, isPending } = useLogoutMutation({
 		onSuccess: () => {
 			toast.success("Успешный выход из аккаунта!")
 			router.push('/')
+			setUser(null)
 		}
 	})
 	

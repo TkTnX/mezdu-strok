@@ -9,4 +9,9 @@ export class SearchController {
   search(@Query() query: { value: string }) {
     return this.searchService.search(query.value);
   }
+
+  @Get('stats')
+  stats() {
+    return this.searchService.stats()
+  }
 }

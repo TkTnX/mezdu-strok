@@ -27,4 +27,3 @@ export const FavoriteAuthors = () => {
 	)
 }
  
-// TODO: Сделать восстановление пароля

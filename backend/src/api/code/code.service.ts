@@ -22,14 +22,24 @@ export class CodeService {
 
   public async generateCode() {
     const now = new Date();
+
+   await this.prismaService.code.deleteMany({
+      where: {
+        expiresAt: {
+          lte: now
+        }
+      }
+    })
+
     const code = await this.prismaService.code.create({
       data: {
-        code: String(Math.ceil(Math.random() * 1000000)),
+        code: String(Math.floor(100000 + Math.random() * 900000)),
         expiresAt: new Date(now.setMinutes(now.getMinutes() + 5)),
       },
     });
 
     if (!code) throw new BadGatewayException('Не удалось создать код');
+
     return code;
   }
 }

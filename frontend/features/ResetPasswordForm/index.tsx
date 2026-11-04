@@ -1,11 +1,14 @@
 'use client'
 import { Button, Input, InputOTP, InputOTPGroup, InputOTPSlot } from '@/shared'
+import { showErrorMessage } from '@/shared/helpers'
 import { useAuth, useCodes } from '@/shared/hooks'
 import { REGEXP_ONLY_DIGITS } from 'input-otp'
+import { useRouter } from 'next/navigation'
 import { SubmitEvent, useState } from 'react'
 import { toast } from 'react-toastify'
 
 export const ResetPasswordForm = () => {
+	const router = useRouter()
 	const [newPassword, setNewPassword] = useState<null | string>(null)
 	const [code, setCode] = useState<null | string>(null)
 	const [openCode, setOpenCode] = useState(false)
@@ -19,8 +22,6 @@ export const ResetPasswordForm = () => {
 		e.preventDefault()
 		if (!email) {
 			setError('Введите почту!')
-		} else if (email && (!newPassword || !code)) {
-			setError('Заполните все поля!')
 		}
 		if (!code && !newPassword) {
 			sendCodeMutation(
@@ -29,15 +30,25 @@ export const ResetPasswordForm = () => {
 					onSuccess: () => {
 						toast.success('Письмо отправлено на почту!')
 						setOpenCode(true)
+						setError(null)
 					}
 				}
 			)
 		} else {
-			resetPasswordMutation({
-				email,
-				code: code!,
-				newPassword: newPassword!
-			})
+			resetPasswordMutation(
+				{
+					email,
+					code: code!,
+					newPassword: newPassword!
+				},
+				{
+					onError: err => showErrorMessage(err),
+					onSuccess: () => {
+						toast.success('Пароль изменён!')
+						router.push('/auth/login')
+					}
+				}
+			)
 		}
 	}
 	return (
@@ -98,16 +109,15 @@ export const ResetPasswordForm = () => {
 				)}
 				<Button
 					type='submit'
-					disabled={isPending}
+					disabled={
+						isPending || (openCode && (!code || !newPassword))
+					}
 					className={'h-10 w-full'}
 				>
-					Отправить код
+					{openCode ? 'Изменить пароль' : 'Отправить код'}
 				</Button>
 			</form>
 		</div>
 	)
 }
 
-// TODO: Функция удаления кода через 5 минут
-
-// TODO: В админке отображать данные
