@@ -22,7 +22,7 @@ export function useReviews() {
 	const useGetReviews = (query: Record<string, unknown>) =>
 		useQuery({
 			queryKey: ['reviews', query],
-			queryFn: (): Promise<IReview[]> => getReviews(query)
+			queryFn: (): Promise<{ items: IReview[] , totalPages: number, currPage: number}> => getReviews(query)
 		})
 
 	return { useCreateReview, useGetReviews, useLikeReview }

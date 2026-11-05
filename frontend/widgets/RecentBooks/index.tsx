@@ -32,7 +32,7 @@ export const RecentBooks = ({ className, isAdmin = false }: Props) => {
 			) : (
 				<div
 					className={cn(
-						'mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3',
+						'mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5',
 						className
 					)}
 				>

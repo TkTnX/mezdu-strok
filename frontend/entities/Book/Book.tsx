@@ -13,17 +13,16 @@ interface Props {
 
 export const Book = ({ book, isAdmin, className }: Props) => {
 	return (
-		<div className='relative'>
+		<div className='relative w-full'>
 			<Link
 				href={`/library/${book.id}`}
-				className={`flex min-w-55 flex-col items-center text-center lg:block lg:text-left ${className}`}
+				className={`flex  flex-col items-center text-center lg:block lg:text-left ${className}`}
 			>
 				<div className='relative h-80 w-full max-w-55'>
 					{book.preview ? (
 						<Image
 							loading='eager'
 							fill
-							sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
 							src={book.preview}
 							alt={book.title}
 							className='rounded-lg'

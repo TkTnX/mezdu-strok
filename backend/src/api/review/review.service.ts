@@ -74,6 +74,7 @@ export class ReviewService {
   }
 
   public async get(query: Record<string, any>) {
+    console.log(query);
     const sort = query?.sortBy && query.sortBy.split('-');
     const reviews = await this.prismaService.review.findMany({
       where: {
@@ -95,11 +96,18 @@ export class ReviewService {
         [sort?.[0]]: sort?.[1],
       },
       take: +query?.take || undefined,
+      skip: +query?.page * +query?.take || undefined,
     });
 
-    if (!reviews) throw new NotFoundException('Рецензии не найдены');
+    const totalItems = await this.prismaService.review.count();
+    const totalPages = Math.ceil(totalItems / +query?.take);
 
-    return reviews;
+    if (!reviews) throw new NotFoundException('Рецензии не найдены');
+    return {
+      items: reviews,
+      totalPages,
+      currPage: +query?.page || 0,
+    };
   }
 
   public async getById(id: string) {
@@ -125,7 +133,9 @@ export class ReviewService {
   }
 
   public async delete(id: string) {
-    const review = await this.prismaService.review.findUnique({ where: { id } });
+    const review = await this.prismaService.review.findUnique({
+      where: { id },
+    });
 
     if (!review) throw new NotFoundException('Рецензия не найдена');
 

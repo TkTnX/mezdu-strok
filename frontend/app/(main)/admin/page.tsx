@@ -4,7 +4,8 @@ import {
 	RecentAuthors,
 	RecentBooks,
 	RecentPublishers,
-	RecentReviews
+	RecentReviews,
+	Reviews
 } from '@/widgets'
 
 const AdminPage = () => {
@@ -12,7 +13,7 @@ const AdminPage = () => {
 		<div className='vsm:pl-10! flex flex-1 flex-col-reverse items-start gap-5 p-4 lg:flex-row'>
 			<div className='flex-1'>
 				<AdminStats />
-				<RecentReviews isAdmin={true} className={'flex flex-col'} />
+				<Reviews isAdmin={true} />
 				<RecentBooks isAdmin={true} />
 				<RecentAuthors isAdmin={true} />
 				<RecentPublishers

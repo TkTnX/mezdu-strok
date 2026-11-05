@@ -1,23 +1,32 @@
 'use client'
 import { Review } from '@/entities'
-import { ErrorMessage, Skeleton, useReviews } from '@/shared'
+import { Button, ErrorMessage, IReview, Skeleton, useReviews } from '@/shared'
 import { ReviewsSort } from './ReviewsSort'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface Props {
 	bookId?: string
 	userId?: string
+	isAdmin?: boolean
 }
 
-export const Reviews = ({ bookId, userId }: Props) => {
+export const Reviews = ({ bookId, userId, isAdmin = false }: Props) => {
+	const [items, setItems] = useState<IReview[]>([])
+	const [page, setPage] = useState(0)
 	const [sortBy, setSortBy] = useState('createdAt-desc')
 	const { useGetReviews } = useReviews()
 	const {
 		data: reviews,
 		isPending,
 		error
-	} = useGetReviews({ bookId, userId, sortBy })
-	// todo: add pagination
+	} = useGetReviews({ bookId, userId, sortBy, take: 8, page })
+
+	useEffect(() => {
+		if (!reviews) return
+		// eslint-disable-next-line react-hooks/set-state-in-effect
+		setItems([...items, ...reviews.items])
+	}, [reviews])
+
 	return (
 		<div className='mt-4 rounded-xl'>
 			<div className='flex flex-col justify-between gap-3 sm:flex-row sm:items-center'>
@@ -33,14 +42,26 @@ export const Reviews = ({ bookId, userId }: Props) => {
 					[...new Array(3)].map((_, index) => (
 						<Skeleton key={index} className='h-100 w-full' />
 					))
-				) : reviews.length > 0 ? (
-					reviews?.map(review => (
-						<Review key={review.id} review={review} />
+				) : items.length > 0 ? (
+					items.map(review => (
+						<Review
+							isAdmin={isAdmin}
+							key={review.id}
+							review={review}
+						/>
 					))
 				) : (
 					<p className='text-secondary col-span-4 text-center'>
 						Нет рецензий!
 					</p>
+				)}
+				{reviews && reviews.currPage + 1 !== reviews.totalPages && (
+					<Button
+						onClick={() => setPage(reviews?.currPage + 1)}
+						className={'h-10'}
+					>
+						Загрузить ещё
+					</Button>
 				)}
 			</div>
 		</div>

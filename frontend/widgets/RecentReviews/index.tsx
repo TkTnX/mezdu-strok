@@ -30,7 +30,7 @@ export const RecentReviews = ({ className, isAdmin = false }: Props) => {
 						<Skeleton key={index} className='h-100 w-full' />
 					))
 				) : (
-					data.map(review => (
+					data.items.map(review => (
 						<Review
 							isAdmin={isAdmin}
 							key={review.id}
