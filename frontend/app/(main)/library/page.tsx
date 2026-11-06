@@ -1,4 +1,5 @@
 import { Filters, LibraryList } from '@/widgets'
+import { Suspense } from 'react'
 
 const LibraryPage = () => {
 	return (
@@ -6,9 +7,13 @@ const LibraryPage = () => {
 			<div className='flex w-full flex-wrap items-center justify-between gap-4'>
 				<h1 className='text-2xl font-bold sm:text-4xl'>Каталог книг</h1>
 			</div>
-			<Filters />
+			<Suspense>
+				<Filters />
+			</Suspense>
 
-			<LibraryList />
+			<Suspense>
+				<LibraryList />
+			</Suspense>
 		</section>
 	)
 }

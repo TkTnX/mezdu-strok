@@ -50,7 +50,7 @@ model Book {
   story Int? @default(0)
 
   authorId String
-  author Author @relation(fields: [authorId], references: [id])
+  author Author @relation(fields: [authorId], references: [id], onDelete: Cascade)
   genreId String
   genre Genre @relation(fields: [genreId], references: [id])
   publisherId String
@@ -93,7 +93,7 @@ model Favorite {
   bookId String?
   book Book? @relation(fields: [bookId], references: [id])
   authorId String?
-  author Author? @relation(fields: [authorId], references: [id])
+  author Author? @relation(fields: [authorId], references: [id], onDelete: Cascade)
   userId String
   type String 
   user User @relation(fields: [userId], references: [id])

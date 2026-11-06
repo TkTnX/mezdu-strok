@@ -56,7 +56,6 @@ export class UserController {
 
   @Get(':username')
   async getUserByUsername(@Param('username') username: string) {
-    console.log(username)
     return this.userService.getUserByUsername(username)
   }
 }

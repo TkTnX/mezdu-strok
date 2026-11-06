@@ -2,9 +2,9 @@
 import { Author } from '@/entities'
 import { ErrorMessage, Skeleton, useFavorites } from '@/shared'
 
-export const FavoriteAuthors = () => {
+export const FavoriteAuthors = ({ userId }: { userId?: string }) => {
 	const { useGetFavorites } = useFavorites()
-	const { data, isPending, error } = useGetFavorites('authors')
+	const { data, isPending, error } = useGetFavorites('authors', userId)
 
 	if (error) return <ErrorMessage error={error} />
 	return (
@@ -20,7 +20,9 @@ export const FavoriteAuthors = () => {
 						<Author key={favorite.id} author={favorite.author!} />
 					))
 				) : (
-					<p className='text-secondary text-center col-span-4'>Избранных нет!</p>
+					<p className='text-secondary col-span-4 text-center'>
+						Избранных нет!
+					</p>
 				)}
 			</div>
 		</div>

@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
 import { Request } from 'express';
 import { AuthGuard } from '@/src/guards';
@@ -12,9 +21,10 @@ export class FavoriteController {
   @Get(':table')
   async getAll(
     @Param('table') table: string,
+    @Query() query: Record<string, string>,
     @Req() req: Request & { session: any },
   ) {
-    return this.favoriteService.getAll(req, table);
+    return this.favoriteService.getAll(req, table, query);
   }
 
   @UseGuards(AuthGuard)

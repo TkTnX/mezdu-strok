@@ -61,10 +61,7 @@ export const Profile = ({ userByUsername }: Props) => {
 							<p className='mt-2 text-lg xl:text-xl'>
 								{user?.bio ? user?.bio : 'Нет описания'}
 							</p>
-							<Stats
-								profile={userByUsername}
-								isSmall={true}
-							/>
+							<Stats profile={userByUsername} isSmall={true} />
 						</div>
 					)}
 				</div>
@@ -123,8 +120,8 @@ export const Profile = ({ userByUsername }: Props) => {
 					<Quotes userId={user.id} />
 				) : (
 					<div>
-						<FavoriteBooks />
-						<FavoriteAuthors />
+						<FavoriteBooks userId={user.id} />
+						<FavoriteAuthors userId={user.id} />
 					</div>
 				))}
 		</section>

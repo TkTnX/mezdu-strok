@@ -16,13 +16,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AtSignIcon, Loader2Icon, User, UserCircle2Icon } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 interface Props {
 	user?: IUser | null
-	setOpen: (open: boolean) => void
+	setOpen?: (open: boolean) => void
 }
 
 export const AddMoreInfoForm = ({ user, setOpen }: Props) => {

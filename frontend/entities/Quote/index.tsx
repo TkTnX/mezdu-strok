@@ -1,13 +1,14 @@
 import { IQuote, QuoteDropdown } from '@/shared'
 import { useUserStore } from '@/shared/stores'
 import { BookIcon, LucideQuote, MoreHorizontal } from 'lucide-react'
+import Link from 'next/link'
 
 interface Props {
 	quote: IQuote
 }
 
 export const Quote = ({ quote }: Props) => {
-	const {user} = useUserStore()
+	const { user } = useUserStore()
 	return (
 		<blockquote className='bg-accent-light/40 border-accent-light flex flex-col rounded-md border px-7 py-5'>
 			<div className='flex items-center justify-between'>
@@ -20,10 +21,23 @@ export const Quote = ({ quote }: Props) => {
 				{quote.quote}
 			</q>
 			<div className='mt-5'>
-				<p className='text-secondary'>{quote.book.author.name}</p>
-				<p className='text-secondary/50'>{quote.book.title} </p>
+				<Link
+					href={`/authors/${quote.book.author.id}`}
+					className='text-secondary block'
+				>
+					{quote.book.author.name}
+				</Link>
+				<Link
+					href={`/library/${quote.bookId}`}
+					className='text-secondary/50 block'
+				>
+					{quote.book.title}{' '}
+				</Link>
 			</div>
-			<div className='mt-4 flex items-center justify-between gap-5'>
+			<Link
+				href={`/users/${quote.author.username}`}
+				className='mt-4 flex items-center justify-between gap-5'
+			>
 				<div className='text-main flex items-center gap-5'>
 					<BookIcon />
 					<p>{quote.book.genre.name}</p>
@@ -32,7 +46,7 @@ export const Quote = ({ quote }: Props) => {
 					{quote.author?.firstname + ' ' + quote.author?.lastname}
 					<span>@{quote.author.username}</span>
 				</p>
-			</div>
+			</Link>
 		</blockquote>
 	)
 }

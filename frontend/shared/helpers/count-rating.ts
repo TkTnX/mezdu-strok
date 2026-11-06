@@ -10,5 +10,5 @@ export function countRating(values: IRating) {
 		idea * 1.5 +
         impression * 2
     
-	return score
+	return Math.ceil(score)
 }

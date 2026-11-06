@@ -4,7 +4,7 @@ import { getMe } from '@/shared'
 import { useUserStore } from '@/shared/stores'
 import { Bell, SearchIcon, UserIcon } from 'lucide-react'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 export const Header = () => {
 	const [openSearch, setOpenSearch] = useState(false)
 	const { user, setUser, setIsPending } = useUserStore()
@@ -28,7 +28,9 @@ export const Header = () => {
 				<Link className='text-2xl font-bold' href={'/'}>
 					Между строк
 				</Link>
-				<Search />
+				<Suspense>
+					<Search />
+				</Suspense>
 				<div className='flex items-center gap-2 sm:gap-8'>
 					<button
 						onClick={() => setOpenSearch(true)}

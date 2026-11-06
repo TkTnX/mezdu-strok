@@ -2,10 +2,10 @@
 import { LibraryBook } from '@/entities'
 import { ErrorMessage, Skeleton, useFavorites } from '@/shared'
 
-export const FavoriteBooks = () => {
+export const FavoriteBooks = ({ userId }: { userId?: string }) => {
 	const { useGetFavorites } = useFavorites()
-	const { data, isPending, error } = useGetFavorites('books')
-
+	const { data, isPending, error } = useGetFavorites('books', userId)
+	console.log(data)
 	if (error) return <ErrorMessage error={error} />
 	return (
 		<div>

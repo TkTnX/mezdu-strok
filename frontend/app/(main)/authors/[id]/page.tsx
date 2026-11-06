@@ -6,7 +6,6 @@ import Image from 'next/image'
 const AuthorPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 	const { id } = await params
 	const author = await getAuthor(id)
-
 	return (
 		<section className='vsm:pl-10! flex-1 p-4'>
 			<div className='border-accent-light flex flex-wrap gap-3 border-b pb-4'>

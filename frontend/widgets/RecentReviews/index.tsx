@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 interface Props {
 	className?: string
-	isAdmin: boolean
+	isAdmin?: boolean
 }
 
 export const RecentReviews = ({ className, isAdmin = false }: Props) => {

@@ -7,6 +7,7 @@ export const Quotes = ({ userId }: { userId?: string }) => {
 	const { data, isPending, error } = useGetQuotes({ authorId: userId })
 
 	if (error) return <ErrorMessage error={error} />
+	console.log(data)
 
 	return (
 		<div className='mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3'>

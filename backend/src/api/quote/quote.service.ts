@@ -17,8 +17,8 @@ export class QuoteService {
           select: {
             title: true,
             id: true,
-            author: { select: { name: true } },
-            genre: { select: { name: true } },
+            author: { select: { name: true, id: true } },
+            genre: { select: { name: true,id:true } },
           },
         },
       },

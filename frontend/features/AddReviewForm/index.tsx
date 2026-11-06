@@ -58,8 +58,8 @@ export const AddReviewForm = ({ bookId }: Props) => {
 						value={watch('story')}
 						register={register('story', { valueAsNumber: true })}
 						name='story'
-						label='Сюжет / Композиция'
-						tooltip='Сюжет / Композиция - насколько хорошо построена история: развитие событий, темп, логика, кульминация и финал.'
+						label='Сюжет'
+						tooltip='Сюжет - насколько хорошо построена история: развитие событий, темп, логика, кульминация и финал.'
 					/>
 					<div className='bg-secondary/20 hidden h-13 w-px sm:block' />
 				</div>
@@ -71,8 +71,8 @@ export const AddReviewForm = ({ bookId }: Props) => {
 						value={watch('characters')}
 
 						name='characters'
-						label='Персонажи / Психология'
-						tooltip='Персонажи / Психология - насколько глубоко раскрыты персонажи, их характеры, мотивация, эмоции и развитие.'
+						label='Персонажи'
+						tooltip='Персонажи - насколько глубоко раскрыты персонажи, их характеры, мотивация, эмоции и развитие.'
 					/>
 					<div className='bg-secondary/20 hidden h-13 w-px md:block lg:hidden xl:block' />
 				</div>

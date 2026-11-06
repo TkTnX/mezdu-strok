@@ -1,7 +1,7 @@
 import { axiosInstance } from "@/shared/lib"
 
-export const getFavorites = async (table: string) => {
-    const { data } = await axiosInstance.get(`favorites/${table}`)
+export const getFavorites = async (table: string, userId?:string) => {
+    const { data } = await axiosInstance.get(`favorites/${table}?${userId ? `userId=${userId}` : ''}`)
     
     return data
 } 

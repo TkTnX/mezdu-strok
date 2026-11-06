@@ -27,6 +27,14 @@ export const Reviews = ({ bookId, userId, isAdmin = false }: Props) => {
 		setItems([...items, ...reviews.items])
 	}, [reviews])
 
+	useEffect(() => {
+		if (!reviews) return
+		// eslint-disable-next-line react-hooks/set-state-in-effect
+		setItems(reviews.items)
+
+		setPage(0)
+	}, [bookId, userId, sortBy, reviews])
+
 	return (
 		<div className='mt-4 rounded-xl'>
 			<div className='flex flex-col justify-between gap-3 sm:flex-row sm:items-center'>
@@ -45,6 +53,7 @@ export const Reviews = ({ bookId, userId, isAdmin = false }: Props) => {
 				) : items.length > 0 ? (
 					items.map(review => (
 						<Review
+							setItems={setItems}
 							isAdmin={isAdmin}
 							key={review.id}
 							review={review}
@@ -55,15 +64,19 @@ export const Reviews = ({ bookId, userId, isAdmin = false }: Props) => {
 						Нет рецензий!
 					</p>
 				)}
-				{reviews && reviews.currPage + 1 !== reviews.totalPages && (
-					<Button
-						onClick={() => setPage(reviews?.currPage + 1)}
-						className={'h-10'}
-					>
-						Загрузить ещё
-					</Button>
-				)}
+				{reviews &&
+					reviews.items.length > 0 &&
+					reviews.currPage + 1 !== reviews.totalPages && (
+						<Button
+							onClick={() => setPage(reviews?.currPage + 1)}
+							className={'h-10'}
+						>
+							Загрузить ещё
+						</Button>
+					)}
 			</div>
 		</div>
 	)
 }
+
+// TODO: Тесты с помощью cursor

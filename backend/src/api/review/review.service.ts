@@ -74,7 +74,6 @@ export class ReviewService {
   }
 
   public async get(query: Record<string, any>) {
-    console.log(query);
     const sort = query?.sortBy && query.sortBy.split('-');
     const reviews = await this.prismaService.review.findMany({
       where: {

@@ -29,9 +29,9 @@ export class AuthorController {
   }
 
   @Get(':id')
-    public getAuthor(@Param('id') id: string) {
-      return this.authorService.getAuthor(id);
-    }
+  public getAuthor(@Param('id') id: string) {
+    return this.authorService.getAuthor(id);
+  }
 
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(ERole.ADMIN)
@@ -57,10 +57,9 @@ export class AuthorController {
     return this.authorService.create(dto, file);
   }
 
-
-    @UseGuards(AuthGuard)
-    @Delete(':id')
-    public delete(@Param('id') id: string) {
-      return this.authorService.delete(id);
-    }
+  @UseGuards(AuthGuard)
+  @Delete(':id')
+  public delete(@Param('id') id: string) {
+    return this.authorService.delete(id);
+  }
 }

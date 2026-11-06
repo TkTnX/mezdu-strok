@@ -16,5 +16,4 @@ export async function emailTemplate(to: string, subject:string, html:string) {
     return console.error({ error });
   }
 
-  console.log({ data });
 }

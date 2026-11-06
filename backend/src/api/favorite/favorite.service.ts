@@ -6,12 +6,13 @@ import { Request } from 'express';
 export class FavoriteService {
   public constructor(private readonly prismaService: PrismaService) {}
 
-  public async getAll(req: Request & { session: any }, table: string) {
+  public async getAll(req: Request & { session: any }, table: string, query?: Record<string, string>) {
+    const userId = query?.userId
     const favorites = await this.prismaService.favorite.findMany({
       where: {
         AND: [
           {
-            userId: req.session.user.id,
+            userId: userId || req.session.user.id,
           },
           {
             type: table,

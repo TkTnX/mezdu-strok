@@ -70,7 +70,6 @@ export class AuthService {
   }
 
   async resetPassword(dto: ResetPasswordDto) {
-    console.log(dto);
     const user = await this.prismaService.user.findUnique({
       where: {
         email: dto.email,

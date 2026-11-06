@@ -7,9 +7,10 @@ type Props = {
 	review: IReview
 	className?: string
 	isAdmin?: boolean
+	setItems?: (arr: IReview[]) => void 
 }
 
-export const Review = ({ review, className, isAdmin }: Props) => {
+export const Review = ({ review, className, isAdmin, setItems }: Props) => {
 	const user = review.user
 	return (
 		<div
@@ -42,7 +43,10 @@ export const Review = ({ review, className, isAdmin }: Props) => {
 							</p>
 						</Link>
 					)}
-					<Link href={`/users/${user?.username}`} className='flex items-center gap-2'>
+					<Link
+						href={`/users/${user?.username}`}
+						className='flex items-center gap-2'
+					>
 						<Image
 							src={user?.avatar || '/images/users/user1.png'}
 							alt={'User'}
@@ -89,7 +93,13 @@ export const Review = ({ review, className, isAdmin }: Props) => {
 				{new Date(review.createdAt).toLocaleDateString('ru-RU')}
 			</p>
 			<LikeReview likes={review.likes} id={review.id} />
-			{isAdmin && <DeleteButton id={review.id} table='reviews' />}
+			{isAdmin && (
+				<DeleteButton
+					setItems={setItems}
+					id={review.id}
+					table='reviews'
+				/>
+			)}
 		</div>
 	)
 }
