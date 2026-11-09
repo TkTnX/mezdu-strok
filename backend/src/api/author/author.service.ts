@@ -1,5 +1,5 @@
 import { CreateAuthorDto } from './dto/create-author.dto';
-import { PrismaService } from '../../../src/prisma/prisma.service';
+import { PrismaService } from '@/src/prisma/prisma.service';
 import {
   BadRequestException,
   Injectable,

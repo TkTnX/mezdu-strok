@@ -1,4 +1,4 @@
-import { ERole } from '../../../src/generated/prisma/enums';
+import { ERole } from '@/src/generated/prisma/enums';
 import { SetMetadata } from '@nestjs/common';
 
 export const ROLES_KEY = 'roles';

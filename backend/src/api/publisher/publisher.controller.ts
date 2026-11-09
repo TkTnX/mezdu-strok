@@ -10,9 +10,9 @@ import {
 } from '@nestjs/common';
 import { PublisherService } from './publisher.service';
 import { CreatePublisherDto } from './dto/create-publisher.dto';
-import { Roles } from '../../../src/decorators';
-import { ERole } from '../../../src/generated/prisma/enums';
-import { AuthGuard, RolesGuard } from '../../../src/guards';
+import { Roles } from '@/src/decorators';
+import { ERole } from '@/src/generated/prisma/enums';
+import { AuthGuard, RolesGuard } from '@/src/guards';
 
 @Controller('publishers')
 export class PublisherController {

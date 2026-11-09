@@ -13,13 +13,13 @@ import {
 } from '@nestjs/common';
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create.dto';
-import { AuthGuard, RolesGuard } from '../../../src/guards';
+import { AuthGuard, RolesGuard } from '@/src/guards';
 import { Request } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
-import { ERole } from '../../../src/generated/prisma/enums';
-import { Roles } from '../../../src/decorators';
+import { ERole } from '@/src/generated/prisma/enums';
+import { Roles } from '@/src/decorators';
 
 @Controller('books')
 export class BookController {

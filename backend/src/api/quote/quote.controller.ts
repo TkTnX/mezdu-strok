@@ -12,7 +12,7 @@ import {
 import { QuoteService } from './quote.service';
 import { CreateQuoteDto } from './dto';
 import { Request } from 'express';
-import { AuthGuard } from '../../../src/guards';
+import { AuthGuard } from '@/src/guards';
 
 @Controller('quotes')
 export class QuoteController {

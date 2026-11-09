@@ -1,6 +1,6 @@
-import { EmailDto } from '../../../src/api/code/dto';
-import { emailTemplate } from '../../../src/lib';
-import { PrismaService } from '../../../src/prisma/prisma.service';
+import { EmailDto } from '@/src/api/code/dto';
+import { emailTemplate } from '@/src/lib';
+import { PrismaService } from '@/src/prisma/prisma.service';
 import { BadGatewayException, Injectable } from '@nestjs/common';
 
 @Injectable()

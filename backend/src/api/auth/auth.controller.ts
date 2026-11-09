@@ -11,7 +11,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LoginDto, RegisterDto, ResetPasswordDto } from '../../../src/api/auth/dto';
+import { LoginDto, RegisterDto, ResetPasswordDto } from '@/src/api/auth/dto';
 import { Request as RequestType, Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';
@@ -40,12 +40,11 @@ export class AuthController {
     return this.authService.logout(req);
   }
 
-  @Post('reset-password') 
+  @Post('reset-password')
   resetPassword(@Body() dto: ResetPasswordDto) {
-    return this.authService.resetPassword(dto)
+    return this.authService.resetPassword(dto);
   }
-    
-    
+
   @Get('google')
   @UseGuards(AuthGuard('google'))
   async googleAuth() {}

@@ -11,13 +11,13 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { AuthorService } from './author.service';
-import { AuthGuard, RolesGuard } from '../../../src/guards';
+import { AuthGuard, RolesGuard } from '@/src/guards';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { CreateAuthorDto } from './dto/create-author.dto';
-import { Roles } from '../../../src/decorators';
-import { ERole } from '../../../src/generated/prisma/enums';
+import { Roles } from '@/src/decorators';
+import { ERole } from '@/src/generated/prisma/enums';
 
 @Controller('authors')
 export class AuthorController {

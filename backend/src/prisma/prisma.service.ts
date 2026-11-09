@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../../src/generated/prisma/client';
+import { PrismaClient } from '@/src/generated/prisma/client';
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { PrismaPg } from '@prisma/adapter-pg';
 

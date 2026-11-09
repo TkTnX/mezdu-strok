@@ -1,5 +1,5 @@
 import { CreateBookDto } from './dto/create.dto';
-import { PrismaService } from '../../../src/prisma/prisma.service';
+import { PrismaService } from '@/src/prisma/prisma.service';
 import {
   BadRequestException,
   Injectable,

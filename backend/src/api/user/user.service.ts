@@ -1,5 +1,5 @@
 import { UpdateUserDto } from './dto';
-import { PrismaService } from '../../../src/prisma/prisma.service';
+import { PrismaService } from '@/src/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Request } from 'express';
