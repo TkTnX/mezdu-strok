@@ -79,4 +79,3 @@ export const Reviews = ({ bookId, userId, isAdmin = false }: Props) => {
 	)
 }
 
-// TODO: Тесты с помощью cursor

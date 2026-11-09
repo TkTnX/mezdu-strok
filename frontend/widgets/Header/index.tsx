@@ -2,7 +2,7 @@
 import { Search } from '@/features'
 import { getMe } from '@/shared'
 import { useUserStore } from '@/shared/stores'
-import { Bell, SearchIcon, UserIcon } from 'lucide-react'
+import {  SearchIcon, UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Suspense, useEffect, useState } from 'react'
 export const Header = () => {
@@ -34,21 +34,14 @@ export const Header = () => {
 				<div className='flex items-center gap-2 sm:gap-8'>
 					<button
 						onClick={() => setOpenSearch(true)}
-						className='block sm:hidden'
+					className='block sm:hidden'
 					>
 						<SearchIcon />
 					</button>
-					<Bell />
-					{user ? (
-						<Link href={'/profile'}>
-							<UserIcon />
-						</Link>
-					) : (
-						<Link href={'/auth/login'}>
-							<UserIcon />
-						</Link>
-					)}
-				</div>
+					<Link href={user ? '/profile' : '/auth/login'}>
+						<UserIcon />
+					</Link>
+			</div>
 			</div>
 			{openSearch && (
 				<Search
