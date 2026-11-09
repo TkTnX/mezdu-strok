@@ -1,7 +1,11 @@
-import { LoginDto, RegisterDto, ResetPasswordDto } from '@/src/api/auth/dto';
-import { CodeService } from '@/src/api/code/code.service';
-import { emailTemplate } from '@/src/lib';
-import { PrismaService } from '@/src/prisma/prisma.service';
+import {
+  LoginDto,
+  RegisterDto,
+  ResetPasswordDto,
+} from '../../../src/api/auth/dto';
+import { CodeService } from '../../../src/api/code/code.service';
+import { emailTemplate } from '../../../src/lib';
+import { PrismaService } from '../../../src/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import bcrypt from 'bcryptjs';
 import { Request, Response } from 'express';

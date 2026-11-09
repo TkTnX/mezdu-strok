@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
 import { Request } from 'express';
-import { AuthGuard } from '@/src/guards';
-import { FavoriteDto } from '@/src/api/favorite/dto';
+import { AuthGuard } from '../../../src/guards';
+import { FavoriteDto } from '../../../src/api/favorite/dto';
 
 @Controller('favorites')
 export class FavoriteController {

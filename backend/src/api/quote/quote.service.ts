@@ -1,8 +1,7 @@
 import { CreateQuoteDto } from './dto';
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '../../../src/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Request } from 'express';
-
 
 @Injectable()
 export class QuoteService {
@@ -18,7 +17,7 @@ export class QuoteService {
             title: true,
             id: true,
             author: { select: { name: true, id: true } },
-            genre: { select: { name: true,id:true } },
+            genre: { select: { name: true, id: true } },
           },
         },
       },

@@ -1,9 +1,18 @@
-import { Body, Controller, Delete, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { PublisherService } from './publisher.service';
 import { CreatePublisherDto } from './dto/create-publisher.dto';
-import { Roles } from '@/src/decorators';
-import { ERole } from '@/src/generated/prisma/enums';
-import { AuthGuard, RolesGuard } from '@/src/guards';
+import { Roles } from '../../../src/decorators';
+import { ERole } from '../../../src/generated/prisma/enums';
+import { AuthGuard, RolesGuard } from '../../../src/guards';
 
 @Controller('publishers')
 export class PublisherController {
@@ -16,8 +25,8 @@ export class PublisherController {
 
   @Get(':id')
   public getPublisher(@Param('id') id: string) {
-    return this.publisherService.getPublisher(id)
-    }
+    return this.publisherService.getPublisher(id);
+  }
 
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(ERole.ADMIN)

@@ -1,5 +1,5 @@
 import { CreateBookDto } from './dto/create.dto';
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '../../../src/prisma/prisma.service';
 import {
   BadRequestException,
   Injectable,
@@ -120,7 +120,6 @@ export class BookService {
 
     return book;
   }
-
 
   public async delete(id: string) {
     const book = await this.prismaService.book.findUnique({

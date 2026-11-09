@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { CreateReviewDto } from './dto/create.dto';
-import { AuthGuard, RolesGuard } from '@/src/guards';
-import { Roles } from '@/src/decorators';
-import { ERole } from '@/src/generated/prisma/enums';
+import { AuthGuard, RolesGuard } from '../../../src/guards';
+import { Roles } from '../../../src/decorators';
+import { ERole } from '../../../src/generated/prisma/enums';
 @Controller('reviews')
 export class ReviewController {
   constructor(private readonly reviewService: ReviewService) {}

@@ -1,6 +1,6 @@
-import { EmailDto } from '@/src/api/code/dto';
-import { emailTemplate } from '@/src/lib';
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { EmailDto } from '../../../src/api/code/dto';
+import { emailTemplate } from '../../../src/lib';
+import { PrismaService } from '../../../src/prisma/prisma.service';
 import { BadGatewayException, Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -23,13 +23,13 @@ export class CodeService {
   public async generateCode() {
     const now = new Date();
 
-   await this.prismaService.code.deleteMany({
+    await this.prismaService.code.deleteMany({
       where: {
         expiresAt: {
-          lte: now
-        }
-      }
-    })
+          lte: now,
+        },
+      },
+    });
 
     const code = await this.prismaService.code.create({
       data: {

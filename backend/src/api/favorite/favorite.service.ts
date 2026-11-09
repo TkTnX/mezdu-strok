@@ -1,4 +1,4 @@
-import { PrismaService } from '@/src/prisma/prisma.service';
+import { PrismaService } from '../../../src/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Request } from 'express';
 
@@ -6,8 +6,12 @@ import { Request } from 'express';
 export class FavoriteService {
   public constructor(private readonly prismaService: PrismaService) {}
 
-  public async getAll(req: Request & { session: any }, table: string, query?: Record<string, string>) {
-    const userId = query?.userId
+  public async getAll(
+    req: Request & { session: any },
+    table: string,
+    query?: Record<string, string>,
+  ) {
+    const userId = query?.userId;
     const favorites = await this.prismaService.favorite.findMany({
       where: {
         AND: [

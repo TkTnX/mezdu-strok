@@ -11,7 +11,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LoginDto, RegisterDto, ResetPasswordDto } from '@/src/api/auth/dto';
+import { LoginDto, RegisterDto, ResetPasswordDto } from '../../../src/api/auth/dto';
 import { Request as RequestType, Response } from 'express';
 import { AuthGuard } from '@nestjs/passport';
 import { ConfigService } from '@nestjs/config';

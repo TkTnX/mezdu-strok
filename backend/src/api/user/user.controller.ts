@@ -12,7 +12,7 @@ import {
 import { UserService } from './user.service';
 import { Request } from 'express';
 import { UpdateUserDto } from './dto';
-import { AuthGuard } from '@/src/guards';
+import { AuthGuard } from '../../../src/guards';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -25,8 +25,6 @@ export class UserController {
   async getMe(@Req() req: Request & { session: any }) {
     return this.userService.getMe(req);
   }
-
-
 
   @UseGuards(AuthGuard)
   @Patch('me')
@@ -53,9 +51,8 @@ export class UserController {
     return this.userService.update(req, dto, file);
   }
 
-
   @Get(':username')
   async getUserByUsername(@Param('username') username: string) {
-    return this.userService.getUserByUsername(username)
+    return this.userService.getUserByUsername(username);
   }
 }
